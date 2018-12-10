@@ -6,7 +6,7 @@
   	<!-- 페이징 - 게시물의 수를 반환 -->
 	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NormalVO">
 		SELECT
-		COUNT(*) FROM normal_board WHERE status = 0 
+		COUNT(*) FROM normal_board WHERE nb_status = 0 
 		<if test="nb_category != null">
 			AND nb_category = #{nb_category}
 		</if>
@@ -26,7 +26,7 @@
 		parameterType="mybatis.vo.NormalVO">
 		SELECT * FROM
 			(SELECT rownum as r_num, a.* FROM
-				(SELECT * FROM normal_board WHERE status = 0
+				(SELECT * FROM normal_board WHERE nb_status = 0
 				<if test="nb_category != null">
 					AND nb_category = #{nb_category}
 				</if>
@@ -39,7 +39,7 @@
 				<if test="m_id != null">
 					AND m_id LIKE '%'||#{m_id}||'%'
 				</if>
-				ORDER BY NB_NUM DESC)a)
+				ORDER BY nb_num DESC)a)
 		WHERE r_num BETWEEN #{begin} AND #{end}
 	</select>
 </mapper>

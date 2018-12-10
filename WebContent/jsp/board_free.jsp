@@ -116,7 +116,6 @@
 						</colgroup>
 						<tbody>
 							<tr>
-								<th>번호</th>
 								<th>분류</th>
 								<th>제목</th>
 								<th>글쓴이</th>
@@ -125,7 +124,6 @@
 							</tr>
 							<c:forEach items="${ar }" var="item" varStatus="st">
 								<tr>
-									<td>${fn:item.length() - (st.index()+1)}</td>
 									<td>${item.nb_category }</td>
 									<td>${item.nb_title }</td>
 									<td>${item.m_id }</td>
@@ -133,34 +131,50 @@
 									<td>${item.nb_hit }</td>
 								</tr>
 							</c:forEach>
+							<c:if test="${empty ar}">
+								<tr>
+									<td bgcolor="#F2F7F9" colspan="5" height="70" align="center">
+									등록된 게시물이 없습니다.</td>
+								</tr>
+							</c:if>
 						</tbody>
 					</table>
 					<div class="col-lg-6" id="search_area">
-						<div class ="form-group" id="search_cate_area">
-							<select  id="search_cate" class="form-control">
-		                        <option>글제목</option>
-		                        <option>글내용</option>
-		                        <option>글제목+글내용</option>
-		                        <option>글쓴이</option>
-	                        </select>
-                        </div>
-                        <div class ="form-group input-group" id="search_word_area">
-                        	<input id="search_word" class="form-control" name="search_word">
-                        	<span class="input-group-btn" id="search_btn">
-							<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
+						<div class="form-group" id="search_cate_area">
+							<select id="search_cate" class="form-control">
+								<option>글제목</option>
+								<option>글내용</option>
+								<option>글제목+글내용</option>
+								<option>글쓴이</option>
+							</select>
+						</div>
+						<div class="form-group input-group" id="search_word_area">
+							<input id="search_word" class="form-control" name="search_word">
+							<span class="input-group-btn" id="search_btn">
+								<button class="btn btn-default" type="button">
+									<i class="fa fa-search"></i>
+								</button>
 							</span>
 						</div>
-                    </div>
-					<div id="page_num_area">
-						<ul class="page_area">
-							<li class="page_button page_disable" id="previous_btn">이전</li>
-							<li class="page_button page_selected"><a href="#">1</a></li>
-							<li class="page_button" ><a href="#">2</a></li>
-							<li class="page_button" ><a href="#">3</a></li>
-							<li class="page_button" ><a href="#">4</a></li>
-							<li class="page_button" ><a href="#">5</a></li>
-							<li class="page_button" id="next_btn"><a href="#">다음</a></li>
-						</ul>
+						<table width="556" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td height="20" valign="middle"><img
+									src="/images/sub_it/point_line.gif" width="556" height="3"></td>
+							</tr>
+							<tr>
+								<td align="right">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="315" align="left">${pageCode }</td>
+											<td width="241" align="right"><img
+												src="images/but_write.gif" width="56" height="21"
+												style="cursor: pointer"
+												onClick="javascript:location.href='text_write.inc'"></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
 					</div>
 				</div>
 			</div>

@@ -29,12 +29,15 @@ public class Board_FreeControl {
 	public ModelAndView board_free(NormalVO vo) {
 		
 		String c_page = String.valueOf(vo.getNowPage());
-		if(c_page == null)
+
+		if(c_page.equals("0"))
 			nowPage = 1;
 		else
 			nowPage = Integer.parseInt(c_page);
 		
 		rowTotal = n_dao.getNbTotalCount(vo);
+		
+		System.out.println("총게시물 :"+n_dao.getNbTotalCount(vo));
 
 		Paging page = new Paging(nowPage, 
 				rowTotal, BLOCK_LIST, BLOCK_PAGE);
@@ -44,18 +47,21 @@ public class Board_FreeControl {
 		int begin = page.getBegin();
 		int end = page.getEnd();
 		
+		System.out.println("시작:"+begin);
+		System.out.println("시작:"+end);
+		
 		vo.setBegin(begin);
 		vo.setEnd(end);
 
 		NormalVO[] ar = n_dao.getList(vo);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("list", ar);
+		mv.addObject("ar", ar);
 		mv.addObject("nowPage", nowPage);
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
 		mv.addObject("pageCode", pageCode);
-		mv.setViewName("list");
+		mv.setViewName("board_free");
 		return mv;
 	}
 
