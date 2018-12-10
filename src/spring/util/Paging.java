@@ -3,16 +3,16 @@ package spring.util;
 public class Paging {
 	
 	private int nowPage, 
-			rowTotal, //ÃÑ °Ô½Ã¹° ¼ö 
-			blockList, //ÇÑ ÆäÀÌÁö¿¡ Ç¥ÇöµÉ °Ô½Ã¹° ¼ö
-			blockPage, //ÇÑ ºí·°´ç Ç¥ÇöÇÒ ÆäÀÌÁö ¼ö 
+			rowTotal, //ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½ 
+			blockList, //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ ï¿½ï¿½
+			blockPage, //ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
 			totalPage, startPage, 
 			endPage, begin, end;
 	
-	private boolean isPrePage;//ÀÌÀü ±â´É °¡´É¿©ºÎ
+	private boolean isPrePage;//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É¿ï¿½ï¿½ï¿½
 	private boolean isNextPage;
 	
-	//JSP¿¡¼­ Ç¥ÇöÇÒ ÆäÀÌÂ¡ HTMLÄÚµå¸¦ ÀúÀåÇÒ °÷!
+	//JSPï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Â¡ HTMLï¿½Úµå¸¦ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!
 	private StringBuffer sb;	
 
 	public Paging(int nowPage, int rowTotal, 
@@ -23,82 +23,93 @@ public class Paging {
 		this.blockList = blockList;
 		this.blockPage = blockPage;
 		
-		//ÀÌÀü ±â´É°ú ´ÙÀ½±â´ÉÀ» ÃÊ±âÈ­
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½É°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		isPrePage = false;
 		isNextPage = false;
 		
-		//ÀÔ·ÂµÈ ÀüÃ¼ °Ô½Ã¹°ÀÇ ¼ö¸¦ ÅëÇØ
-		// ÀüÃ¼ ÆäÀÌÁö ¼ö¸¦ ±¸ÇÑ´Ù.
+		//ï¿½Ô·Âµï¿½ ï¿½ï¿½Ã¼ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+		// ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 		totalPage = (int)Math.ceil((double)rowTotal/blockList);
 		
-		//ÇöÀç ÆäÀÌÁöÀÇ °ªÀÌ ÀüÃ¼ ÆäÀÌÁöÀÇ °ªº¸´Ù Å©´Ù¸é
-		//ÀüÃ¼ ÆäÀÌÁöÀÇ °ªÀ» ÇöÀç ÆäÀÌÁö °ªÀ¸·Î »ç¿ëÇÏÀÚ!
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½Ù¸ï¿½
+		//ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!
 		if(nowPage > totalPage)
 			nowPage = totalPage;
 		
-		//ÇöÀç ºí·°ÀÇ ½ÃÀÛÆäÀÌÁö °ª°ú ¸¶Áö¸·ÆäÀÌÁöÀÇ °ªÀ» ±¸ÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ñ´ï¿½.
 		startPage = (int)((nowPage-1)/blockPage) * blockPage + 1;
 		endPage = startPage + blockPage - 1;
 		
-		//¸¶Áö¸·ÆäÀÌÁö °ªÀÌ ÀüÃ¼ÆäÀÌÁö °ªº¸´Ù Å©Áö ¾Êµµ·Ï ÇÑ´Ù.
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ ï¿½Êµï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
 		if(endPage > totalPage)
 			endPage = totalPage;
 		
-		//Ç¥ÇöÇÒ ½ÃÀÛ °Ô½Ã¹°ÀÇ Çà¹øÈ£¿Í ¸¶Áö¸· °Ô½Ã¹°ÀÇ Çà¹øÈ£¸¦
-		//±¸ÇÑ´Ù.(bbs2Å×ÀÌºí¿¡¼­ °Ô½Ã¹°µéÀ» ÃßÃâÇÏ´Â Çà¹øÈ£)
+		//Ç¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È£ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È£ï¿½ï¿½
+		//ï¿½ï¿½ï¿½Ñ´ï¿½.(bbs2ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½Ô½Ã¹ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½È£)
 		begin = (nowPage - 1) * blockList + 1;
 		end = begin + blockList - 1;
 		
-		//ÀÌÀü ±â´ÉÀÌ °¡´ÉÇÑÁö¸¦ ¾Ë¾Æº¸ÀÚ!
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½!
 		if(startPage > 1)
 			isPrePage = true;
 		
-		//´ÙÀ½ ±â´ÉÀÌ °¡´ÉÇÑÁö¸¦ ¾Ë¾Æº¸ÀÚ!
+		//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¾Æºï¿½ï¿½ï¿½!
 		if(endPage < totalPage)
 			isNextPage = true;
 		
-		// ÀÌÁ¦ ÇöÀçÆäÀÌÁö °ªµµ ¾Ë°í, ½ÃÀÛÆäÀÌÁö¿Í ¸¶Áö¸·ÆäÀÌÁö °ªÀ»
-		// ¾Ë¾ÒÀ¸´Ï ÆäÀÌÂ¡ ±â¹ı¿¡ »ç¿ëÇÒ ÄÚµå¸¦ ÀÛ¼ºÇÏ¿©
-		// StringBuffer¿¡ ÀúÀåÇÏÀÚ!
-		sb = new StringBuffer("<ol class='paging'>");
+		/*<div id="page_num_area">
+			<ul class="page_area">
+				<li class="page_button page_disable" id="previous_btn">ì´ì „</li>
+				<li class="page_button page_selected"><a href="#">1</a></li>
+				<li class="page_button" ><a href="#">2</a></li>
+				<li class="page_button" ><a href="#">3</a></li>
+				<li class="page_button" ><a href="#">4</a></li>
+				<li class="page_button" ><a href="#">5</a></li>
+				<li class="page_button" id="next_btn"><a href="#">ë‹¤ìŒ</a></li>
+			</ul>
+		</div>*/
+		sb = new StringBuffer("<div id='page_num_area'><ol class='page_area'>");
 		
 		if(isPrePage) {
-			sb.append("<li><a href='list.inc?nowPage=");
+			sb.append("<li class='page_button'><a href='board_free.inc?nowPage=");
 			sb.append(nowPage - blockPage);
 			sb.append("'> &lt; </a></li>");
 		}else {
-			//ÀÌÀü±â´É ºñÈ°¼ºÈ­
-			sb.append("<li class='disable'> &lt; </li>");
+			//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
+			sb.append("<li class='page_button page_disable'>  &lt; </li>");
 		}
 		
-		//ÆäÀÌÁö ¹øÈ£ Ãâ·ÂÇÏ´Â ¹İº¹¹®
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£ ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½İºï¿½ï¿½ï¿½
 		for(int i=startPage ; i<=endPage ; i++) {
 			
-			//iÀÇ °ªÀÌ ÇöÀçÆäÀÌÁöÀÇ °ª°ú °°À» ¶§´Â
-			// aÅÂ±×¸¦ ÁöÁ¤ÇÏÁö ¾Ê°í ¼ıÀÚ¸¸ Ãâ·ÂÇÑ´Ù.
+			//iï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+			// aï¿½Â±×¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê°ï¿½ ï¿½ï¿½ï¿½Ú¸ï¿½ ï¿½ï¿½ï¿½ï¿½Ñ´ï¿½.
 			if(i == nowPage) {
-				sb.append("<li class='now'>");
+				sb.append("<li class='page_button page_selected'><a href='board_free.inc?nowPage=");
 				sb.append(i);
-				sb.append("</li>");
+				sb.append("'>");
+				sb.append(i);
+				sb.append("</a></li>");
+				
 			}else {
-				sb.append("<li><a href='list.inc?nowPage=");
-				sb.append(i);//ÆÄ¶ó¹ÌÅÍ °ª
+				sb.append("<li class='page_button'><a href='board_free.inc?nowPage=");
+				sb.append(i);//ï¿½Ä¶ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½
 				sb.append("'>");// <li><a href='list.inc?nowPage=1'>
-				sb.append(i); //È­¸é¿¡ Ãâ·ÂµÇ´Â ÆäÀÌÁö ¹øÈ£
+				sb.append(i); //È­ï¿½é¿¡ ï¿½ï¿½ÂµÇ´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È£
 				sb.append("</a></li>");
 			}			
-		}//for¹®ÀÇ ³¡!!
+		}//forï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!!
 		
-		//´ÙÀ½±â´É °¡´É¿©ºÎ¸¦ È®ÀÎÇÑ´Ù.
+		
 		if(isNextPage) {
-			sb.append("<li><a href='list.inc?nowPage=");
+			sb.append("<li class='page_button'><a href='board_free.inc?nowPage=");
 			sb.append(nowPage + blockPage);
 			sb.append("'> &gt; </a></li>");
 		}else {
-			sb.append("<li class='disable'> &gt; </li>");
+			sb.append("<li class='page_disable'> &gt; </li>");
 		}
-		sb.append("</ol>");
-	}//»ı¼ºÀÚÀÇ ³¡!
+		sb.append("</ol></div>");
+	}//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½!
 
 	public int getNowPage() {
 		return nowPage;
