@@ -37,8 +37,6 @@ public class Board_FreeControl {
 		
 		rowTotal = n_dao.getNbTotalCount(vo);
 		
-		System.out.println("총게시물 :"+n_dao.getNbTotalCount(vo));
-
 		Paging page = new Paging(nowPage, 
 				rowTotal, BLOCK_LIST, BLOCK_PAGE);
 		
@@ -47,9 +45,7 @@ public class Board_FreeControl {
 		int begin = page.getBegin();
 		int end = page.getEnd();
 		
-		System.out.println("시작:"+begin);
-		System.out.println("시작:"+end);
-		
+
 		vo.setBegin(begin);
 		vo.setEnd(end);
 

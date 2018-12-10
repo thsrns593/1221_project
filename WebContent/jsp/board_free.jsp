@@ -107,26 +107,27 @@
 						<colgroup>
 							<col width="5%">
 							<col width="5%">
-							<col width="40%">
 							<col width="10%">
+							<col width="50%">
+							<col width="20%">
 							<col width="10%">
-							<col width="8%">
-							<col width="6%">
-							<col width="6%">
+
 						</colgroup>
 						<tbody>
 							<tr>
+								<th>번호</th>
 								<th>분류</th>
-								<th>제목</th>
 								<th>글쓴이</th>
+								<th>제목</th>
 								<th>등록일</th>
 								<th>조회수</th>
 							</tr>
 							<c:forEach items="${ar }" var="item" varStatus="st">
 								<tr>
+									<td>${item.nb_num}</td>
 									<td>${item.nb_category }</td>
-									<td>${item.nb_title }</td>
 									<td>${item.m_id }</td>
+									<td>${item.nb_title }</td>
 									<td>${item.nb_cdate }</td>
 									<td>${item.nb_hit }</td>
 								</tr>
@@ -156,25 +157,7 @@
 								</button>
 							</span>
 						</div>
-						<table width="556" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td height="20" valign="middle"><img
-									src="/images/sub_it/point_line.gif" width="556" height="3"></td>
-							</tr>
-							<tr>
-								<td align="right">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0">
-										<tr>
-											<td width="315" align="left">${pageCode }</td>
-											<td width="241" align="right"><img
-												src="images/but_write.gif" width="56" height="21"
-												style="cursor: pointer"
-												onClick="javascript:location.href='text_write.inc'"></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
+						${pageCode }
 					</div>
 				</div>
 			</div>

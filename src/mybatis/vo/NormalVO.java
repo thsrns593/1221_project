@@ -10,8 +10,6 @@ public class NormalVO {
 	
 	private MultipartFile upload;
 	
-	
-	
 	public int getBegin() {
 		return begin;
 	}
