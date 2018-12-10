@@ -3,7 +3,25 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="normal">  
-  
-  
+  <select id="totalCount" resultType="int">
+  	select count(*) from normal_board
+  		where status = 0
+  </select>
+  <select id="getList" parameterType="java.util.Map" resultType="mybatis.vo.NormalVO">
+  	select * from (
+		select rownum r_num, n.* from (
+			select * from normal_board order by nb_cdate desc
+		)n 
+	) where r_num between #{begin} and #{end}
+  </select>
+  <insert id="add" parameterType="mybatis.vo.NormalVO">
+  	 
+  </insert>
+  <select id="getBbs" parameterType="String" resultType="mybatis.vo.NormalVO">
+  	select * from normal_board where nb_status != 0
+  </select>
+  <update id="edit" parameterType="mybatis.vo.NormalVO">
+  	
+  </update>
 </mapper>
 
