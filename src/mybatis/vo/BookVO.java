@@ -3,7 +3,7 @@ package mybatis.vo;
 public class BookVO {
 	private String bb_num,	bb_title, m_id, bb_category, bb_hit,bb_content,bb_bname, bb_author, bb_press,
             bb_cdate, bb_edate, bb_ip,bb_status;
-
+	//안녕
 	public String getBb_num() {
 		return bb_num;
 	}
