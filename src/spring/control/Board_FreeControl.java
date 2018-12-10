@@ -3,6 +3,8 @@ package spring.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,7 +16,6 @@ import spring.util.Paging;
 
 @Controller
 public class Board_FreeControl {
-	
 	@Autowired
 	private NormalDAO n_dao;
 	
@@ -36,9 +37,9 @@ public class Board_FreeControl {
 			nowPage = Integer.parseInt(c_page);
 		
 		rowTotal = n_dao.getNbTotalCount(vo);
-		
+		String board_name ="board_free";
 		Paging page = new Paging(nowPage, 
-				rowTotal, BLOCK_LIST, BLOCK_PAGE);
+				rowTotal, BLOCK_LIST, BLOCK_PAGE,board_name);
 		
 		pageCode = page.getSb().toString();
 		
