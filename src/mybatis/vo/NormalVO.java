@@ -1,8 +1,31 @@
 package mybatis.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class NormalVO {
 	
 	private String nb_num, nb_title, m_id, nb_category, nb_hit, nb_content, nb_fname,nb_oname,nb_cdate,nb_edate,nb_ip,nb_status;
+	
+	private int nowPage;
+	
+	private MultipartFile upload;
+	
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+
+	public MultipartFile getUpload() {
+		return upload;
+	}
+
+	public void setUpload(MultipartFile upload) {
+		this.upload = upload;
+	}
 
 	public String getNb_num() {
 		return nb_num;

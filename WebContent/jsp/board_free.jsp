@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,7 +101,7 @@
 								<option>질문</option>
 							</select>
 						</div>
-						<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='tw.inc'"></div>
+						<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
 					</div>
 					<table class="table table-striped table-bordered table-hover" id="dataTable">
 						<colgroup>
@@ -120,39 +122,17 @@
 								<th>글쓴이</th>
 								<th>등록일</th>
 								<th>조회수</th>
-								<th>추천</th>
-								<th>비추</th>
 							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지</td>
-								<td><a href="#">공지입니다</a></td>
-								<td>관리자</td>
-								<td>11/7</td>
-								<td>510</td>
-								<td>20</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>잡담</td>
-								<td><a href="#">아무글이나 쓰는곳</a></td>
-								<td>사용자</td>
-								<td>11/7</td>
-								<td>13</td>
-								<td>3</td>
-								<td>10</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>질문</td>
-								<td><a href="#">질문해도 되나요?</a></td>
-								<td>다른사용자</td>
-								<td>11/8</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-							</tr>
+							<c:forEach items="${ar }" var="item" varStatus="st">
+								<tr>
+									<td>${fn:item.length() - (st.index()+1)}</td>
+									<td>${item.nb_category }</td>
+									<td>${item.nb_title }</td>
+									<td>${item.m_id }</td>
+									<td>${item.nb_cdate }</td>
+									<td>${item.nb_hit }</td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
 					<div class="col-lg-6" id="search_area">
