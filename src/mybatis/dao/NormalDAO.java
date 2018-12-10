@@ -13,12 +13,13 @@ public class NormalDAO {
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-	public int getNbTotalCount() {
-		return ss.selectOne("normal.totalCount");
+	public int getNbTotalCount(NormalVO vo) {
+		return ss.selectOne("normal.totalCount", vo);
 	}
-	public NormalVO[] getList(Map<String, String> map) {
+	
+	public NormalVO[] getList(NormalVO vo) {
 		// map에 담겨져 있는 begin, end로 원하는 갯수만큼의 게시물을 뽑는다.
-		List<NormalVO> list = ss.selectList("bbs.list", map);
+		List<NormalVO> list = ss.selectList("normal.list", vo);
 		NormalVO[] ar = null;
 		if(list!=null && list.size()>0) {
 			ar = new NormalVO[list.size()];

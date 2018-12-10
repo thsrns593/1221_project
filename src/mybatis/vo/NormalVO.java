@@ -6,11 +6,28 @@ public class NormalVO {
 	
 	private String nb_num, nb_title, m_id, nb_category, nb_hit, nb_content, nb_fname,nb_oname,nb_cdate,nb_edate,nb_ip,nb_status;
 	
-	private int nowPage;
+	private int nowPage, begin, end;
 	
 	private MultipartFile upload;
 	
 	
+	
+	public int getBegin() {
+		return begin;
+	}
+
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
 	public int getNowPage() {
 		return nowPage;
 	}
