@@ -3,7 +3,44 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="normal">  
-  
-  
+  	<!-- 페이징 - 게시물의 수를 반환 -->
+	<select id="totalCount" resultType="int" parameterType="java.util.Map">
+		SELECT
+		COUNT(*) FROM normal_board WHERE status = 0 
+		<if test="nb_category != null">
+			AND nb_category = #{nb_category}
+		</if>
+		<if test="nb_title != null">
+			AND nb_title LIKE '%'||#{nb_title}||'%'
+		</if>
+		<if test="nb_content != null">
+			AND nb_content LIKE '%'||#{nb_content}||'%'
+		</if>
+		<if test="m_id != null">
+			AND m_id LIKE '%'||#{m_id}||'%'
+		</if>
+	</select>
+	
+	<!-- 페이징 - 목록을 반환하는 기능 -->
+	<select id="list" resultType="mybatis.vo.BoardVO"
+		parameterType="java.util.Map">
+		SELECT * FROM
+			(SELECT rownum as r_num, a.* FROM
+				(SELECT * FROM normal_board WHERE status = 0
+				<if test="nb_category != null">
+					AND nb_category = #{nb_category}
+				</if>
+				<if test="nb_title != null">
+					AND nb_title LIKE '%'||#{nb_title}||'%'
+				</if>
+				<if test="nb_content != null">
+					AND nb_content LIKE '%'||#{nb_content}||'%'
+				</if>
+				<if test="m_id != null">
+					AND m_id LIKE '%'||#{m_id}||'%'
+				</if>
+				ORDER BY NB_NUM DESC)a)
+		WHERE r_num BETWEEN #{begin} AND #{end}
+	</select>
 </mapper>
 
