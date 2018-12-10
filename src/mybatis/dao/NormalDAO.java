@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mybatis.vo.NormalVO;
 
 public class NormalDAO {
+	//실험용 주석 입력합니다1
 	@Autowired
 	private SqlSessionTemplate ss;
 	
