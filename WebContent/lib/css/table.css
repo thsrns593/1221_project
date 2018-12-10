@@ -1,0 +1,89 @@
+@charset "UTF-8";
+.row{
+	margin-top: 5%;
+}
+.panel{
+	height: 950px;
+}
+.p_heading{
+	height: auto;
+	width: 100%;
+	font-size: 40px;
+	background-color: #b0b0b0;
+	padding: 10px;
+	margin-bottom: 40px;
+}
+.table{
+	margin: auto;
+	width: 80%;
+	float: right;
+}
+.t_table{
+	width: 100%;
+	height: auto;
+}
+.book_img{
+	margin: 10px auto auto 15px;
+	width: 160px; 
+	height: 220px;
+	border: 1px solid black;
+	display: inline-block;
+}
+.h3_title{
+	margin-top: 10%;
+	width: auto;
+	background-color: #efefef;
+	padding: 20px;
+}
+.view_tbl{
+	width: 100%;
+	text-align: center;
+}
+.view_tbl thead{
+	background-color: #c0c0c0;
+	width: 100%;
+}
+.c_total{
+	margin: auto;
+	height: auto;
+	min-width: 100%;
+	border: 1px solid #c0c0c0;
+}
+#map{
+	margin: auto;
+	width: auto;
+	height: 300px;
+	
+}
+.show{display: block;}
+.b_table tbody a:hover{
+	text-decoration: none;
+	color: red !important;
+	border-bottom: 1px solid red;
+}
+.in_table{
+	margin-left: 5px;
+	margin-right: 10px;
+	margin-top: 15px;
+	float: right;
+	width: 850px;
+	border: 1px solid black;
+}
+.in_table .c_td{
+	border: 1px solid black;
+}
+.in_table .br_none{
+	border: 1px solid black;
+}
+.li_box .b_table{
+	border: 1px solid red;
+	width: 100%;
+	margin: auto;
+}
+#content{
+	margin: auto;
+	padding: 0;
+	width: 1100px;
+	height: auto;
+	min-height: 655px;
+}

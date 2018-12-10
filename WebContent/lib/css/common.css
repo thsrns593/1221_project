@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+#header_logo{
+	border-bottom: 2px solid #ebeced;
+	color: #ebeced;
+	font-weight: bold;
+}
+.bg-dark{
+	background-color: #343a40;
+}
+.container-fluid{
+	margin-left: -16px;
+}
+.btn-secondary{
+	background-color: #687672;
+	border-color: #687672;
+}
+.btn{
+	padding: .375rem .2rem;
+}
+#sidebar-wrapper{
+	background: #ebeced !important;
+}
+.sidebar-nav>.sidebar-brand{
+	font-size: 22px !important;
+	padding-top: 10px;
+}
+.sidebar-nav>.sidebar-brand a{
+	color: #3f3931 !important;
+	font-weight: bold; 
+}
+.sidebar-nav>.sidebar-brand a:hover{
+	color: #999999 !important;
+}
+.sidebar-nav li a{
+	color: #3f3931 !important;
+}
+.sidebar-nav li a:hover{
+	color: #999999 !important;
+}

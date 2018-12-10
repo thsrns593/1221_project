@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.card{
+	width: 500px;
+	margin: auto;
+}
+.card-header{
+	background-color: #ebeced;
+	font-weight: bold;
+}
+.input-group{
+	margin-top: 10px;
+}
+.form-control{
+	font-size: 13px;
+}
+.btn{
+	font-size: 13px;
+}
+.btcenter{
+	margin: auto;
+}
+#id_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#id{
+	width: 200px;
+	margin-right: 5px;
+}
+#pw_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#pw{
+	width: 200px;
+	margin-right: 5px;
+}
+#r_pw_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#r_pw{
+	width: 200px;
+	margin-right: 5px;
+}
+#ph_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#ph{
+	width: 200px;
+	margin-right: 5px;
+}
+#email_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#email{
+	width: 200px;
+	margin-right: 5px;
+}
+#b_day_lb{
+	background-color: #ebeced;
+	
+	text-align: center;
+}
+#b_day{
+	width: 200px;
+	margin-right: 5px;
+}

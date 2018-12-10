@@ -1,0 +1,81 @@
+@charset "UTF-8";
+body{
+	width: 400px;
+	height: 700px;
+	border: 1px solid red;
+}
+.id_total{
+	margin: auto;
+	margin-top: 15px;
+}
+.pw_total{
+	margin: auto;
+	margin-top: 15px;
+}
+.t_head{
+	width: 100%;
+	margin-bottom: 40px;
+	font-size: 25px;
+	text-align: center;
+	background-color: #efefef;
+	
+}
+.t_id{
+	margin: auto;
+	align-self: center;
+}
+.f_bottom{
+	
+	position:absolute;
+	bottom:0;
+	width: 100%;
+}
+.id_ema{
+	width: 100%;
+	padding-left: 55px;
+}
+.t_email{
+	
+	width: 100%;
+	text-align: center;
+}
+.id_ema button{
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-bottom: 9px;
+}
+#t_ok{
+	margin-top: 10px;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-left: 180px;
+	padding: 5px;
+}
+.pw_ema{
+	width: 100%;
+	padding-left: 70px;
+	
+}
+.t_pass{
+	width: 80%;
+	margin-bottom: 9px;
+}
+.email{
+	margin-bottom: 9px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+

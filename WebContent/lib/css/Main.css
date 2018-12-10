@@ -1,0 +1,57 @@
+@charset "UTF-8";
+
+.card-header{
+	font-weight: bold;
+}
+.btn_fixed{
+	width: 60px;
+	margin-right: 2px;
+	background-color: #fff;
+	color: #000;
+	border-color: #ededed;
+	border-bottom-color: #fff;
+}
+.lead_fixed {
+	margin: 0px 0px 0px 10px;
+	font-size: 14px;
+}
+.bold{
+	font-weight: bold;
+}
+.mt-4{
+	border-top: 1px solid #cccccc;
+}
+.my-4{
+	font-weight: bold;
+}
+.carousel-item{
+	height:300px !important;
+	width: 700px;
+	min-height:300px !important;
+	border: 1px solid #efefef;
+}
+
+.carousel-control-next{
+	height: 300px;
+}
+.carousel-control-prev{
+	height: 300px;
+}
+.font_fixed{
+	font-size: 70%;
+}
+.card-img-top{
+	height: 300px;
+}
+#a_fixed{
+	color: #007bff;
+	float: right;
+}
+#button_fixed{
+	width: 40px;
+}
+#hr_fixed{
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+

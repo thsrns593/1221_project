@@ -1,0 +1,95 @@
+@charset "UTF-8";
+
+.checkbox input{
+	border: none;
+	margin: auto;
+	 background-color: rgba( 255, 255, 255, 0.5 );
+}
+.login-panel{
+	margin: auto;
+	margin-top: 32%;
+	background-color: rgba( 255, 255, 255, 0.5 );	
+	height: 500px;
+	border-radius: 3px;
+}
+.form-control{
+	margin-top: 30px;
+	width: 90%;
+}
+.form-group{
+	width: 90%;
+	margin: auto;
+}
+.form-group1{
+	width: 90%;
+	margin: auto;
+}
+.checkbox{
+	margin-top: 30px;
+	margin-bottom: 45px;
+	margin-left: 20px;
+	font-size: 13px;
+	
+	
+}
+#r_id1{
+	margin-left: 5px;
+	background-color: rgba( 255, 255, 255, 0 );
+	border: none;
+}
+#r_id2{
+	 background-color: rgba( 255, 255, 255, 0 );
+	 border: none;
+}
+.lo_btn{
+	display: block;
+	background-color: #5cd878;
+	padding: .375rem .2rem;
+	white-space: nowrap;
+	width: 90%;
+	text-align: center;
+	margin: auto;
+	border-radius: 5px;
+	font-size: 20px;
+	color: black;
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+.jo_btn{
+	display: block;
+	background-color: #53a5ff;
+	padding: .375rem .2rem;
+	white-space: nowrap;
+	width: 90%;
+	text-align: center;
+	margin: auto;
+	border-radius: 5px;
+	font-size: 20px;
+	color: black;
+	margin-bottom: 15px;
+}
+.ka_btn{
+	display: block;
+	background-color: #ffdb6f;
+	padding: .375rem .2rem;
+	white-space: nowrap;
+	width: 90%;
+	text-align: center;
+	margin: auto;
+	border-radius: 5px;
+	font-size: 20px;
+	color: black;
+	margin-bottom: 15px;
+}
+.panel-title{
+	text-align: center;
+	font-size: large;
+	font-weight: bold;
+	padding: 10px;
+	background-color: rgba(245, 198, 203, 1);
+	border-radius: 3px;
+}
+.log_container{
+	margin-left: 37%;
+	margin-bottom: 70px;
+}
