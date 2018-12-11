@@ -35,7 +35,7 @@ public class TableControl {
 		rowTotal = n_dao.getNbTotalCount(vo);
 		String board_name ="table";
 		Paging page = new Paging(nowPage, 
-				rowTotal, BLOCK_LIST, BLOCK_PAGE,board_name);
+				rowTotal, BLOCK_LIST, BLOCK_PAGE,board_name, vo.getNb_category());
 		
 		pageCode = page.getSb().toString();
 		

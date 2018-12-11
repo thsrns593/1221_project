@@ -65,6 +65,7 @@
 		WHERE r_num BETWEEN #{begin} AND #{end}
 	</select>
 	
+	<!-- 게시물 추가 -->
 	<insert id="add" parameterType="mybatis.vo.NormalVO">
 		INSERT INTO normal_board(nb_num, nb_title, m_id, nb_category, nb_hit, nb_content,
 									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status)
