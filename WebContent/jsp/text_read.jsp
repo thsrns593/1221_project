@@ -140,74 +140,87 @@
 					<!-- /.col-lg-12 -->
 				</div>
 			</div>
-				<div class="formstyle">
-					<div>
-						<input type="text" size="5px" value="공지" readonly="readonly"
-							style="text-align: center;" /> <input type="text" size="120px"
-							style="margin-bottom: 10px;" value="${vo.getNb_title() }"
-							readonly="readonly" />
-					</div>
-
-					<table>
-						<tfoot>
-							<tr>
-								<td height="10px;">
-							</tr>
-							<tr>
-								<td colspan="5"><textarea rows="10px" cols="132px"
-										readonly="readonly">${vo.getNb_content() }</textarea></td>
-							</tr>
-						</tfoot>
-					</table>
-					<span><label>글쓴이:</label><input class="writerinfo"
-						type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
-						class="writerinfo" type="text" value="${vo.getNb_cdate() }" readonly="readonly" /></span>
-					<span><label>조회수:</label><input class="writerinfo"
-						type="text" value="1" readonly="readonly" /></span> <span><label>추천수:</label><input
-						class="writerinfo" type="text" value="${vo.getNb_hit() }" readonly="readonly" /></span>
+			<div class="formstyle">
+				<div>
+					<input type="text" size="5px" value="공지" readonly="readonly"
+						style="text-align: center;" /> <input type="text" size="120px"
+						style="margin-bottom: 10px;" value="${vo.getNb_title() }"
+						readonly="readonly" />
 				</div>
-				<div class="col-md-12">
-					<br />
-					<form action="">
-						<div id="reinput">
-							<table id="list_table">
+
+				<table>
+					<tfoot>
+						<tr>
+							<td height="10px;">
+						</tr>
+						<tr>
+							<td colspan="5"><textarea rows="10px" cols="132px"
+									readonly="readonly">${vo.getNb_content() }</textarea></td>
+						</tr>
+						<tr>
+							<td> <div>첨부파일 : <a href="javascript:download('${vo.getNb_fname()}')">
+									${vo.getNb_oname()} </a></div> </td>
+						</tr>
+					</tfoot>
+				</table>
+				<span><label>글쓴이:</label><input class="writerinfo"
+					type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
+					class="writerinfo" type="text" value="${vo.getNb_cdate() }"
+					readonly="readonly" /></span> <span><label>조회수:</label><input
+					class="writerinfo" type="text" value="1" readonly="readonly" /></span> <span><label>추천수:</label><input
+					class="writerinfo" type="text" value="${vo.getNb_hit() }"
+					readonly="readonly" /></span>
+			</div>
+			<div class="col-md-12">
+				<br />
+				<form action="">
+					<div id="reinput">
+						<table id="list_table">
+							<tbody>
+								<tr>
+									<td><div id="d_id">홍길동</div></td>
+									<td><div id="d_text">고고염~</div></td>
+									<td><div id="d_delete">
+											<i class="fa fa-times"></i>
+										</div></td>
+								</tr>
+								<tr>
+									<td><div id="d_id">ㄴ일지매</div></td>
+									<td><div id="d_text">고고염</div></td>
+								</tr>
+							</tbody>
+						</table>
+						<br />
+						<div class="footfoot">
+							<table id="reinput">
+								<colgroup>
+									<col width="1000px">
+									<col width="100px">
+								</colgroup>
 								<tbody>
 									<tr>
-										<td><div id="d_id">홍길동</div></td>
-										<td><div id="d_text">고고염~</div></td>
-										<td><div id="d_delete">
-												<i class="fa fa-times"></i>
-											</div></td>
-									</tr>
-									<tr>
-										<td><div id="d_id">ㄴ일지매</div></td>
-										<td><div id="d_text">고고염</div></td>
+										<td><input type="text" style="width: 100%;" /></td>
+										<td><button type="button" style="width: 100%;">댓글달기</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
-							<br />
-							<div class="footfoot">
-								<table id="reinput">
-									<colgroup>
-										<col width="1000px">
-										<col width="100px">
-									</colgroup>
-									<tbody>
-										<tr>
-											<td><input type="text" style="width: 100%;" /></td>
-											<td><button type="button" style="width: 100%;">댓글달기</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
+			</div>
 		</div>
-		</div>
+	</div>
 
-		<jsp:include page="footer.jsp"></jsp:include>
+	<jsp:include page="footer.jsp"></jsp:include>
+	
+	<script type="text/javascript">
+	function download(fname){
+		
+		location.href="FileDownload?dir=upload&filename="+encodeURIComponent(fname);
+		//위의 FileDownload는 서블릿이다.
+	}
+</script>
 </body>
 
 </html>
