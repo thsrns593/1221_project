@@ -97,78 +97,91 @@
 					<h3>일반게시판</h3>
 				</div>
 				<div class="panel-body">
-					<div id="top_side">
-						<div id="top_left">
-							<select class="form-control">
-								<option>전체</option>
-								<option>공지</option>
-								<option>잡담</option>
-								<option>질문</option>
-							</select>
+					<form action="board_free.inc" method="get">
+						<div id="top_side">
+							<div id="top_left">
+							<%
+								String cate = request.getParameter("cate");
+								if(cate == null)
+									cate ="";
+							%>
+								<select class="form-control" name="cate" onchange="sel()">
+									<option <%if(cate.equals("") || cate.equals("total")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
+									<option <%if(cate.equals("notice")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
+									<option <%if(cate.equals("chat")) {out.print(" selected='selected' ");} %>value="잡담">잡담</option>
+									<option <%if(cate.equals("question")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
+								</select>
+							</div>
+							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
 						</div>
-						<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
-					</div>
-					<table class="table table-striped table-bordered table-hover" id="dataTable">
-						<colgroup>
-							<col width="5%">
-							<col width="5%">
-							<col width="10%">
-							<col width="50%">
-							<col width="20%">
-							<col width="10%">
-
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>번호</th>
-								<th>분류</th>
-								<th>글쓴이</th>
-								<th>제목</th>
-								<th>등록일</th>
-								<th>조회수</th>
-							</tr>
-							<c:forEach items="${ar }" var="item" varStatus="st">
+						<table class="table table-striped table-bordered table-hover" id="dataTable">
+							<colgroup>
+								<col width="5%">
+								<col width="5%">
+								<col width="10%">
+								<col width="50%">
+								<col width="20%">
+								<col width="10%">
+	
+							</colgroup>
+							<tbody>
 								<tr>
-									<td>${item.nb_num}</td>
-									<td>${item.nb_category }</td>
-									<td>${item.m_id }</td>
-									<td><a href="text_read.inc">${item.nb_title }</a></td>
-									<td>${item.nb_cdate }</td>
-									<td>${item.nb_hit }</td>
+									<th>번호</th>
+									<th>분류</th>
+									<th>글쓴이</th>
+									<th>제목</th>
+									<th>등록일</th>
+									<th>조회수</th>
 								</tr>
-							</c:forEach>
-							<c:if test="${empty ar}">
-								<tr>
-									<td bgcolor="#F2F7F9" colspan="5" height="70" align="center">
-									등록된 게시물이 없습니다.</td>
-								</tr>
-							</c:if>
-						</tbody>
-					</table>
-					<div class="col-lg-6" id="search_area">
-						<div class="form-group" id="search_cate_area">
-							<select id="search_cate" class="form-control">
-								<option>글제목</option>
-								<option>글내용</option>
-								<option>글제목+글내용</option>
-								<option>글쓴이</option>
-							</select>
+								<c:forEach items="${ar }" var="item" varStatus="st">
+									<tr>
+										<td>${item.nb_num}</td>
+										<td>${item.nb_category }</td>
+										<td>${item.m_id }</td>
+										<td><a href="text_read.inc?nowPage=${nowPage }">${item.nb_title }</a></td>
+										<td>${item.nb_cdate }</td>
+										<td>${item.nb_hit }</td>
+									</tr>
+								</c:forEach>
+								<c:if test="${empty ar}">
+									<tr>
+										<td bgcolor="#F2F7F9" colspan="6" height="70" align="center">
+										등록된 게시물이 없습니다.</td>
+									</tr>
+								</c:if>
+							</tbody>
+						</table>
+						<div class="col-lg-6" id="search_area">
+							<div class="form-group" id="search_cate_area">
+								<select id="search_cate" class="form-control" name="searchType">
+									<option value="0">글제목</option>
+									<option value="1">글내용</option>
+									<option value="2">글제목+글내용</option>
+									<option value="3">글쓴이</option>
+								</select>
+							</div>
+							<div class="form-group input-group" id="search_word_area">
+								<input id="search_word" class="form-control" name="search_value">
+								<span class="input-group-btn" id="search_btn">
+									<button class="btn btn-default" type="button" >
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
 						</div>
-						<div class="form-group input-group" id="search_word_area">
-							<input id="search_word" class="form-control" name="search_word">
-							<span class="input-group-btn" id="search_btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-						</div>
-					</div>
-						${pageCode }
+							${pageCode }
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
-    
+    <script>
+    	function sel() {
+    		var cate =document.forms[0].cate.value;
+    		location.href= "board_free.inc?cate="+cate;
+    		
+    	}
+    </script>
 </body>
 </html>

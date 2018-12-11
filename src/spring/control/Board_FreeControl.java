@@ -28,9 +28,9 @@ public class Board_FreeControl {
 
 	@RequestMapping("board_free.inc")
 	public ModelAndView board_free(NormalVO vo) {
-		
+		System.out.println("카테고리:"+vo.getCate());
 		String c_page = String.valueOf(vo.getNowPage());
-
+		
 		if(c_page.equals("0"))
 			nowPage = 1;
 		else

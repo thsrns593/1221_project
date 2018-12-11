@@ -7,17 +7,28 @@
 	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NormalVO">
 		SELECT
 		COUNT(*) FROM normal_board WHERE nb_status = 0 
-		<if test="nb_category != null">
-			AND nb_category = #{nb_category}
+		<if test="cate != null">
+			AND nb_category= #{cate}
 		</if>
-		<if test="nb_title != null">
-			AND nb_title LIKE '%'||#{nb_title}||'%'
-		</if>
-		<if test="nb_content != null">
-			AND nb_content LIKE '%'||#{nb_content}||'%'
-		</if>
-		<if test="m_id != null">
-			AND m_id LIKE '%'||#{m_id}||'%'
+		<if test="searchType != null">
+			<choose>
+				<!-- 0 글제목 -->
+				<when test="searchType == 0">
+					AND nb_title LIKE '%'||#{searchValue}||'%'
+				</when>
+				<!-- 1 글내용 -->
+				<when test="searchType == 1">
+					AND nb_content LIKE '%'||#{searchValue}||'%'
+				</when>
+				<!-- 2 글제목+글내용 -->
+				<when test="searchType == 2">
+					AND nb_title LIKE '%'||#{searchValue}||'%' OR nb_content LIKE '%'||#{searchValue}||'%'
+				</when>
+				<!-- 3 글쓴이 -->
+				<when test="searchType == 3">
+					AND m_id LIKE '%'||#{searchValue}||'%'
+				</when>
+			</choose>
 		</if>
 	</select>
 	
@@ -27,17 +38,28 @@
 		SELECT * FROM
 			(SELECT rownum as r_num, a.* FROM
 				(SELECT * FROM normal_board WHERE nb_status = 0
-				<if test="nb_category != null">
-					AND nb_category = #{nb_category}
+				<if test="cate != null">
+					AND nb_category= #{cate}
 				</if>
-				<if test="nb_title != null">
-					AND nb_title LIKE '%'||#{nb_title}||'%'
-				</if>
-				<if test="nb_content != null">
-					AND nb_content LIKE '%'||#{nb_content}||'%'
-				</if>
-				<if test="m_id != null">
-					AND m_id LIKE '%'||#{m_id}||'%'
+				<if test="searchType != null">
+					<choose>
+						<!-- 0 글제목 -->
+						<when test="searchType == 0">
+							AND nb_title LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 1 글내용 -->
+						<when test="searchType == 1">
+							AND nb_content LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 2 글제목+글내용 -->
+						<when test="searchType == 2">
+							AND nb_title LIKE '%'||#{searchValue}||'%' OR nb_content LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 3 글쓴이 -->
+						<when test="searchType == 3">
+							AND m_id LIKE '%'||#{searchValue}||'%'
+						</when>
+					</choose>
 				</if>
 				ORDER BY nb_num DESC)a)
 		WHERE r_num BETWEEN #{begin} AND #{end}

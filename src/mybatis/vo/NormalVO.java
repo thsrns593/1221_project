@@ -7,7 +7,31 @@ public class NormalVO {
 	private String nb_num, nb_title, m_id, nb_category, nb_hit, nb_content, nb_fname,nb_oname,nb_cdate,nb_edate,nb_ip,nb_status;
 	
 	private int nowPage, begin, end;
-	
+	public String getCate() {
+		return cate;
+	}
+
+	public void setCate(String cate) {
+		this.cate = cate;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
+	}
+
+	public String getSearchValue() {
+		return searchValue;
+	}
+
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
+
+	private String cate,searchType,searchValue;
 	private MultipartFile upload;
 	
 	public int getBegin() {
