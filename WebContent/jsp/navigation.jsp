@@ -156,7 +156,6 @@
     </section> -->
     <!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/lib/js/jquery-ui.min.js"></script>
 	<!-- Menu Toggle Script -->

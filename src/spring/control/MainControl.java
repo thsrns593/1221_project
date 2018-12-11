@@ -8,7 +8,6 @@ public class MainControl {
 
 	@RequestMapping("main.inc")
 	public String main() {
-		System.out.println("메인페이지 이동");
 		return "main";
 	}
 }

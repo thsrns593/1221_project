@@ -1,5 +1,9 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,14 +16,16 @@
     
 	<!--share css -->
     <style type="text/css">
-    	#page_num_area {
-    		text-align: right;
+    	#contents{
+    		height: 600px !important;
     	}
     	#dataTable tbody a:hover,#dataTable tbody a:visited{
     		text-decoration: none;
     	}
     	#page_num_area {
+    		width : 160px;
     		float: right;
+    		text-align: center;
     	}
     	#search_area {
     		float:left;
@@ -63,7 +69,7 @@
     	.page_area {
     		border : 1px solid #dedede;
     		border-radius: 5px;
-    		text-align: left;
+    		text-align: center;
     		padding : 0;
     	}
     	
@@ -71,6 +77,7 @@
     		color : rgba(0,84,255);
     	}
     	.page_disable{
+    		display: inline-block;
     		color : #ababab;
     	}
     	.page_selected{
@@ -90,103 +97,101 @@
 					<h3>일반게시판</h3>
 				</div>
 				<div class="panel-body">
-					<div id="top_side">
-						<div id="top_left">
-							<select class="form-control">
-								<option>전체</option>
-								<option>공지</option>
-								<option>잡담</option>
-								<option>질문</option>
-							</select>
+					<form action="board_free.inc" method="get">
+						<div id="top_side">
+							<div id="top_left">
+							<%
+								String cate = (String)request.getAttribute("cate");
+								if(cate == null)
+									cate ="";
+							%>
+								<select class="form-control" name="cate" onchange="sel()">
+									<option <%if(cate.equals("") || cate.equals("전체")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
+									<option <%if(cate.equals("공지")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
+									<option <%if(cate.equals("잡담")) {out.print(" selected='selected' ");} %>value="잡담">잡담</option>
+									<option <%if(cate.equals("질문")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
+								</select>
+							</div>
+							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
 						</div>
-						<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='tw.inc'"></div>
-					</div>
-					<table class="table table-striped table-bordered table-hover" id="dataTable">
-						<colgroup>
-							<col width="5%">
-							<col width="5%">
-							<col width="40%">
-							<col width="10%">
-							<col width="10%">
-							<col width="8%">
-							<col width="6%">
-							<col width="6%">
-						</colgroup>
-						<tbody>
-							<tr>
-								<th>번호</th>
-								<th>분류</th>
-								<th>제목</th>
-								<th>글쓴이</th>
-								<th>등록일</th>
-								<th>조회수</th>
-								<th>추천</th>
-								<th>비추</th>
-							</tr>
-							<tr>
-								<td>1</td>
-								<td>공지</td>
-								<td><a href="#">공지입니다</a></td>
-								<td>관리자</td>
-								<td>11/7</td>
-								<td>510</td>
-								<td>20</td>
-								<td>3</td>
-							</tr>
-							<tr>
-								<td>2</td>
-								<td>잡담</td>
-								<td><a href="#">아무글이나 쓰는곳</a></td>
-								<td>사용자</td>
-								<td>11/7</td>
-								<td>13</td>
-								<td>3</td>
-								<td>10</td>
-							</tr>
-							<tr>
-								<td>3</td>
-								<td>질문</td>
-								<td><a href="#">질문해도 되나요?</a></td>
-								<td>다른사용자</td>
-								<td>11/8</td>
-								<td>0</td>
-								<td>0</td>
-								<td>0</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="col-lg-6" id="search_area">
-						<div class ="form-group" id="search_cate_area">
-							<select  id="search_cate" class="form-control">
-		                        <option>글제목</option>
-		                        <option>글내용</option>
-		                        <option>글제목+글내용</option>
-		                        <option>글쓴이</option>
-	                        </select>
-                        </div>
-                        <div class ="form-group input-group" id="search_word_area">
-                        	<input id="search_word" class="form-control" name="search_word">
-                        	<span class="input-group-btn" id="search_btn">
-							<button class="btn btn-default" type="button"><i class="fa fa-search"></i></button>
-							</span>
+						<table class="table table-striped table-bordered table-hover" id="dataTable">
+							<colgroup>
+								<col width="5%">
+								<col width="5%">
+								<col width="10%">
+								<col width="50%">
+								<col width="20%">
+								<col width="10%">
+	
+							</colgroup>
+							<tbody>
+								<tr>
+									<th>번호</th>
+									<th>분류</th>
+									<th>글쓴이</th>
+									<th>제목</th>
+									<th>등록일</th>
+									<th>조회수</th>
+								</tr>
+								<c:forEach items="${ar }" var="item" varStatus="st">
+									<tr>
+										<td>${item.nb_num}</td>
+										<td>${item.nb_category }</td>
+										<td>${item.m_id }</td>
+										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }</a></td>
+										<td>${item.nb_cdate }</td>
+										<td>${item.nb_hit }</td>
+									</tr>
+								</c:forEach>
+								<c:if test="${empty ar}">
+									<tr>
+										<td bgcolor="#F2F7F9" colspan="6" height="70" align="center">
+										등록된 게시물이 없습니다.</td>
+									</tr>
+								</c:if>
+							</tbody>
+						</table>
+						<%
+							String searchType = (String)request.getAttribute("searchType");
+							String searchValue = (String)request.getAttribute("searchValue");
+							if(searchType == null) 
+								searchType ="";
+							if(searchValue == null)
+								searchValue="";
+						%>
+						<div class="col-lg-6" id="search_area">
+							<div class="form-group" id="search_cate_area">
+								<select id="search_cate" class="form-control" name="searchType">
+									<option <%if(searchType.equals("0")) {out.print(" selected='selected' ");} %> value="0">글제목</option>
+									<option <%if(searchType.equals("1")) {out.print(" selected='selected' ");} %>value="1">글내용</option>
+									<option <%if(searchType.equals("2")) {out.print(" selected='selected' ");} %>value="2">글제목+글내용</option>
+									<option <%if(searchType.equals("3")) {out.print(" selected='selected' ");} %>value="3">글쓴이</option>
+								</select>
+							</div>
+							<div class="form-group input-group" id="search_word_area">
+								<input id="search_word" class="form-control" name="searchValue" value="<%=searchValue%>">
+								<span class="input-group-btn" id="search_btn">
+									<button class="btn btn-default" type="button" onclick="search(this.form)">
+										<i class="fa fa-search"></i>
+									</button>
+								</span>
+							</div>
 						</div>
-                    </div>
-					<div id="page_num_area">
-						<ul class="page_area">
-							<li class="page_button page_disable" id="previous_btn">이전</li>
-							<li class="page_button page_selected"><a href="#">1</a></li>
-							<li class="page_button" ><a href="#">2</a></li>
-							<li class="page_button" ><a href="#">3</a></li>
-							<li class="page_button" ><a href="#">4</a></li>
-							<li class="page_button" ><a href="#">5</a></li>
-							<li class="page_button" id="next_btn"><a href="#">다음</a></li>
-						</ul>
-					</div>
+							${pageCode }
+					</form>
 				</div>
 			</div>
 		</div>
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
-    
+    <script>
+    	function sel() {
+    		var cate =document.forms[0].cate.value;
+    		location.href= "board_free.inc?cate="+cate;
+    	}
+    	function search(frm) {
+    		frm.submit();
+    	}
+    </script>
 </body>
 </html>

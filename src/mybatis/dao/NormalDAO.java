@@ -10,15 +10,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import mybatis.vo.NormalVO;
 
 public class NormalDAO {
+	//주석실험용 ㅇㄴㄹㄴㅇㄹㄴ
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-	public int getNbTotalCount() {
-		return ss.selectOne("normal.totalCount");
+	public int getNbTotalCount(NormalVO vo) {
+		return ss.selectOne("normal.totalCount", vo);
 	}
-	public NormalVO[] getList(Map<String, String> map) {
+	
+	public NormalVO[] getList(NormalVO vo) {
 		// map에 담겨져 있는 begin, end로 원하는 갯수만큼의 게시물을 뽑는다.
-		List<NormalVO> list = ss.selectList("bbs.list", map);
+		List<NormalVO> list = ss.selectList("normal.list", vo);
 		NormalVO[] ar = null;
 		if(list!=null && list.size()>0) {
 			ar = new NormalVO[list.size()];
@@ -26,18 +28,20 @@ public class NormalDAO {
 		}
 		return ar;
 	}
-	public boolean writeBbs(NormalVO vo) {
-		int cnt =ss.insert("bbs.add", vo);
+	public boolean writeText(NormalVO vo) {
+		
+		int cnt =ss.insert("normal.add", vo);
+		
 		if(cnt >0 )
 			return true;
 		else
 			return false;
 	}
-	public NormalVO getBbs(String seq) {
-		return ss.selectOne("bbs.getBbs",seq);
+	public NormalVO getText(NormalVO vo) {
+		return ss.selectOne("normal.view",vo);
 	}
-	public boolean editBbs(NormalVO vo ) {
-		int cnt = ss.update("bbs.edit", vo);
+	public boolean editText(NormalVO vo ) {
+		int cnt = ss.update("normal.edit", vo);
 		if(cnt>0)
 			return true;
 		else

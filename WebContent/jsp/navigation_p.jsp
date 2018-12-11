@@ -49,6 +49,7 @@
             <li class="nav-item">
               <a class="nav-link" href="login.inc">로그인</a> <!-- 로그인 시, 로그아웃 -->
             </li>
+            
             <!-- <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li> -->
@@ -158,7 +159,6 @@
     </section> -->
     <!-- Bootstrap core JavaScript -->
 	<script src="${pageContext.request.contextPath}/lib/js/jquery.min.js"></script>
-	<script src="${pageContext.request.contextPath}/lib/js/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/lib/js/bootstrap.bundle.min.js"></script>
 	
 	<!-- Menu Toggle Script -->
