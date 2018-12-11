@@ -140,12 +140,11 @@
 					<!-- /.col-lg-12 -->
 				</div>
 			</div>
-			<c:if test="${vo ne null} ">
 				<div class="formstyle">
 					<div>
 						<input type="text" size="5px" value="공지" readonly="readonly"
 							style="text-align: center;" /> <input type="text" size="120px"
-							style="margin-bottom: 10px;" value="일반게시판 글입니다"
+							style="margin-bottom: 10px;" value="${vo.getNb_title() }"
 							readonly="readonly" />
 					</div>
 
@@ -205,10 +204,7 @@
 						</div>
 					</form>
 				</div>
-			</c:if>
-			<c:if test="${vo eq null} ">
-				<h1>등록된 게시물이 아니거나 삭제 된 게시물입니다.</h1>
-			</c:if>
+		</div>
 		</div>
 
 		<jsp:include page="footer.jsp"></jsp:include>
