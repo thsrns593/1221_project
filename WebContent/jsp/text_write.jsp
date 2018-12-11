@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <title>일반게시판글쓰기</title>
 	
@@ -131,14 +132,14 @@
                         </div>
                         <div class="">
 	                        <div class="formstyle">
-	                        	<form action="">
+	                        	<form action="text_write.inc" method=post id="writeform" enctype="multipart/form-data">
 	                        		<div>
-	                        			<select>
-	                        				<option value="자랑">&nbsp;공지&nbsp;</option>
-	                        				<option value="교환">&nbsp;잡담&nbsp;</option>
-	                        				<option value="대여">&nbsp;질문&nbsp;</option>
+	                        			<select name="nb_category">
+	                        				<option value="공지">&nbsp;공지&nbsp;</option>
+	                        				<option value="잡담">&nbsp;잡담&nbsp;</option>
+	                        				<option value="질문">&nbsp;질문&nbsp;</option>
 	                        			</select>
-	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="" placeholder="제목"/>
+	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="" placeholder="제목" name="nb_title"/>
 	                        		</div>
   									<table>
   										<tfoot>
@@ -148,20 +149,26 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea rows="10px" cols="132px" ></textarea>
+  													<textarea rows="10px" cols="132px" name="nb_content" ></textarea>
+  												</td>
+  											</tr>
+  											<tr>
+  												<td>
+  													<input type="file" name="upload" value="첨부파일">
   												</td>
   											</tr>
   										</tfoot>
   									</table>		
+  									<input type="hidden" value="${cate }" name="cate"/>			
 								</form>	                        				
 							</div>					
 						</div> 
 						<div class="" >
 	                        <p>
-		                        <button type="button" class="btn btn-outline btn-danger bts"
-		                        onclick="javascript:location.href='board_free.inc'">취소</button>
-			                    <button type="button" class="btn btn-outline btn-success bts"
-			                    onclick="javascript:location.href='tw.inc'">완료</button>
+		                        <input type="button" class="btn btn-outline btn-danger bts"
+		                        onclick="javascript:location.href='board_free.inc'" value="취소"></input>
+			                    <input type="button" class="btn btn-outline btn-success bts"
+			                    onclick="textwrite()" value="완료"></input>
 	                        </p>
                         </div>   
 				</div>                
@@ -170,6 +177,11 @@
 
    <jsp:include page="footer.jsp"></jsp:include>
     
+    <script type="text/javascript">
+    	function textwrite() {
+    		$("#writeform").submit();
+		}
+    </script>
   </body>
 
 </html>

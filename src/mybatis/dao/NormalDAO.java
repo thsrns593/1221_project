@@ -28,17 +28,19 @@ public class NormalDAO {
 		}
 		return ar;
 	}
-	public boolean writeBbs(NormalVO vo) {
+	public boolean writeText(NormalVO vo) {
+		
 		int cnt =ss.insert("normal.add", vo);
+		
 		if(cnt >0 )
 			return true;
 		else
 			return false;
 	}
-	public NormalVO getBbs(String seq) {
+	public NormalVO getText(String seq) {
 		return ss.selectOne("normal.getBbs",seq);
 	}
-	public boolean editBbs(NormalVO vo ) {
+	public boolean editText(NormalVO vo ) {
 		int cnt = ss.update("normal.edit", vo);
 		if(cnt>0)
 			return true;
