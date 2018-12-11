@@ -1,3 +1,5 @@
+<%@page import="java.util.Calendar"%>
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,14 +16,16 @@
     
 	<!--share css -->
     <style type="text/css">
-    	#page_num_area {
-    		text-align: right;
+    	#contents{
+    		height: 600px !important;
     	}
     	#dataTable tbody a:hover,#dataTable tbody a:visited{
     		text-decoration: none;
     	}
     	#page_num_area {
+    		width : 160px;
     		float: right;
+    		text-align: center;
     	}
     	#search_area {
     		float:left;
@@ -65,7 +69,7 @@
     	.page_area {
     		border : 1px solid #dedede;
     		border-radius: 5px;
-    		text-align: left;
+    		text-align: center;
     		padding : 0;
     	}
     	
@@ -73,6 +77,7 @@
     		color : rgba(0,84,255);
     	}
     	.page_disable{
+    		display: inline-block;
     		color : #ababab;
     	}
     	.page_selected{
@@ -127,7 +132,7 @@
 									<td>${item.nb_num}</td>
 									<td>${item.nb_category }</td>
 									<td>${item.m_id }</td>
-									<td>${item.nb_title }</td>
+									<td><a href="text_read.inc">${item.nb_title }</a></td>
 									<td>${item.nb_cdate }</td>
 									<td>${item.nb_hit }</td>
 								</tr>
@@ -157,8 +162,8 @@
 								</button>
 							</span>
 						</div>
-						${pageCode }
 					</div>
+						${pageCode }
 				</div>
 			</div>
 		</div>
