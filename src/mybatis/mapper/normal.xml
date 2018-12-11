@@ -7,7 +7,7 @@
 	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NormalVO">
 		SELECT
 		COUNT(*) FROM normal_board WHERE nb_status = 0 
-		<if test="cate != null and cate!= '전체'">
+		<if test="cate != null and cate!= '전체' and cate !='null'">
 			AND nb_category= #{cate}
 		</if>
 		<if test="searchType != null">
@@ -38,7 +38,7 @@
 		SELECT * FROM
 			(SELECT rownum as r_num, a.* FROM
 				(SELECT * FROM normal_board WHERE nb_status = 0
-				<if test="cate != null and cate!= '전체'">
+				<if test="cate != null and cate!= '전체' and cate !='null'">
 					AND nb_category= #{cate}
 				</if>
 				<if test="searchType != null">
