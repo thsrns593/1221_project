@@ -101,15 +101,15 @@
 						<div id="top_side">
 							<div id="top_left">
 							<%
-								String cate = request.getParameter("cate");
+								String cate = (String)request.getAttribute("cate");
 								if(cate == null)
 									cate ="";
 							%>
 								<select class="form-control" name="cate" onchange="sel()">
-									<option <%if(cate.equals("") || cate.equals("total")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
-									<option <%if(cate.equals("notice")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
-									<option <%if(cate.equals("chat")) {out.print(" selected='selected' ");} %>value="잡담">잡담</option>
-									<option <%if(cate.equals("question")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
+									<option <%if(cate.equals("") || cate.equals("전체")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
+									<option <%if(cate.equals("공지")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
+									<option <%if(cate.equals("잡담")) {out.print(" selected='selected' ");} %>value="잡담">잡담</option>
+									<option <%if(cate.equals("질문")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
 								</select>
 							</div>
 							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
@@ -151,19 +151,27 @@
 								</c:if>
 							</tbody>
 						</table>
+						<%
+							String searchType = (String)request.getAttribute("searchType");
+							String searchValue = (String)request.getAttribute("searchValue");
+							if(searchType == null) 
+								searchType ="";
+							if(searchValue == null)
+								searchValue="";
+						%>
 						<div class="col-lg-6" id="search_area">
 							<div class="form-group" id="search_cate_area">
 								<select id="search_cate" class="form-control" name="searchType">
-									<option value="0">글제목</option>
-									<option value="1">글내용</option>
-									<option value="2">글제목+글내용</option>
-									<option value="3">글쓴이</option>
+									<option <%if(searchType.equals("0")) {out.print(" selected='selected' ");} %> value="0">글제목</option>
+									<option <%if(searchType.equals("1")) {out.print(" selected='selected' ");} %>value="1">글내용</option>
+									<option <%if(searchType.equals("2")) {out.print(" selected='selected' ");} %>value="2">글제목+글내용</option>
+									<option <%if(searchType.equals("3")) {out.print(" selected='selected' ");} %>value="3">글쓴이</option>
 								</select>
 							</div>
 							<div class="form-group input-group" id="search_word_area">
-								<input id="search_word" class="form-control" name="search_value">
+								<input id="search_word" class="form-control" name="searchValue" value="<%=searchValue%>">
 								<span class="input-group-btn" id="search_btn">
-									<button class="btn btn-default" type="button" >
+									<button class="btn btn-default" type="button" onclick="search(this.form)">
 										<i class="fa fa-search"></i>
 									</button>
 								</span>
@@ -180,7 +188,9 @@
     	function sel() {
     		var cate =document.forms[0].cate.value;
     		location.href= "board_free.inc?cate="+cate;
-    		
+    	}
+    	function search(frm) {
+    		frm.submit();
     	}
     </script>
 </body>

@@ -7,7 +7,4 @@ public class BookDAO {
 	@Autowired
 	private SqlSessionTemplate ss;
 	
-	//klejfhwelkfhwef
-		//hello~~~~~
-	//hekfhekhfef
 }

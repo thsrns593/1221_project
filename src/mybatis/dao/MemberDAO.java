@@ -15,4 +15,19 @@ public class MemberDAO {
 		mvo = ss.selectOne("");
 		return mvo;
 	}
+	
+	public boolean join(MemberVO vo) {
+		int cnt = ss.insert("member.addjoin", vo);
+		
+		if(cnt > 0)
+			return true;
+		else
+			return false;
+	}
+	
+	public MemberVO searchId(String id) {
+		MemberVO mvo = null;
+		mvo = ss.selectOne("member.searchId", id);
+		return mvo;
+	}
 }
