@@ -132,7 +132,7 @@
 							<button type="button" class="btn btn-outline btn-success bts"
 								onclick="javascript:location.href='board_free.inc'">돌아가기</button>
 							<button type="button" class="btn btn-outline btn-warning bts"
-								onclick="javascript:location.href='text_edit.inc'">삭제</button>
+								onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
 							<button type="button" class="btn btn-outline btn-info bts"
 								onclick="javascript:location.href='text_edit.inc'">수정</button>
 						</p>

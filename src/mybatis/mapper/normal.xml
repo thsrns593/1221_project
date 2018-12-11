@@ -73,8 +73,13 @@
 									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0)
 	</insert>
 	
+	<!-- 게시물 보기 -->
 	<select id="view" parameterType="mybatis.vo.NormalVO" resultType="mybatis.vo.NormalVO">
 		SELECT * FROM normal_board WHERE nb_num = #{nb_num}
 	</select>
+	<!-- 게시물 삭제 -->
+	<update id="del" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board set nb_status = 1 WHERE nb_num = #{nb_num} 
+	</update>
 </mapper>
 
