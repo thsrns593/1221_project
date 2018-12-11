@@ -1,8 +1,7 @@
 @charset "UTF-8";
 body{
 	width: 400px;
-	height: 700px;
-	border: 1px solid red;
+	height: 550px;
 }
 .id_total{
 	margin: auto;

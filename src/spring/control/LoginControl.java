@@ -27,9 +27,9 @@ public class LoginControl {
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
 	public ModelAndView login(String email, String password) {
 		ModelAndView mv = new ModelAndView();
-		
+	
 		if(l_dao.login(email, password) != null) {
-			session.setAttribute("id", email);
+			session.setAttribute("m_id", email);
 			mv.setViewName("main");
 		}else {
 			
