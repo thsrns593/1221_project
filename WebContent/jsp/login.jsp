@@ -44,11 +44,11 @@
                                        
                                    		
                                    			<td>
-                                   				<button onclick="window.open('find.inc','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" type="button" id="r_id1" name="r_id1" value="아이디 찾기">아이디 찾기</button>
+                                   				<button onclick="window.open('find.inc','window_name','width=430,height=600,location=no,status=no,scrollbars=yes');" type="button" id="r_id1" name="r_id1" value="아이디 찾기">아이디 찾기</button>
                                    			</td>
                                    			<td>/</td>
                                    			<td>
-                                   				<button onclick="window.open('find.inc','window_name','width=430,height=500,location=no,status=no,scrollbars=yes');" type="button" id="r_id2" name="r_id1" value="비밀번호 찾기">비밀번호 찾기</button>
+                                   				<button onclick="window.open('find.inc','window_name','width=430,height=600,location=no,status=no,scrollbars=yes');" type="button" id="r_id2" name="r_id1" value="비밀번호 찾기">비밀번호 찾기</button>
                                    			</td>
                                    		</tr>
                                    	</thead>

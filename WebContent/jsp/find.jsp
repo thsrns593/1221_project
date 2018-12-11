@@ -6,9 +6,75 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="${pageContext.request.contextPath}/lib/css/find.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/lib/css/common.css" rel="stylesheet">
 <link href="${pageContext.request.contextPath}/lib/css/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+body{
+	width: 100%;
+	height: 550px;
+}
+.id_total{
+	margin: auto;
+	margin-top: 15px;
+}
+.pw_total{
+	margin: auto;
+	margin-top: 15px;
+}
+.t_head{
+	width: 100%;
+	margin-bottom: 40px;
+	font-size: 25px;
+	text-align: center;
+	background-color: #efefef;
+	
+}
+.t_id{
+	margin: auto;
+	align-self: center;
+}
+.f_bottom{
+	
+	position:absolute;
+	bottom:0;
+	width: 100%;
+}
+.id_ema{
+	width: 100%;
+	padding-left: 55px;
+}
+.t_email{
+	
+	width: 100%;
+	text-align: center;
+}
+.id_ema button{
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-bottom: 9px;
+}
+#t_ok{
+	margin-top: 10px;
+	background-color: white;
+	border-radius: 5px;
+	border: 1px solid black;
+	margin-left: 180px;
+	padding: 5px;
+}
+.pw_ema{
+	width: 100%;
+	padding-left: 70px;
+	
+}
+.t_pass{
+	width: 80%;
+	margin-bottom: 9px;
+}
+.email{
+	margin-bottom: 9px;
+}
+</style>
 </head>
 <body>
 	<div class="id_total">
@@ -36,12 +102,7 @@
 		</div>
 			<button id="t_ok" type="button">확인</button>
 	</div>
-	<!-- Footer -->
-    <footer class="py-5 bg-dark f_bottom">
-      <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Your Website 2018</p>
-      </div>
-    </footer>
+	
     
 </body>
 </html>
