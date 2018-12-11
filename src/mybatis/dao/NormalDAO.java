@@ -37,8 +37,8 @@ public class NormalDAO {
 		else
 			return false;
 	}
-	public NormalVO getText(String seq) {
-		return ss.selectOne("normal.getBbs",seq);
+	public NormalVO getText(NormalVO vo) {
+		return ss.selectOne("normal.view",vo);
 	}
 	public boolean editText(NormalVO vo ) {
 		int cnt = ss.update("normal.edit", vo);

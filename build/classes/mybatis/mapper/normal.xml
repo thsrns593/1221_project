@@ -72,5 +72,9 @@
 		VALUES(nb_seq.NEXTVAL, #{nb_title}, #{m_id}, #{nb_category}, 0, #{nb_content},
 									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0)
 	</insert>
+	
+	<select id="view" parameterType="mybatis.vo.NormalVO" resultType="mybatis.vo.NormalVO">
+		SELECT * FROM normal_board WHERE nb_num = #{nb_num}
+	</select>
 </mapper>
 

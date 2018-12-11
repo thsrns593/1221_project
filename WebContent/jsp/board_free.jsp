@@ -138,7 +138,7 @@
 										<td>${item.nb_num}</td>
 										<td>${item.nb_category }</td>
 										<td>${item.m_id }</td>
-										<td><a href="text_read.inc?nowPage=${nowPage }">${item.nb_title }</a></td>
+										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }</a></td>
 										<td>${item.nb_cdate }</td>
 										<td>${item.nb_hit }</td>
 									</tr>
