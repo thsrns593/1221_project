@@ -7,7 +7,7 @@
 	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NormalVO">
 		SELECT
 		COUNT(*) FROM normal_board WHERE nb_status = 0 
-		<if test="cate != null">
+		<if test="cate != null and cate!= '전체'">
 			AND nb_category= #{cate}
 		</if>
 		<if test="searchType != null">
@@ -38,7 +38,7 @@
 		SELECT * FROM
 			(SELECT rownum as r_num, a.* FROM
 				(SELECT * FROM normal_board WHERE nb_status = 0
-				<if test="cate != null">
+				<if test="cate != null and cate!= '전체'">
 					AND nb_category= #{cate}
 				</if>
 				<if test="searchType != null">
@@ -64,5 +64,12 @@
 				ORDER BY nb_num DESC)a)
 		WHERE r_num BETWEEN #{begin} AND #{end}
 	</select>
+	
+	<insert id="add" parameterType="mybatis.vo.NormalVO">
+		INSERT INTO normal_board(nb_num, nb_title, m_id, nb_category, nb_hit, nb_content,
+									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status)
+		VALUES(nb_seq.NEXTVAL, #{nb_title}, #{m_id}, #{nb_category}, 0, #{nb_content},
+									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0)
+	</insert>
 </mapper>
 

@@ -28,7 +28,6 @@ public class Board_FreeControl {
 
 	@RequestMapping("board_free.inc")
 	public ModelAndView board_free(NormalVO vo) {
-		System.out.println("카테고리:"+vo.getCate());
 		String c_page = String.valueOf(vo.getNowPage());
 		
 		if(c_page.equals("0"))
@@ -38,8 +37,9 @@ public class Board_FreeControl {
 		
 		rowTotal = n_dao.getNbTotalCount(vo);
 		String board_name ="board_free";
+		String cate = vo.getCate(); 
 		Paging page = new Paging(nowPage, 
-				rowTotal, BLOCK_LIST, BLOCK_PAGE,board_name);
+			rowTotal, BLOCK_LIST, BLOCK_PAGE,board_name,cate);
 		
 		pageCode = page.getSb().toString();
 		
@@ -57,7 +57,11 @@ public class Board_FreeControl {
 		mv.addObject("nowPage", nowPage);
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
+		mv.addObject("searchType", vo.getSearchType());
+		mv.addObject("searchValue",vo.getSearchValue());
 		mv.addObject("pageCode", pageCode);
+		System.out.println("카테고리"+cate);
+		mv.addObject("cate",cate);
 		mv.setViewName("board_free");
 		return mv;
 	}

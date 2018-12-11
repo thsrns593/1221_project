@@ -15,6 +15,13 @@
 .ui-widget-header {
      border: none; 
     }
+.btn-secondary{
+	background-color: #6c757d !important;
+	border-color: #6c757d !important;
+}
+.btn{
+	    padding: .375rem .75rem !important;
+}
 </style>	
 	
    <!--  Custom fonts for this template-->

@@ -16,7 +16,7 @@ public class Paging {
 	private StringBuffer sb;	
 
 	public Paging(int nowPage, int rowTotal, 
-			int blockList, int blockPage,String board_name) {
+			int blockList, int blockPage,String board_name,String cate) {
 		super();
 		this.nowPage = nowPage;
 		this.rowTotal = rowTotal;
@@ -73,6 +73,7 @@ public class Paging {
 		if(isPrePage) {
 			sb.append("<li class='page_button'><a href='"+board_name+".inc?nowPage=");
 			sb.append(nowPage - blockPage);
+			sb.append("&cate="+cate);
 			sb.append("'> &lt; </a></li>");
 		}else {
 			//������� ��Ȱ��ȭ
@@ -87,6 +88,7 @@ public class Paging {
 			if(i == nowPage) {
 				sb.append("<li class='page_button page_selected'><a href='"+board_name+".inc?nowPage=");
 				sb.append(i);
+				sb.append("&cate="+cate);
 				sb.append("'>");
 				sb.append(i);
 				sb.append("</a></li>");
@@ -94,6 +96,7 @@ public class Paging {
 			}else {
 				sb.append("<li class='page_button'><a href='"+board_name+".inc?nowPage=");
 				sb.append(i);//�Ķ���� ��
+				sb.append("&cate="+cate);
 				sb.append("'>");// <li><a href='list.inc?nowPage=1'>
 				sb.append(i); //ȭ�鿡 ��µǴ� ������ ��ȣ
 				sb.append("</a></li>");
@@ -104,6 +107,7 @@ public class Paging {
 		if(isNextPage) {
 			sb.append("<li class='page_button'><a href='"+board_name+".inc?nowPage=");
 			sb.append(nowPage + blockPage);
+			sb.append("&cate="+cate);
 			sb.append("'> &gt; </a></li>");
 		}else {
 			sb.append("<li class='page_disable'> &gt; </li>");
