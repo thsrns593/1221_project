@@ -22,8 +22,12 @@
     	#page_num_area {
     		text-align: right;
     	}
-    	#dataTable tbody a:hover,#dataTable tbody a:visited{
+    	#dataTable tbody a,#dataTable tbody a:hover{
     		text-decoration: none;
+    		color: rgba(0,120,205);
+    	}
+    	#dataTable tbody a:visited {
+    		color:rgba(100,50,200);
     	}
     	#page_num_area {
     		float: right;
@@ -155,7 +159,7 @@
 										<tr>
 											<td>${item.bb_num }</td>
 											<td>${item.bb_category }</td>
-											<td><a href="javascript:goView(this.form)">${item.bb_title }</a></td>
+											<td><a href="javascript:goView(${item.bb_num })">${item.bb_title }</a></td>
 											<td>${item.bb_bname }</td>
 											<td>${item.bb_author }</td>
 											<td>${item.m_id }</td>
@@ -197,6 +201,7 @@
 	                    </div>
 						${pageCode }
 						<input type="hidden" name="nowPage" value="${nowPage }">
+						<input type="hidden" name="bb_num" value="">
 					</form>
 				</div>
 			</div>
@@ -205,7 +210,9 @@
 	<!-- /contents -->
     <jsp:include page="footer.jsp"></jsp:include>
     <script>
-    	function goView(frm) {
+    	function goView(bb_num) {
+    		var frm = document.forms[0];
+    		frm.bb_num.value=bb_num;
     		frm.action ="book_read.inc";
     		frm.method="post";
     		frm.submit();

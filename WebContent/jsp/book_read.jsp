@@ -140,21 +140,20 @@
 	                        <div class="formstyle">
 	                        	<form action="">
 	                        		<div >
-	                        			<input type="text" size="5px"value="평가" readonly="readonly" style="text-align: center;"/>
-	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="안녕하세요" readonly="readonly"/>
+	                        			<input type="text" size="5px"value="${vo.bb_category }" readonly="readonly" style="text-align: center;"/>
+	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }" readonly="readonly"/>
 	                        		</div>
 	                        		&nbsp;
 	                        		&nbsp;
-	                        		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="말포이" readonly="readonly"/></span>
-	                        		<span><label>작성일:</label><input class="writerinfo" type="text" value="1999" readonly="readonly"/></span>
-	                        		<span><label>조회수:</label><input class="writerinfo" type="text" value="1" readonly="readonly"/></span>
-	                        		<span><label>추천수:</label><input class="writerinfo" type="text" value="-1" readonly="readonly"/></span>
+	                        		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" value=""/></span>
+	                        		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" value=""/></span>
+	                        		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" value=""/></span>
 	                        		<div id="imagediv"> 사진 </div>
 									<div id="textdiv">
 										&nbsp;
-										<div><label>도서명:</label><input class="bookinfo" type="text" value="해리포터" readonly="readonly"/></div>
-										<div><label>저자명:</label><input class="bookinfo" type="text" value="하이염" readonly="readonly"/></div>
-										<div><label>출판사:</label><input class="bookinfo" type="text" value="위가르디움 레비오사" readonly="readonly"/></div>
+										<div><label>도서명:</label><input class="bookinfo" type="text" value="${vo.bb_bname }" readonly="readonly"/></div>
+										<div><label>저자명:</label><input class="bookinfo" type="text" value="${vo.bb_author }" readonly="readonly"/></div>
+										<div><label>출판사:</label><input class="bookinfo" type="text" value="${vo.bb_press }" readonly="readonly"/></div>
 									</div>
   									<table>
   										<tfoot>
@@ -164,7 +163,7 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea rows="10px" cols="132px"  readonly="readonly">해리포터,,,,ㅡㅡ</textarea>
+  													<textarea rows="10px" cols="132px"  readonly="readonly">${vo.bb_content }</textarea>
   												</td>
   											</tr>
   										</tfoot>

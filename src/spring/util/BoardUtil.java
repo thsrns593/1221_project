@@ -1,16 +1,25 @@
 package spring.util;
 
 public class BoardUtil {
-	private String nowPage, cate, searchType,searchValue;
+	private String nowPage, cate, searchType,searchValue,num;
 
 	public BoardUtil() {}
 	
-	public BoardUtil(String nowPage, String cate, String searchType, String searchValue) {
+	public String getNum() {
+		return num;
+	}
+
+	public void setNum(String num) {
+		this.num = num;
+	}
+
+	public BoardUtil(String nowPage, String cate, String searchType, String searchValue,String num) {
 		super();
 		this.nowPage = nowPage;
 		this.cate = cate;
 		this.searchType = searchType;
 		this.searchValue = searchValue;
+		this.num = num;
 	}
 
 	public String getNowPage() {

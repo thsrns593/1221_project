@@ -61,7 +61,7 @@
 						  AND (bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%')
 						</when>
 						<!-- 5 글쓴이 -->
-						<when test="searchType == 3">
+						<when test="searchType == 5">
 					 	  AND m_id LIKE '%'||#{searchValue}||'%'
 						</when>
 					</choose>
@@ -80,6 +80,9 @@
       			<if test="cate !=null and cate !='전체'">bb_category = #{cate} and</if> bb_status = 0 order by bb_num desc)a
    		) 
 	where r_num between #{begin} and #{end}
+  </select>
+  <select id="getBbs" resultType="mybatis.vo.BookVO" parameterType="String">
+  	select * from book_board where bb_num = #{bb_num}
   </select>
 </mapper>
 

@@ -34,4 +34,7 @@ public class BookDAO {
 		}
 		return ar;
 	}
+	public BookVO getBbs(String num) {
+		return ss.selectOne("book.getBbs",num);
+	}
 }
