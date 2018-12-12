@@ -92,5 +92,10 @@
 			nb_ip = #{nb_ip}
 		WHERE nb_num = #{nb_num}
 	</update>
+	
+	<!-- 게시물 조회수 증가 -->
+	<update id="updateHit" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board set nb_hit = nb_hit + 1 WHERE nb_num = #{nb_num}
+	</update>
 </mapper>
 

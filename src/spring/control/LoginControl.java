@@ -39,6 +39,7 @@ public class LoginControl {
 		}
 		return mv;
 	}
+	
 	@RequestMapping("logout.inc")
 	public ModelAndView logout(HttpSession session) {
 		session.removeAttribute("m_id");
