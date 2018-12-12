@@ -110,6 +110,7 @@
 }
 
 .writerinfo {
+	margin: auto;
 	border-radius: 5px;
 	text-align: center;
 }
@@ -129,12 +130,19 @@
 					</div>
 					<div class="panel-footer">
 						<p>
-							<button type="button" class="btn btn-outline btn-success bts"
-								onclick="javascript:location.href='board_free.inc'">돌아가기</button>
-							<button type="button" class="btn btn-outline btn-warning bts"
-								onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
-							<button type="button" class="btn btn-outline btn-info bts"
-								onclick="javascript:location.href='text_edit.inc'">수정</button>
+							<c:if test="${sessionScope.m_id eq vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+								<button type="button" class="btn btn-outline btn-warning bts"
+									onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
+								<button type="button" class="btn btn-outline btn-info bts"
+									onclick="javascript:location.href='text_edit.inc?nb_num=${param.nb_num}&nowPage=${param.nowPage}'">수정</button>
+							</c:if>
+							<c:if test="${sessionScope.m_id ne vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts" style="float: right;"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+							</c:if>
+							
 						</p>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -142,7 +150,7 @@
 			</div>
 			<div class="formstyle">
 				<div>
-					<input type="text" size="5px" value="공지" readonly="readonly"
+					<input type="text" size="5px" value="${vo.getNb_category() }" readonly="readonly"
 						style="text-align: center;" /> <input type="text" size="120px"
 						style="margin-bottom: 10px;" value="${vo.getNb_title() }"
 						readonly="readonly" />
@@ -167,9 +175,7 @@
 					type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
 					class="writerinfo" type="text" value="${vo.getNb_cdate() }"
 					readonly="readonly" /></span> <span><label>조회수:</label><input
-					class="writerinfo" type="text" value="1" readonly="readonly" /></span> <span><label>추천수:</label><input
-					class="writerinfo" type="text" value="${vo.getNb_hit() }"
-					readonly="readonly" /></span>
+					class="writerinfo" type="text" value="${vo.getNb_hit() }" readonly="readonly" /></span>
 			</div>
 			<div class="col-md-12">
 				<br />

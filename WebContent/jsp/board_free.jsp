@@ -106,7 +106,6 @@
 								if(cate == null)
 									cate ="";
 							%>
-							
 								<select class="form-control" name="cate" onchange="sel()">
 									<option <%if(cate.equals("") || cate.equals("전체")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
 									<option <%if(cate.equals("공지")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
@@ -114,7 +113,9 @@
 									<option <%if(cate.equals("질문")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
 								</select>
 							</div>
+							<c:if test="${sessionScope.m_id ne null }">
 							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
+							</c:if>
 						</div>
 						<table class="table table-striped table-bordered table-hover" id="dataTable">
 							<colgroup>
