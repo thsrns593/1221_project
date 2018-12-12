@@ -56,4 +56,12 @@ public class NormalDAO {
 		else
 			return false;
 	}
+	
+	public boolean updateHit(NormalVO vo) {
+		int cnt = ss.update("normal.updateHit",vo);
+		if(cnt>0)
+			return true;
+		else
+			return false;
+	}
 }

@@ -3,6 +3,83 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="book">
-	
+  <!-- 카테고리, 검색타입, 검색어에 맞는 총게시물 수를 반환 -->
+  <select id="totalCount" parameterType="java.util.Map" resultType="int">
+  	SELECT COUNT(*) FROM book_board WHERE bb_status = 0 
+	  <if test="cate != null and cate!= '전체' and cate !='null'">
+		AND bb_category= #{cate}
+	  </if>
+	  <if test="searchType != null">
+		<choose>
+	 	  <!-- 0 글제목 -->
+			<when test="searchType == 0">
+			  AND bb_title LIKE '%'||#{searchValue}||'%'
+			</when>
+			<!-- 1 글내용 -->
+			<when test="searchType == 1">
+			  AND bb_content LIKE '%'||#{searchValue}||'%'
+			</when>
+			<!-- 2 글제목+글내용 -->
+			<when test="searchType == 2">
+			  AND bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%'
+			</when>
+			<!-- 3 글쓴이 -->
+			<when test="searchType == 3">
+		 	  AND m_id LIKE '%'||#{searchValue}||'%'
+			</when>
+		</choose>
+	  </if>
+  </select>
+  
+  <!-- 카테고리, 검색타입, 검색어에 맞는 게시물들을 반환 -->
+  <select id="list" parameterType="java.util.Map" resultType="mybatis.vo.BookVO">
+  	select * from 
+   		(select rownum r_num,a.* from       
+      		(select * from book_board where
+      			bb_status = 0   
+      			<if test="cate !=null and cate !='전체' and cate !='null'">AND bb_category = #{cate}</if>
+      			<if test="searchType != null">
+					<choose>
+				 	  <!-- 0 도서명 -->
+						<when test="searchType == 0">
+						  AND bb_bname LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 1 저자 -->
+						<when test="searchType == 1">
+						  AND bb_author LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 2 글제목 -->
+						<when test="searchType == 2">
+						  AND bb_title LIKE '%'||#{searchValue}||'%' 
+						</when>
+						<!-- 3 글내용 -->
+						<when test="searchType == 3">
+						  AND bb_content LIKE '%'||#{searchValue}||'%'
+						</when>
+						<!-- 4 글제목+글내용 -->
+						<when test="searchType == 4">
+						  AND (bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%')
+						</when>
+						<!-- 5 글쓴이 -->
+						<when test="searchType == 3">
+					 	  AND m_id LIKE '%'||#{searchValue}||'%'
+						</when>
+					</choose>
+			    </if>
+      			order by bb_num desc)a
+   		) 
+	where r_num between #{begin} and #{end}
+  	
+  </select>
+  
+  <!-- 카테고리 별로 검색된 게시물들 반환 -->
+  <select id="cate" parameterType="java.util.Map" resultType="mybatis.vo.BookVO">
+	select * from 
+   		(select rownum r_num,a.* from       
+      		(select * from book_board where   
+      			<if test="cate !=null and cate !='전체'">bb_category = #{cate} and</if> bb_status = 0 order by bb_num desc)a
+   		) 
+	where r_num between #{begin} and #{end}
+  </select>
 </mapper>
 

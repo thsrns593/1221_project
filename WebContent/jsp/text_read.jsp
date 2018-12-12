@@ -110,6 +110,7 @@
 }
 
 .writerinfo {
+	margin: auto;
 	border-radius: 5px;
 	text-align: center;
 }
@@ -129,12 +130,20 @@
 					</div>
 					<div class="panel-footer">
 						<p>
-							<button type="button" class="btn btn-outline btn-success bts"
-								onclick="javascript:location.href='board_free.inc'">돌아가기</button>
-							<button type="button" class="btn btn-outline btn-warning bts"
-								onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
-							<button type="button" class="btn btn-outline btn-info bts"
-								onclick="javascript:location.href='text_edit.inc'">수정</button>
+							<c:if test="${sessionScope.m_id eq vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+								<button type="button" class="btn btn-outline btn-warning bts"
+									onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
+								<button type="button" class="btn btn-outline btn-info bts"
+									onclick="javascript:location.href='text_edit.inc?nb_num=${param.nb_num}&nowPage=${param.nowPage}'">수정</button>
+							</c:if>
+							<c:if test="${sessionScope.m_id ne vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts"
+									style="float: right;"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+							</c:if>
+
 						</p>
 					</div>
 					<!-- /.col-lg-12 -->
@@ -142,10 +151,10 @@
 			</div>
 			<div class="formstyle">
 				<div>
-					<input type="text" size="5px" value="공지" readonly="readonly"
-						style="text-align: center;" /> <input type="text" size="120px"
-						style="margin-bottom: 10px;" value="${vo.getNb_title() }"
-						readonly="readonly" />
+					<input type="text" size="5px" value="${vo.getNb_category() }"
+						readonly="readonly" style="text-align: center;" /> <input
+						type="text" size="120px" style="margin-bottom: 10px;"
+						value="${vo.getNb_title() }" readonly="readonly" />
 				</div>
 
 				<table>
@@ -158,8 +167,12 @@
 									readonly="readonly">${vo.getNb_content() }</textarea></td>
 						</tr>
 						<tr>
-							<td> <div>첨부파일 : <a href="javascript:download('${vo.getNb_fname()}')">
-									${vo.getNb_oname()} </a></div> </td>
+							<td>
+								<div>
+									첨부파일 : <a href="javascript:download('${vo.getNb_fname()}')">
+										${vo.getNb_oname()} </a>
+								</div>
+							</td>
 						</tr>
 					</tfoot>
 				</table>
@@ -167,7 +180,6 @@
 					type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
 					class="writerinfo" type="text" value="${vo.getNb_cdate() }"
 					readonly="readonly" /></span> <span><label>조회수:</label><input
-					class="writerinfo" type="text" value="1" readonly="readonly" /></span> <span><label>추천수:</label><input
 					class="writerinfo" type="text" value="${vo.getNb_hit() }"
 					readonly="readonly" /></span>
 			</div>
@@ -191,21 +203,42 @@
 							</tbody>
 						</table>
 						<br />
-						<div class="footfoot">
-							<table id="reinput">
-								<colgroup>
-									<col width="1000px">
-									<col width="100px">
-								</colgroup>
-								<tbody>
-									<tr>
-										<td><input type="text" style="width: 100%;" /></td>
-										<td><button type="button" style="width: 100%;">댓글달기</button>
-										</td>
-									</tr>
-								</tbody>
-							</table>
-						</div>
+						<c:if test="${sessionScope.m_id ne null }">
+							<div class="footfoot">
+								<table id="reinput">
+									<colgroup>
+										<col width="1000px">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<td><input type="text" style="width: 100%;" id="reply"
+												name="reply" /></td>
+											<td><button type="button" style="width: 100%;">댓글달기</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
+						<c:if test="${sessionScope.m_id eq null}">
+							<div class="footfoot">
+								<table id="reinput">
+									<colgroup>
+										<col width="1000px">
+										<col width="100px">
+									</colgroup>
+									<tbody>
+										<tr>
+											<td><input type="text" style="width: 100%;"
+												 placeholder="로그인 해주세요~" readonly="readonly"/></td>
+											<td><button type="button" style="width: 100%;">댓글달기</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</c:if>
 					</div>
 				</form>
 			</div>
@@ -213,14 +246,15 @@
 	</div>
 
 	<jsp:include page="footer.jsp"></jsp:include>
-	
+
 	<script type="text/javascript">
-	function download(fname){
-		
-		location.href="FileDownload?dir=upload&filename="+encodeURIComponent(fname);
-		//위의 FileDownload는 서블릿이다.
-	}
-</script>
+		function download(fname) {
+
+			location.href = "FileDownload?dir=upload&filename="
+					+ encodeURIComponent(fname);
+			//위의 FileDownload는 서블릿이다.
+		}
+	</script>
 </body>
 
 </html>
