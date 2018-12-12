@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -105,6 +106,7 @@
 								if(cate == null)
 									cate ="";
 							%>
+							
 								<select class="form-control" name="cate" onchange="sel()">
 									<option <%if(cate.equals("") || cate.equals("전체")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
 									<option <%if(cate.equals("공지")) {out.print(" selected='selected' ");} %>value="공지">공지</option>
@@ -133,13 +135,18 @@
 									<th>등록일</th>
 									<th>조회수</th>
 								</tr>
+								<jsp:useBean id="today2" class="java.util.Date" />
+								<fmt:formatDate var="today" value="${today2}" pattern="yyyy-MM-dd" />
+								
 								<c:forEach items="${ar }" var="item" varStatus="st">
 									<tr>
 										<td>${item.nb_num}</td>
 										<td>${item.nb_category }</td>
 										<td>${item.m_id }</td>
 										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }</a></td>
-										<td>${item.nb_cdate }</td>
+										<td><c:if test="${fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,10,16) }</c:if> 
+											<c:if test="${!fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,5,10) }</c:if>
+										</td>
 										<td>${item.nb_hit }</td>
 									</tr>
 								</c:forEach>

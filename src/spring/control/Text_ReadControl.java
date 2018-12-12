@@ -25,4 +25,16 @@ public class Text_ReadControl {
 		
 		return mv;
 	}
+	
+	@RequestMapping("text_del.inc")
+	public ModelAndView text_del(NormalVO vo) {
+		
+		ModelAndView mv = new ModelAndView();
+		
+		boolean chk = n_dao.delText(vo);
+		
+		mv.setViewName("redirect: board_free.inc");
+		
+		return mv;
+	}
 }
