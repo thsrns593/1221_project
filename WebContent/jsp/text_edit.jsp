@@ -140,7 +140,7 @@
 				</div>
 				<div class="">
 					<div class="formstyle">
-						<form action="">
+						<form action="" method="post" id="editform" name="editform">
 							<div>
 								<%
 								NormalVO vo = (NormalVO)request.getAttribute("vo");
@@ -156,7 +156,7 @@
 								</select>
 								
 								<input type="text" size="120px" style="margin-bottom: 10px;"
-									value="${vo.getNb_title() }" />
+									value="${vo.getNb_title() }"  name="nb_title"/>
 							</div>
 							<table>
 								<tfoot>
@@ -164,7 +164,7 @@
 										<td height="10px;">
 									</tr>
 									<tr>
-										<td colspan="5"><textarea rows="10px" cols="132px">${vo.getNb_content() }</textarea>
+										<td colspan="5"><textarea rows="10px" cols="132px" name="nb_content">${vo.getNb_content() }</textarea>
 										</td>
 									</tr>
 									<tr>
@@ -173,6 +173,7 @@
 									</tr>
 								</tfoot>
 							</table>
+							<input type="hidden" value="${vo.getNb_num()}" name="nb_num"/>
 						</form>
 					</div>
 				</div>
@@ -181,7 +182,7 @@
 						<button type="button" class="btn btn-outline btn-warning bts"
 							onclick="javascript:location.href='text_read.inc'">삭제</button>
 						<button type="button" class="btn btn-outline btn-info bts"
-							onclick="javascript:location.href='text_read.inc'">수정</button>
+							onclick="editText()">수정</button>
 					</p>
 				</div>
 			</div>
@@ -197,11 +198,17 @@
 
 	<!-- Bootstrap core JavaScript -->
 	<script
-		src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.min.js"></script>
-	<script
 		src="${pageContext.request.contextPath}/lib/js/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript"
 		src="${pageContext.request.contextPath}/lib/js/jquery-ui.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript">
+		function editText(){
+			$("#editform").attr("action", "text_edit.inc");
+			$("#editform").submit();
+			
+		};
+	</script>
 
 
 

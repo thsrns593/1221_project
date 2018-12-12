@@ -129,12 +129,19 @@
 					</div>
 					<div class="panel-footer">
 						<p>
-							<button type="button" class="btn btn-outline btn-success bts"
-								onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
-							<button type="button" class="btn btn-outline btn-warning bts"
-								onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
-							<button type="button" class="btn btn-outline btn-info bts"
-								onclick="javascript:location.href='text_edit.inc?nb_num=${param.nb_num}&nowPage=${param.nowPage}'">수정</button>
+							<c:if test="${sessionScope.m_id eq vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+								<button type="button" class="btn btn-outline btn-warning bts"
+									onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
+								<button type="button" class="btn btn-outline btn-info bts"
+									onclick="javascript:location.href='text_edit.inc?nb_num=${param.nb_num}&nowPage=${param.nowPage}'">수정</button>
+							</c:if>
+							<c:if test="${sessionScope.m_id ne vo.getM_id() }">
+								<button type="button" class="btn btn-outline btn-success bts" style="float: right;"
+									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
+							</c:if>
+							
 						</p>
 					</div>
 					<!-- /.col-lg-12 -->

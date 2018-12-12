@@ -46,7 +46,6 @@ public class Text_EditControl {
 	@RequestMapping(value = "text_edit.inc", method=RequestMethod.POST)
 	public ModelAndView write(NormalVO vo) throws Exception {
 
-
 //		MultipartFile mf = vo.getUpload();
 //
 		ModelAndView mv = new ModelAndView();
@@ -72,6 +71,12 @@ public class Text_EditControl {
 //		}
 		vo.setM_id((String)session.getAttribute("m_id"));
 		vo.setNb_ip(request.getRemoteAddr());
+		
+		System.out.println(vo.getNb_title());
+		System.out.println(vo.getNb_content());
+		System.out.println(vo.getNb_ip());
+		System.out.println(vo.getNb_num());
+
 				
 		boolean chk = n_dao.editText(vo);
 

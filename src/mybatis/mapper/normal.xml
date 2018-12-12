@@ -88,9 +88,7 @@
 		set nb_title = #{nb_title},
 			nb_category = #{nb_category},
 			nb_content = #{nb_content},
-			nb_fname = #{nb_fname},
-			nb_oname = #{nb_oname},
-			nb_edate = #{nb_edate},
+			nb_edate = sysdate,
 			nb_ip = #{nb_ip}
 		WHERE nb_num = #{nb_num}
 	</update>
