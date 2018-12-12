@@ -11,13 +11,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.NormalDAO;
+import mybatis.dao.NreplyDAO;
 import mybatis.vo.NormalVO;
+import mybatis.vo.NreplyVO;
 
 @Controller
 public class Text_ReadControl {
 	
 	@Autowired
 	private NormalDAO n_dao;
+	
+	@Autowired
+	private NreplyDAO nreply_dao;
 	
 	@Autowired
 	private HttpSession session;
@@ -82,7 +87,38 @@ public class Text_ReadControl {
 		
 		mv.setViewName("text_read");
 		
+		
+		//여기서부터 댓글 기능---------------------
+		//댓글 수
+		NreplyVO rvo = new NreplyVO();
+		
+		rvo.setNb_num(vo.getNb_num());
+		
+		int replycount = nreply_dao.getNreplyTotalCount(rvo);
+		
+		mv.addObject("replycount",replycount);
+		
+		//댓글 리스트
+		
+		NreplyVO[] nreplyar = nreply_dao.getNreplyList(rvo);
+		
+		mv.addObject("nreplyar",nreplyar);
+		
+			
 		return mv;
+	}
+	
+	//댓글 추가
+	@RequestMapping("nreply.inc")
+	public NreplyVO[] addNreply(NreplyVO vo) {
+		NreplyVO[] nreplyar = null;
+		
+		nreply_dao.addNreply(vo);
+		
+		nreplyar = nreply_dao.getNreplyList(vo);
+		
+		return nreplyar;
+		
 	}
 	
 	@RequestMapping("text_del.inc")

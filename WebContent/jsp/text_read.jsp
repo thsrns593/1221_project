@@ -11,6 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
 <title>일반게시물보기</title>
 
@@ -185,21 +186,25 @@
 			</div>
 			<div class="col-md-12">
 				<br />
-				<form action="">
+					<label>댓글수 : ${replycount }</label>
 					<div id="reinput">
-						<table id="list_table">
+						<table id="reply_table">
 							<tbody>
-								<tr>
-									<td><div id="d_id">홍길동</div></td>
-									<td><div id="d_text">고고염~</div></td>
-									<td><div id="d_delete">
-											<i class="fa fa-times"></i>
-										</div></td>
-								</tr>
-								<tr>
-									<td><div id="d_id">ㄴ일지매</div></td>
-									<td><div id="d_text">고고염</div></td>
-								</tr>
+								<c:if test="${nreplyar eq null }">
+									<tr>
+										<td>
+											<h5>등록된 댓글이 없어요</h5>
+										</td>
+									</tr>	
+								</c:if>
+								<c:forEach items="${nreplyar}" var="item">
+									<tr>
+										<td>&nbsp;&nbsp;${item.m_id } --> ${item.nreply_to } &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;등록일 : ${item.nreply_cdate } </td>
+									</tr>
+									<tr>
+										<td>&nbsp;&nbsp;${item.nreply_content }</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 						<br />
@@ -214,13 +219,16 @@
 										<tr>
 											<td><input type="text" style="width: 100%;" id="reply"
 												name="reply" /></td>
-											<td><button type="button" style="width: 100%;">댓글달기</button>
+											<td><button type="button" onclick="addreply()" style="width: 100%;">댓글달기</button>
 											</td>
 										</tr>
 									</tbody>
 								</table>
 							</div>
 						</c:if>
+						<form action="">
+						
+						</form>
 						<c:if test="${sessionScope.m_id eq null}">
 							<div class="footfoot">
 								<table id="reinput">
@@ -240,7 +248,6 @@
 							</div>
 						</c:if>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>
@@ -254,6 +261,12 @@
 					+ encodeURIComponent(fname);
 			//위의 FileDownload는 서블릿이다.
 		}
+		function addreply(){
+			
+			
+		}
+		
+		
 	</script>
 </body>
 
