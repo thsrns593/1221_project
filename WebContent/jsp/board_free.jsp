@@ -106,7 +106,6 @@
 								if(cate == null)
 									cate ="";
 							%>
-							
 								<select class="form-control" name="cate" onchange="sel()">
 									<option <%if(cate.equals("") || cate.equals("전체")) {out.print(" selected='selected' ");} %>value="전체">전체</option>
 									<option <%if(cate.equals("공지")) {out.print(" selected='selected' ");} %>value="공지">공지</option>

@@ -81,5 +81,18 @@
 	<update id="del" parameterType="mybatis.vo.NormalVO">
 		UPDATE normal_board set nb_status = 1 WHERE nb_num = #{nb_num} 
 	</update>
+	
+	<!-- 게시물 수정 -->
+	<update id="edit" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board 
+		set nb_title = #{nb_title},
+			nb_category = #{nb_category},
+			nb_content = #{nb_content},
+			nb_fname = #{nb_fname},
+			nb_oname = #{nb_oname},
+			nb_edate = #{nb_edate},
+			nb_ip = #{nb_ip}
+		WHERE nb_num = #{nb_num}
+	</update>
 </mapper>
 

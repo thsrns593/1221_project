@@ -124,7 +124,7 @@
 				                <div class="panel-footer">
 	                            	<p>
 		                                <button type="button" class="btn btn-outline btn-success bts"
-		                                onclick="javascript:location.href='nb.inc'">돌아가기</button>
+		                                onclick="javascript:location.href='board_free.inc'">돌아가기</button>
 	                            	</p>
                         		</div>
 				                <!-- /.col-lg-12 -->
