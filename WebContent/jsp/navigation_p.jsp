@@ -43,22 +43,26 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+           <c:if test="${sessionScope.m_id == null }">
             <li class="nav-item">
               <a class="nav-link" href="join.inc">회원가입</a> <!-- 로그인 시, 마이페이지 -->
             </li>
-           <!--  <li class="nav-item">
-              <a class="nav-link" href="login.inc">로그인</a> 로그인 시, 로그아웃
-            </li> -->
+            </c:if>
+            <c:if test="${sessionScope.m_id != null }">
+            	<a></a>
+            </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
-            		<a class="nav-link" href="login.inc">로그인 ,${sessionScope.m_id},asdf </a>
+            		<a class="nav-link" href="login.inc">로그인 </a>
             	</li>
             	</c:if>
             
 			<c:if test="${sessionScope.m_id != null }">
-            	${sessionScope.m_id}님이 로그인중입니다.}
+            	<li class="nav_logout">
+            	${sessionScope.m_id}님이 로그인중입니다.
+            	</li>
             	<li class="nav-item">
-            		<a class="nav-link" href="logout.inc">로그아웃, ${sessionScope.m_id},asdf</a>
+            		<a class="nav-link" href="logout.inc">로그아웃</a>
             	</li>
             </c:if>
             <!-- <li class="nav-item">
