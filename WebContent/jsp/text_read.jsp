@@ -110,6 +110,7 @@
 }
 
 .writerinfo {
+	margin: auto;
 	border-radius: 5px;
 	text-align: center;
 }
@@ -174,9 +175,7 @@
 					type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
 					class="writerinfo" type="text" value="${vo.getNb_cdate() }"
 					readonly="readonly" /></span> <span><label>조회수:</label><input
-					class="writerinfo" type="text" value="1" readonly="readonly" /></span> <span><label>추천수:</label><input
-					class="writerinfo" type="text" value="${vo.getNb_hit() }"
-					readonly="readonly" /></span>
+					class="writerinfo" type="text" value="${vo.getNb_hit() }" readonly="readonly" /></span>
 			</div>
 			<div class="col-md-12">
 				<br />
