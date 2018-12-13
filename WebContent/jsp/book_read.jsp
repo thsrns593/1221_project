@@ -175,10 +175,27 @@
 					</form>
 						 <div class="col-md-12" >
 						 	<br/>
-	                        	<form action="" method="">
 									<div id="reinput">
-										<table id="list_table">
-											<tbody>
+										<div class="footfoot">
+                      						<form action="" id="reply">
+												<table id="reinput">
+													<colgroup>
+														<col width="1000px">
+														<col width="100px">
+													</colgroup>
+													<tbody>
+														<tr>
+															<td>
+																<input type="text" style="width: 100%;" name="breply_content"/>
+															</td>
+															<td><button type="button" style="width: 100%;" onclick="reply(this.form)">댓글달기</button> </td>
+														</tr>
+													</tbody>
+												</table>
+											</form>
+										</div>
+										<table>
+											<tbody id="reply_list">
 												<tr>
 													<td><div id="d_id">홍길동</div></td>
 													<td><div id="d_text">그 책 가지고 싶은데 공짜론 안되나요?</div></td>
@@ -190,21 +207,6 @@
 												</tr>
 											</tbody>
 										</table>
-										<br/>
-										<div class="footfoot">
-											<table id="reinput">
-												<colgroup>
-													<col width="1000px">
-													<col width="100px">
-												</colgroup>
-												<tbody>
-													<tr>
-														<td><input type="text" style="width: 100%;"/></td>
-														<td><button type="button" style="width: 100%;">댓글달기</button> </td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
 									</div>
 							     </form>                   				
 						</div>	
@@ -248,6 +250,27 @@
 				$("#editBtn").prop("disabled",true);
 			}
 		});
+		
+		function reply(frm) {
+			var reply_list = document.getElementById("reply_list");
+			reply_list.innerHTML +="";
+			var bb_num = "${vo.bb_num}";
+			var m_id = "${m_id}";
+			var breply_content = frm.breply_content;
+			$.ajax({
+				url:"breply_write.inc",
+				data : "bb_num="+bb_num+"&m_id="+m_id+"&breply_content="+breply_content;
+				dataType : "json",
+				type:"post"
+			}).done(function(data){
+				
+			}).fail(function(err){
+				console.log("댓글실패")
+			});
+			frm.action="breply_write.inc";
+			frm.method="post";
+			frm.submit();
+		}
 	</script>
   </body>
 
