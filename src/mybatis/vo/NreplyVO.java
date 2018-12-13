@@ -3,7 +3,7 @@ package mybatis.vo;
 public class NreplyVO {
 	private String nreply_num,	nb_num,	m_id,nreply_to,	nreply_group, nreply_content,
             nreply_cdate,nreply_ip,nreply_status;
-
+	
 	private int nowPage, begin, end;
 	
 	
