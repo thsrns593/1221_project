@@ -1,8 +1,7 @@
 @charset "UTF-8";
 
 .nav_logout{
-	color: #ebeced !important;
-	padding-top: 7px;
+	padding-top: 7px !important;
 }
 
 #header_logo{

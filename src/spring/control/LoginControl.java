@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.LoginDAO;
+import mybatis.vo.MemberVO;
 
 @Controller
 public class LoginControl {
@@ -28,8 +29,9 @@ public class LoginControl {
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
 	public ModelAndView login(String email, String password) {
 		ModelAndView mv = new ModelAndView();
-	
-		if(l_dao.login(email, password) != null) {
+		MemberVO vo = null;
+		vo = l_dao.login(email, password);
+		if(vo != null && vo.getM_odate() == null) {
 			session.setAttribute("m_id", email);
 			System.out.println((String)session.getAttribute("m_id"));
 			mv.setViewName("main");
