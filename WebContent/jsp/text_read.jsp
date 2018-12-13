@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-<link href="${pageContext.request.contextPath}/lib/css/text.css" rel="stylesheet" type="text/css">
+
 
 <title>일반게시물보기</title>
 
@@ -118,6 +118,32 @@
 
 #replybody td {
 	width: 1200px;
+}
+
+.page_button {
+	padding: 5px;
+	display: inline-block;
+}
+
+.page_area {
+	border: 1px solid #424242;
+	border-radius: 5px;
+	text-align: center;
+	padding: 0;
+}
+
+.page_area a {
+	color: #6E6E6E;
+}
+
+.page_disable {
+	display: inline-block;
+	color: #F4FA58;
+}
+
+.page_selected {
+	font-size: 20px;
+	font-weight: bold;
 }
 </style>
 
@@ -227,15 +253,20 @@
 											${item.m_id }
 										</c:if> <c:if test="${item.nreply_to ne null }">
 											--> ${item.nreply_to }
-										</c:if> <c:if test="${item.nreply_status eq '0' }">
-											 : ${item.nreply_content }
-										</c:if> <c:if test="${item.nreply_status eq '1' }">
-											 : 삭제된 댓글입니다.
-										</c:if></td>
-								</tr>
+										</c:if>
+									${item.nreply_cdate }
+								</td>
+								</tr>							
 								<tr>
-									<td><p>${item.nreply_cdate }</p></td>
+									<td>
+										<c:if test="${item.nreply_status eq '0' }">
+											  ${item.nreply_content }
+										</c:if> <c:if test="${item.nreply_status eq '1' }">
+											  삭제된 댓글입니다.
+										</c:if>
+									</td>	
 								</tr>
+
 							</c:forEach>
 						</tbody>
 					</table>
@@ -248,9 +279,9 @@
 	</div>
 
 	<jsp:include page="footer.jsp"></jsp:include>
-
+	
+	<input type="text" value="${param.nb_num}" id="nrnb_num">
 	<script type="text/javascript">
-		
 		function download(fname) {
 
 			location.href = "FileDownload?dir=upload&filename="
@@ -258,7 +289,17 @@
 			//위의 FileDownload는 서블릿이다.
 		}
 
+		function goPage() {
+			addreply();
+			var frm = document.forms[0];
+			frm.nowPage.value = pg;
+			frm.action = "";
+			frm.method = "post";
+			frm.submit();
+		}
+
 		function addreply() {
+
 			var postvalue = $("form[name=addnreply]").serialize();
 
 			$.ajax({
@@ -275,15 +316,9 @@
 
 				var str = "";
 				var a = 0;
-				var br = "<tr><td> </td></tr><tr><td> </td></tr>";
-					
 				for (var i = 1; i < list.length - 1; i++) {
 					var tr = "<tr><td>" + list[i] + "</td></tr>";
-
-					str += tr;
-					str += br;
 					a = i;
-					
 				}
 				$("#replybody").html(str);
 				$("#nreplynum").text("댓글수 : " + a);
@@ -291,13 +326,40 @@
 				console.log("실패" + err);
 			});
 			$("#nreply_content").val("");
-			
-			$("#reinput").css("display", "block");
-			$("#reinput").attr(, value)
-
-
 		}
 
+		function goPage(pg) {
+			var nb_num = $("#nrnb_num").val();
+			$.ajax({
+				type : "post",
+				url : "nreply.inc?nowPage=" + pg + "&nb_num=" + nb_num,
+				dataType : 'text'
+			}).done(function(data) {
+				var list = data.split("#");
+				var removeItem = "";
+				list = jQuery.grep(list, function(value) {
+					return value != removeItem;
+				});
+
+				var str = "";
+				var a = 0;
+				var br = "<tr><td> </td></tr><tr><td> </td></tr>";
+
+				for (var i = 1; i < list.length - 1; i++) {
+					var tr = "<tr><td>" + list[i] + "</td></tr>";
+
+					str += tr;
+					str += br;
+					a = i;
+
+				}
+				$("#replybody").html(str);
+				$("#nreplynum").text("댓글수 : " + a);
+			}).fail(function(err) {
+				console.log("실패" + err);
+			});
+			$("#nreply_content").val("");
+		}
 	</script>
 </body>
 
