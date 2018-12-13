@@ -60,7 +60,7 @@ public class Board_FreeControl {
 		mv.addObject("searchType", vo.getSearchType());
 		mv.addObject("searchValue",vo.getSearchValue());
 		mv.addObject("pageCode", pageCode);
-		System.out.println("카테고리"+cate);
+
 		mv.addObject("cate",cate);
 		mv.setViewName("board_free");
 		return mv;

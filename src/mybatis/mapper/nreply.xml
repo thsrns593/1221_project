@@ -11,9 +11,12 @@
 	<!-- 댓글 리스트를 가져오는 기능 -->
 	<select id="list" resultType="mybatis.vo.NreplyVO"
 		parameterType="mybatis.vo.NreplyVO">
-		SELECT * FROM normal_reply 
-		WHERE nb_num = #{nb_num}
-		ORDER BY nreply_group ASC,nreply_cdate ASC
+		SELECT * FROM
+			(SELECT rownum r_num, a.* FROM
+				(SELECT * FROM normal_reply 
+				WHERE nb_num = #{nb_num}
+				ORDER BY nreply_group ASC,nreply_cdate ASC)a)
+		WHERE r_num BETWEEN  #{begin} AND #{end}
 	</select>
 	
 	<!-- 댓글 추가 -->
@@ -31,8 +34,18 @@
 	</insert>
 	
 	<!-- 댓글 삭제 -->
-	<update id="del" parameterType="mybatis.vo.NormalVO">
+	<update id="del" parameterType="mybatis.vo.NreplyVO">
 		UPDATE normal_reply set nreply_status = 1 WHERE nreply_num = #{nreply_num} 
+	</update>
+	
+	
+	<!-- 게시물 테이블 댓글 수 증가 -->
+	<update id="upnb_count" parameterType="mybatis.vo.NreplyVO">
+		UPDATE normal_board set 
+		
+		nb_reply_count = nb_reply_count + 1
+		
+		WHERE nb_num = #{nb_num} 
 	</update>
 </mapper>
 

@@ -144,7 +144,7 @@
 										<td>${item.nb_num}</td>
 										<td>${item.nb_category }</td>
 										<td>${item.m_id }</td>
-										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }</a></td>
+										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }(${item.nb_reply_count})</a></td>
 										<td><c:if test="${fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,10,16) }</c:if> 
 											<c:if test="${!fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,5,10) }</c:if>
 										</td>

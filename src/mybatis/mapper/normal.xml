@@ -68,9 +68,9 @@
 	<!-- 게시물 추가 -->
 	<insert id="add" parameterType="mybatis.vo.NormalVO">
 		INSERT INTO normal_board(nb_num, nb_title, m_id, nb_category, nb_hit, nb_content,
-									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status)
+									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status, nb_reply_count)
 		VALUES(normal_board_seq.NEXTVAL, #{nb_title}, #{m_id}, #{nb_category}, 0, #{nb_content},
-									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0)
+									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0, 0)
 	</insert>
 	
 	<!-- 게시물 보기 -->

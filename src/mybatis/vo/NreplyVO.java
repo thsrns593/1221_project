@@ -4,6 +4,33 @@ public class NreplyVO {
 	private String nreply_num,	nb_num,	m_id,nreply_to,	nreply_group, nreply_content,
             nreply_cdate,nreply_ip,nreply_status;
 
+	private int nowPage, begin, end;
+	
+	
+	public int getNowPage() {
+		return nowPage;
+	}
+
+	public void setNowPage(int nowPage) {
+		this.nowPage = nowPage;
+	}
+
+	public int getBegin() {
+		return begin;
+	}
+
+	public void setBegin(int begin) {
+		this.begin = begin;
+	}
+
+	public int getEnd() {
+		return end;
+	}
+
+	public void setEnd(int end) {
+		this.end = end;
+	}
+
 	public String getNreply_num() {
 		return nreply_num;
 	}
