@@ -3,10 +3,14 @@ package spring.control;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.mail.Session;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.BookDAO;
@@ -18,6 +22,9 @@ import spring.util.PageUtil;
 public class Board_ShareControl {
 	@Autowired
 	private BookDAO b_dao;
+	@Autowired
+	private HttpSession session;
+	
 	public static final int BLOCK_LIST = 7;
 	public static final int BLOCK_PAGE = 5;
 	
@@ -44,6 +51,7 @@ public class Board_ShareControl {
 		
 		return mv;
 	}
+	//책게시판에서 검색 버튼 또는 페이지숫자를 눌러서 들어온 경우
 	@RequestMapping(value="board_share.inc",method = RequestMethod.POST)
 	public ModelAndView getList(BoardUtil bu) {
 		Map<String, String> map = new HashMap<String, String>();
@@ -73,5 +81,23 @@ public class Board_ShareControl {
 		mv.addObject("ar",ar);
 		mv.setViewName("board_share");
 		return mv;
+	}
+	
+	//게시물 삭제
+	@RequestMapping(value = "deleteBook.inc",method = RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> deleteBbs(BoardUtil bu) {
+		String msg = "0";
+		String m_id = (String)session.getAttribute("m_id");
+		if(m_id !=null && m_id.equals(bu.getM_id())) {
+			boolean chk =b_dao.deleteBbs(bu.getNum());
+			//true이면 삭제완료
+			if(chk) {
+				msg ="1";
+			}
+		}
+		Map<String, String> map = new HashMap<>();
+		map.put("msg", msg);
+		return map;
 	}
 }

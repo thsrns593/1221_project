@@ -127,9 +127,9 @@
 	                            		<button type="button" class="btn btn-outline btn-success bts"
 	                            		onclick="javascript:location.href='board_share.inc'">돌아가기</button>
 	                            		<button type="button" class="btn btn-outline btn-warning bts"
-	                            		onclick="">삭제</button>
+	                            		onclick="del(this.form)">삭제</button>
                             			<button type="button" class="btn btn-outline btn-info bts"
-                            			onclick="javascript:location.href='book_edit.inc'">수정</button> 
+                            			onclick="edit(this.form)">수정</button> 
 		                                
 	                            	</p>
                         		</div>
@@ -140,14 +140,15 @@
 	                        <div class="formstyle">
 	                        	<form action="">
 	                        		<div >
-	                        			<input type="text" size="5px"value="${vo.bb_category }" readonly="readonly" style="text-align: center;"/>
+	                        			<input type="hidden" name="bb_num" value="${vo.bb_num }">
+	                        			<input type="text" size="5px" value="${vo.bb_category }" readonly="readonly" style="text-align: center;"/>
 	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }" readonly="readonly"/>
 	                        		</div>
 	                        		&nbsp;
 	                        		&nbsp;
-	                        		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" value=""/></span>
-	                        		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" value=""/></span>
-	                        		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" value=""/></span>
+	                        		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" name="m_id" /></span>
+	                        		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" /></span>
+	                        		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" /></span>
 	                        		<div id="imagediv"> 사진 </div>
 									<div id="textdiv">
 										&nbsp;
@@ -212,7 +213,32 @@
         </div>
         
     <jsp:include page="footer.jsp"></jsp:include>
-
+    <script type="text/javascript" src=""></script>
+	<script type="text/javascript">
+		function del(frm) {
+			var bb_num = frm.bb_num; 
+			var m_id = frm.m_id;
+			$.ajax({
+				url : "deleteBbs.inc",
+				data : "bb_num="+bb_num.value+"&m_id="+m_id.value,
+				dataType : "json",
+				type : "post"
+			}).done(function(data) {
+				//1이면 삭제완료 0이면 삭제실패
+				if(data.msg == "1") {
+					alert("삭제완료");
+					location.href="board_share.inc";
+				} else {
+					alert("삭제실패");
+				}
+			}).fail(function(err) {
+				console.log(err)
+			});
+		}
+		function edit(frm) {
+			location.href="editBbs.inc?bb_num="+frm.bb_num.value;
+		}
+	</script>
   </body>
 
 </html>

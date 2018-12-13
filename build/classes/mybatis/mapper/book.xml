@@ -84,5 +84,9 @@
   <select id="getBbs" resultType="mybatis.vo.BookVO" parameterType="String">
   	select * from book_board where bb_num = #{bb_num}
   </select>
+  
+  <update id="deleteBbs" parameterType="String">
+  	update book_board set status = 1 where bb_num = #{bb_num}
+  </update>
 </mapper>
 

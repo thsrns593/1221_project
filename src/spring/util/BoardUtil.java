@@ -1,7 +1,15 @@
 package spring.util;
 
 public class BoardUtil {
-	private String nowPage, cate, searchType,searchValue,num;
+	private String nowPage, cate, searchType,searchValue,num,m_id;
+
+	public String getM_id() {
+		return m_id;
+	}
+
+	public void setM_id(String m_id) {
+		this.m_id = m_id;
+	}
 
 	public BoardUtil() {}
 	

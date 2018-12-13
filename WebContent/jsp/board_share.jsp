@@ -200,8 +200,8 @@
 							</div>
 	                    </div>
 						${pageCode }
-						<input type="hidden" name="nowPage" value="${nowPage }">
-						<input type="hidden" name="bb_num" value="">
+						<input on type="hidden" name="nowPage" value="${nowPage }">
+						<input type="hidden" name="num" >
 					</form>
 				</div>
 			</div>
@@ -212,7 +212,8 @@
     <script>
     	function goView(bb_num) {
     		var frm = document.forms[0];
-    		frm.bb_num.value=bb_num;
+    		frm.num.value=bb_num;
+    		console.log(frm.num.value);
     		frm.action ="book_read.inc";
     		frm.method="post";
     		frm.submit();
@@ -234,6 +235,7 @@
     		frm.method ="post";
     		frm.submit();
     	}
+    	
     </script>
   </body>
 
