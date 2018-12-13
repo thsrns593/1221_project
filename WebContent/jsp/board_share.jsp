@@ -124,7 +124,7 @@
 									<option value="대여" <%if(cate.equals("대여")){out.print(" selected='selected' ");} %>>대여</option>
 								</select>
 							</div>
-							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='book_write.inc'"></div>
+							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='writeBook.inc'"></div>
 						</div>
 						<table class="table table-striped table-bordered table-hover" id="dataTable">
 							<colgroup>

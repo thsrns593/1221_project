@@ -59,7 +59,7 @@
             
 			<c:if test="${sessionScope.m_id != null }">
             	<li class="nav_logout">
-            	${sessionScope.m_id}님이 로그인중입니다.
+            		<a href="modify.inc" style="color: #ebeced !important;">${sessionScope.m_id}님이 로그인중입니다.</a>
             	</li>
             	<li class="nav-item">
             		<a class="nav-link" href="logout.inc">로그아웃</a>

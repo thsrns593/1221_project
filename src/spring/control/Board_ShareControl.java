@@ -86,8 +86,9 @@ public class Board_ShareControl {
 	//게시물 삭제
 	@RequestMapping(value = "deleteBook.inc",method = RequestMethod.POST)
 	@ResponseBody
-	public Map<String, String> deleteBbs(BoardUtil bu) {
+	public Map<String, String> deleteBook(BoardUtil bu) {
 		String msg = "0";
+		System.out.println("bb_num : "+ bu.getNum());
 		String m_id = (String)session.getAttribute("m_id");
 		if(m_id !=null && m_id.equals(bu.getM_id())) {
 			boolean chk =b_dao.deleteBbs(bu.getNum());
@@ -100,4 +101,6 @@ public class Board_ShareControl {
 		map.put("msg", msg);
 		return map;
 	}
+	
+	
 }

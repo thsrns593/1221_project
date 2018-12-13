@@ -81,12 +81,26 @@
    		) 
 	where r_num between #{begin} and #{end}
   </select>
+  
+  <!-- 게시물 보기 -->
   <select id="getBbs" resultType="mybatis.vo.BookVO" parameterType="String">
   	select * from book_board where bb_num = #{bb_num}
   </select>
   
+  <!-- 글 삭제 -->
   <update id="deleteBbs" parameterType="String">
-  	update book_board set status = 1 where bb_num = #{bb_num}
+  	update book_board set bb_status = 1 where bb_num = #{bb_num}
   </update>
+  
+  <!-- 조회수 증가 -->
+  <update id="upHit" parameterType="String">
+  	update book_board set bb_hit = bb_hit+1 where bb_num = #{bb_num}
+  </update>
+  
+  <!-- 글쓰기 bb_num ,bb_category bb_title bb_bname bb_author bb_press bb_content-->
+  <insert id="writeBook" parameterType="mybatis.vo.BookVO">
+  	insert into book_board values(book_board_seq.nextval, #{bb_title}, #{m_id},#{bb_category},0,#{bb_content},#{bb_bname},
+  		#{bb_author},#{bb_press},sysdate,sysdate,#{bb_ip},0)
+  </insert>
 </mapper>
 

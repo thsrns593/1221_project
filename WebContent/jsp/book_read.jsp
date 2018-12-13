@@ -116,6 +116,7 @@
 
     <jsp:include page="navigation.jsp"></jsp:include>
 		<div class="row" id="content">  
+			<form method="post" action ="">
                 <div class="col-md-12" >
                       <div class="panel-heading">
                            <div class="row">
@@ -133,47 +134,48 @@
 		                                
 	                            	</p>
                         		</div>
+                       		</div>
 				                <!-- /.col-lg-12 -->
-				            </div>
-                        </div>
-                        <div class="">
-	                        <div class="formstyle">
-	                        	<form action="">
-	                        		<div >
-	                        			<input type="hidden" name="bb_num" value="${vo.bb_num }">
-	                        			<input type="text" size="5px" value="${vo.bb_category }" readonly="readonly" style="text-align: center;"/>
-	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }" readonly="readonly"/>
-	                        		</div>
-	                        		&nbsp;
-	                        		&nbsp;
-	                        		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" name="m_id" /></span>
-	                        		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" /></span>
-	                        		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" /></span>
-	                        		<div id="imagediv"> 사진 </div>
-									<div id="textdiv">
-										&nbsp;
-										<div><label>도서명:</label><input class="bookinfo" type="text" value="${vo.bb_bname }" readonly="readonly"/></div>
-										<div><label>저자명:</label><input class="bookinfo" type="text" value="${vo.bb_author }" readonly="readonly"/></div>
-										<div><label>출판사:</label><input class="bookinfo" type="text" value="${vo.bb_press }" readonly="readonly"/></div>
-									</div>
-  									<table>
-  										<tfoot>
-  											<tr>
-  												<td height="10px;">
+			            </div>
+                </div>
+                <div class="formstyle">
+	                        	
+               		<div >
+               			<input type="hidden" name="bb_num" value="${vo.bb_num }">
+               			<input type="text" size="5px" value="${vo.bb_category }" readonly="readonly" style="text-align: center;"/>
+               			<input type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }" readonly="readonly"/>
+               		</div>
+               		&nbsp;
+               		&nbsp;
+               		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" name="m_id" /></span>
+               		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" /></span>
+               		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" /></span>
+               		<div id="imagediv"> 사진 </div>
+					<div id="textdiv">
+						&nbsp;
+						<div><label>도서명:</label><input class="bookinfo" type="text" value="${vo.bb_bname }" readonly="readonly"/></div>
+						<div><label>저자명:</label><input class="bookinfo" type="text" value="${vo.bb_author }" readonly="readonly"/></div>
+						<div><label>출판사:</label><input class="bookinfo" type="text" value="${vo.bb_press }" readonly="readonly"/></div>
+					</div>
+						<table>
+							<tfoot>
+								<tr>
+									<td height="10px;">
 
-  											</tr>
-  											<tr>
-  												<td colspan="5">
-  													<textarea rows="10px" cols="132px"  readonly="readonly">${vo.bb_content }</textarea>
-  												</td>
-  											</tr>
-  										</tfoot>
-  									</table>		
-								</form>	                        				
-							</div>
-							 <div class="col-md-12" >
-							 	<br/>
-	                        	<form action="">
+								</tr>
+								<tr>
+									<td colspan="5">
+										<textarea rows="10px" cols="132px"  readonly="readonly">${vo.bb_content }</textarea>
+									</td>
+								</tr>
+							</tfoot>
+						</table>		
+								                      				
+					</div>
+					</form>
+						 <div class="col-md-12" >
+						 	<br/>
+	                        	<form action="" method="">
 									<div id="reinput">
 										<table id="list_table">
 											<tbody>
@@ -204,13 +206,12 @@
 											</table>
 										</div>
 									</div>
-								</form>	                        				
-								</div>	
+							     </form>                   				
+						</div>	
 							<br/>				
 							<br/>				
-						</div> 
-				</div>                
-        </div>
+			</div> 
+				
         
     <jsp:include page="footer.jsp"></jsp:include>
     <script type="text/javascript" src=""></script>
@@ -219,8 +220,8 @@
 			var bb_num = frm.bb_num; 
 			var m_id = frm.m_id;
 			$.ajax({
-				url : "deleteBbs.inc",
-				data : "bb_num="+bb_num.value+"&m_id="+m_id.value,
+				url : "deleteBook.inc",
+				data : "num="+bb_num.value+"&m_id="+m_id.value,
 				dataType : "json",
 				type : "post"
 			}).done(function(data) {
@@ -236,7 +237,7 @@
 			});
 		}
 		function edit(frm) {
-			location.href="editBbs.inc?bb_num="+frm.bb_num.value;
+			location.href="editBook.inc?num="+frm.bb_num.value;
 		}
 	</script>
   </body>
