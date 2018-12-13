@@ -1,23 +1,34 @@
 package spring.control;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.NormalDAO;
+import mybatis.dao.NreplyDAO;
 import mybatis.vo.NormalVO;
+import mybatis.vo.NreplyVO;
 
 @Controller
 public class Text_ReadControl {
 	
 	@Autowired
 	private NormalDAO n_dao;
+	
+	@Autowired
+	private NreplyDAO nreply_dao;
 	
 	@Autowired
 	private HttpSession session;
@@ -43,7 +54,7 @@ public class Text_ReadControl {
 			
 			
 			session.setAttribute("view_list", list);
-			System.out.println("최소 게시물 리스트생성");
+
 		}else {
 			
 			list = (ArrayList<NormalVO>)obj;
@@ -53,7 +64,6 @@ public class Text_ReadControl {
 			for(NormalVO nvo1 : list) {
 				if(nvo.getNb_num().equals(nvo1.getNb_num())) {
 					chk = true;
-					System.out.println("탈출은 하냐");
 					break;//반복문 탈출!
 				}
 				System.out.println("nvo :"+nvo.getNb_num());
@@ -71,7 +81,6 @@ public class Text_ReadControl {
 				int hit = Integer.parseInt(nvo.getNb_hit());
 				nvo.setNb_hit(String.valueOf(hit+1));
 
-				System.out.println("안본글보기");
 			}
 		}
 		
@@ -82,7 +91,67 @@ public class Text_ReadControl {
 		
 		mv.setViewName("text_read");
 		
+		
+		//여기서부터 댓글 기능---------------------
+		//댓글 수
+		NreplyVO rvo = new NreplyVO();
+		
+		rvo.setNb_num(vo.getNb_num());
+		
+		int replycount = nreply_dao.getNreplyTotalCount(rvo);
+		
+		mv.addObject("replycount",replycount);
+		
+		//댓글 리스트
+		
+		NreplyVO[] nreplyar = nreply_dao.getNreplyList(rvo);
+		
+		mv.addObject("nreplyar",nreplyar);
+		
+			
 		return mv;
+	}
+	
+	//댓글 추가
+	@RequestMapping("nreply.inc")
+	@ResponseBody
+	public Map<String, String> addNreply(NreplyVO vo,HttpServletRequest request){
+		NreplyVO[] nreplyar = null;
+		
+		vo.setNreply_ip(request.getRemoteAddr());
+		
+		
+		if(vo.getNreply_to() == null ) {
+			vo.setNreply_to("");
+		}
+		
+		nreply_dao.addNreply(vo);
+		
+		nreplyar = nreply_dao.getNreplyList(vo);
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for(NreplyVO nrvo : nreplyar) {
+			sb.append("#");
+			sb.append(nrvo.getM_id());
+			if(nrvo.getNreply_to() != null) {
+				sb.append(nrvo.getNreply_to());
+				sb.append("->");
+				}
+			sb.append("  :  ");
+			sb.append(nrvo.getNreply_content());
+			sb.append("<p >");
+			sb.append(nrvo.getNreply_cdate());
+			sb.append("</p>");
+			sb.append("#");
+		}
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("replylist", sb.toString());
+		
+		return map;
+		
 	}
 	
 	@RequestMapping("text_del.inc")

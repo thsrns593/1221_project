@@ -12,6 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
+
 <title>일반게시물보기</title>
 
 
@@ -114,6 +115,10 @@
 	border-radius: 5px;
 	text-align: center;
 }
+
+#replybody td {
+	width: 1200px;
+}
 </style>
 
 </head>
@@ -184,63 +189,60 @@
 					readonly="readonly" /></span>
 			</div>
 			<div class="col-md-12">
-				<br />
-				<form action="">
-					<div id="reinput">
-						<table id="list_table">
-							<tbody>
-								<tr>
-									<td><div id="d_id">홍길동</div></td>
-									<td><div id="d_text">고고염~</div></td>
-									<td><div id="d_delete">
-											<i class="fa fa-times"></i>
-										</div></td>
-								</tr>
-								<tr>
-									<td><div id="d_id">ㄴ일지매</div></td>
-									<td><div id="d_text">고고염</div></td>
-								</tr>
-							</tbody>
-						</table>
-						<br />
-						<c:if test="${sessionScope.m_id ne null }">
-							<div class="footfoot">
-								<table id="reinput">
-									<colgroup>
-										<col width="1000px">
-										<col width="100px">
-									</colgroup>
-									<tbody>
-										<tr>
-											<td><input type="text" style="width: 100%;" id="reply"
-												name="reply" /></td>
-											<td><button type="button" style="width: 100%;">댓글달기</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</c:if>
-						<c:if test="${sessionScope.m_id eq null}">
-							<div class="footfoot">
-								<table id="reinput">
-									<colgroup>
-										<col width="1000px">
-										<col width="100px">
-									</colgroup>
-									<tbody>
-										<tr>
-											<td><input type="text" style="width: 100%;"
-												 placeholder="로그인 해주세요~" readonly="readonly"/></td>
-											<td><button type="button" style="width: 100%;">댓글달기</button>
-											</td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</c:if>
-					</div>
+				<br /> <label id="nreplynum">댓글수 : ${replycount }</label>
+				<input type="button" id="listbtn" onclick="replyopen()" value="댓글보기"></input>
+				<form action="nreply.inc" name="addnreply">
+
+					<c:if test="${sessionScope.m_id ne null }">
+						<input type="text" style="width: 800px;" id="nreply_content"
+							name="nreply_content" />
+						<button type="button" onclick="addreply()" style="width: 100px;">댓글달기</button>
+						<input type="hidden" value="${vo.getNb_num() }" name="nb_num">
+						<input type="hidden" value="${sessionScope.m_id}" name="m_id">
+						<input type="hidden" value="" name="nreply_to">
+					</c:if>
+
 				</form>
+				<c:if test="${sessionScope.m_id eq null}">
+					<div>
+						<input type="text" style="width: 800px;" placeholder="로그인 해주세요~"
+							readonly="readonly" />
+						<button type="button" style="width: 100px;">댓글달기</button>
+					</div>
+				</c:if>
+				<div id="reinput" style="display: none;">
+					<table id="reply_table">
+						<tbody id="replybody" style="background-color: #F2F2F2;">
+							<c:if test="${nreplyar eq null }">
+								<tr>
+									<td>
+										<h5>등록된 댓글이 없어요</h5>
+									</td>
+								</tr>
+							</c:if>
+							<c:forEach items="${nreplyar}" var="item">
+								<tr>
+									<td><c:if test="${item.nreply_to ne null }">
+											ㄴ${item.m_id }
+										</c:if> <c:if test="${item.nreply_to eq null }">
+											${item.m_id }
+										</c:if> <c:if test="${item.nreply_to ne null }">
+											--> ${item.nreply_to }
+										</c:if> <c:if test="${item.nreply_status eq '0' }">
+											 : ${item.nreply_content }
+										</c:if> <c:if test="${item.nreply_status eq '1' }">
+											 : 삭제된 댓글입니다.
+										</c:if></td>
+								</tr>
+								<tr>
+									<td><p>${item.nreply_cdate }</p></td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<br />
+					<div style="height: 50px;"></div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -253,6 +255,55 @@
 			location.href = "FileDownload?dir=upload&filename="
 					+ encodeURIComponent(fname);
 			//위의 FileDownload는 서블릿이다.
+		}
+
+		function addreply() {
+
+			var postvalue = $("form[name=addnreply]").serialize();
+
+			$.ajax({
+				type : "post",
+				url : "nreply.inc",
+				data : postvalue,
+				dataType : 'text'
+			}).done(function(data) {
+				var list = data.split("#");
+				var removeItem = "";
+				list = jQuery.grep(list, function(value) {
+					return value != removeItem;
+				});
+
+				console.log(list);
+				var str = "";
+				var a = 0;
+				var br = "<tr><td> </td></tr><tr><td> </td></tr>";
+				for (var i = 1; i < list.length - 1; i++) {
+					var tr = "<tr><td>" + list[i] + "</td></tr>";
+
+					str += tr;
+					str += br;
+					a = i;
+					console.log(list.length);
+				}
+				$("#replybody").html(str);
+				$("#nreplynum").text("댓글수 : " + a);
+			}).fail(function(err) {
+				console.log("실패" + err);
+			});
+			$("#nreply_content").val("");
+
+		}
+		function replyopen() {
+			$("#reinput").toggle();
+			
+			var str = $("#listbtn").val();
+			
+			console.log(str);
+			
+			if(str =="댓글보기")
+				$("#listbtn").val("댓글접기");
+			else
+				$("#listbtn").val("댓글보기");
 		}
 	</script>
 </body>

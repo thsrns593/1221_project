@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">  
+  	<!-- 댓글 수를 반환 -->
+	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NreplyVO">
+		SELECT COUNT(*) FROM normal_reply WHERE nb_num = #{nb_num}
+	</select>
+	
+	<!-- 댓글 리스트를 가져오는 기능 -->
+	<select id="list" resultType="mybatis.vo.NreplyVO"
+		parameterType="mybatis.vo.NreplyVO">
+		SELECT * FROM normal_reply 
+		WHERE nb_num = #{nb_num}
+		ORDER BY nreply_group ASC,nreply_cdate ASC
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="add" parameterType="mybatis.vo.NreplyVO">
+		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_to,nreply_group, nreply_content,
+            						nreply_cdate,nreply_ip,nreply_status)
+		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},#{nreply_to}
+				<if test="nreply_group != null">
+					, #{nreply_group}
+				</if>
+				<if test="nreply_group == null">
+					, normal_reply_group_seq.NEXTVAL
+				</if>
+			, #{nreply_content},sysdate,#{nreply_ip},0)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="del" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_reply set nreply_status = 1 WHERE nreply_num = #{nreply_num} 
+	</update>
+</mapper>
+
