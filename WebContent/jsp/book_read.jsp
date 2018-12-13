@@ -127,9 +127,9 @@
 	                            	<p>
 	                            		<button type="button" class="btn btn-outline btn-success bts"
 	                            		onclick="javascript:location.href='board_share.inc'">돌아가기</button>
-	                            		<button type="button" class="btn btn-outline btn-warning bts"
+	                            		<button id="delBtn" type="button" class="btn btn-outline btn-warning bts"
 	                            		onclick="del(this.form)">삭제</button>
-                            			<button type="button" class="btn btn-outline btn-info bts"
+                            			<button id="editBtn" type="button" class="btn btn-outline btn-info bts"
                             			onclick="edit(this.form)">수정</button> 
 		                                
 	                            	</p>
@@ -239,6 +239,15 @@
 		function edit(frm) {
 			location.href="editBook.inc?num="+frm.bb_num.value;
 		}
+		$(function(){
+			var loginId = "${m_id}";
+			var m_id =$("input[name=m_id]").val();
+			console.log(m_id);
+			if(m_id != loginId) {
+				$("#delBtn").prop("disabled",true);
+				$("#editBtn").prop("disabled",true);
+			}
+		});
 	</script>
   </body>
 
