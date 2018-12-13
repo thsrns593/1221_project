@@ -11,7 +11,7 @@
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="description" content="">
 <meta name="author" content="">
-
+<link href="${pageContext.request.contextPath}/lib/css/text.css" rel="stylesheet" type="text/css">
 
 <title>일반게시물보기</title>
 
@@ -189,8 +189,7 @@
 					readonly="readonly" /></span>
 			</div>
 			<div class="col-md-12">
-				<br /> <label id="nreplynum">댓글수 : ${replycount }</label>
-				<input type="button" id="listbtn" onclick="replyopen()" value="댓글보기"></input>
+				<br /> <label id="nreplynum">댓글수 : ${nrreplycount }</label>
 				<form action="nreply.inc" name="addnreply">
 
 					<c:if test="${sessionScope.m_id ne null }">
@@ -210,7 +209,7 @@
 						<button type="button" style="width: 100px;">댓글달기</button>
 					</div>
 				</c:if>
-				<div id="reinput" style="display: none;">
+				<div id="reinput">
 					<table id="reply_table">
 						<tbody id="replybody" style="background-color: #F2F2F2;">
 							<c:if test="${nreplyar eq null }">
@@ -240,6 +239,7 @@
 							</c:forEach>
 						</tbody>
 					</table>
+						${nrpageCode }
 					<br />
 					<div style="height: 50px;"></div>
 				</div>
@@ -250,6 +250,7 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 
 	<script type="text/javascript">
+		
 		function download(fname) {
 
 			location.href = "FileDownload?dir=upload&filename="
@@ -258,7 +259,6 @@
 		}
 
 		function addreply() {
-
 			var postvalue = $("form[name=addnreply]").serialize();
 
 			$.ajax({
@@ -273,17 +273,17 @@
 					return value != removeItem;
 				});
 
-				console.log(list);
 				var str = "";
 				var a = 0;
 				var br = "<tr><td> </td></tr><tr><td> </td></tr>";
+					
 				for (var i = 1; i < list.length - 1; i++) {
 					var tr = "<tr><td>" + list[i] + "</td></tr>";
 
 					str += tr;
 					str += br;
 					a = i;
-					console.log(list.length);
+					
 				}
 				$("#replybody").html(str);
 				$("#nreplynum").text("댓글수 : " + a);
@@ -291,20 +291,13 @@
 				console.log("실패" + err);
 			});
 			$("#nreply_content").val("");
+			
+			$("#reinput").css("display", "block");
+			$("#reinput").attr(, value)
+
 
 		}
-		function replyopen() {
-			$("#reinput").toggle();
-			
-			var str = $("#listbtn").val();
-			
-			console.log(str);
-			
-			if(str =="댓글보기")
-				$("#listbtn").val("댓글접기");
-			else
-				$("#listbtn").val("댓글보기");
-		}
+
 	</script>
 </body>
 

@@ -20,10 +20,17 @@ import mybatis.dao.NormalDAO;
 import mybatis.dao.NreplyDAO;
 import mybatis.vo.NormalVO;
 import mybatis.vo.NreplyVO;
+import spring.util.PageUtil;
+import spring.util.Paging;
 
 @Controller
 public class Text_ReadControl {
-	
+
+	public static final int BLOCK_LIST = 10;
+	public static final int BLOCK_PAGE = 5;
+
+	String pageCode;
+
 	@Autowired
 	private NormalDAO n_dao;
 	
@@ -66,8 +73,6 @@ public class Text_ReadControl {
 					chk = true;
 					break;//반복문 탈출!
 				}
-				System.out.println("nvo :"+nvo.getNb_num());
-				System.out.println("nvo"+(i++)+":"+nvo1.getNb_num());
 			}
 			// 현재 영역에 와서는.. chk의 값이 계속 false를 유지하고
 			//있을 수도 있으며, chk의 값이 true일수도 있다.
@@ -93,29 +98,34 @@ public class Text_ReadControl {
 		
 		
 		//여기서부터 댓글 기능---------------------
-		//댓글 수
 		NreplyVO rvo = new NreplyVO();
 		
 		rvo.setNb_num(vo.getNb_num());
 		
-		int replycount = nreply_dao.getNreplyTotalCount(rvo);
+		int replycount = Integer.parseInt(nvo.getNb_reply_count());
 		
-		mv.addObject("replycount",replycount);
+		//댓글 페이징
+		PageUtil pvo = new PageUtil(1, replycount, BLOCK_LIST, BLOCK_PAGE);
 		
-		//댓글 리스트
+		pageCode = pvo.getSb().toString();
+		
+		rvo.setBegin(pvo.getBegin());
+		rvo.setEnd(pvo.getEnd());
 		
 		NreplyVO[] nreplyar = nreply_dao.getNreplyList(rvo);
-		
-		mv.addObject("nreplyar",nreplyar);
-		
-			
+		mv.addObject("nreplyar", nreplyar);
+		mv.addObject("nrnowPage", 1);
+		mv.addObject("nrreplycount", replycount);
+		mv.addObject("nrblockList", BLOCK_LIST);
+		mv.addObject("nrpageCode", pageCode);
+
 		return mv;
 	}
 	
 	//댓글 추가
 	@RequestMapping("nreply.inc")
 	@ResponseBody
-	public Map<String, String> addNreply(NreplyVO vo,HttpServletRequest request){
+	public Map<String, String> addNreply(NreplyVO vo, HttpServletRequest request){
 		NreplyVO[] nreplyar = null;
 		
 		vo.setNreply_ip(request.getRemoteAddr());
@@ -125,7 +135,12 @@ public class Text_ReadControl {
 			vo.setNreply_to("");
 		}
 		
-		nreply_dao.addNreply(vo);
+		if(vo.getNreply_content() != null || vo.getNreply_content().trim().length() > 1) {
+
+			nreply_dao.addNreply(vo);
+			
+		}
+		
 		
 		nreplyar = nreply_dao.getNreplyList(vo);
 		

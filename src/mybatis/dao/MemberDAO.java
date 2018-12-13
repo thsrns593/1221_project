@@ -1,9 +1,13 @@
 package mybatis.dao;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import mybatis.vo.MemberVO;
+import mybatis.vo.NormalVO;
 
 public class MemberDAO {
 	
@@ -29,5 +33,20 @@ public class MemberDAO {
 		MemberVO mvo = null;
 		mvo = ss.selectOne("member.searchId", id);
 		return mvo;
+	}
+	
+	public boolean upInfo(MemberVO vo) {
+		int cnt = ss.update("member.updateinfo", vo);
+		if(cnt>0)
+			return true;
+		else
+			return false;
+	}
+	public boolean delDate(MemberVO vo) {
+		int cnt = ss.update("member.deldate",vo);
+		if(cnt>0)
+			return true;
+		else
+			return false;
 	}
 }

@@ -43,9 +43,10 @@ public class NreplyDAO {
 	public boolean addNreply(NreplyVO vo) {
 		boolean chk = false;
 		
-		int cnt =  sqlSession.insert("reply.add",vo);
+		int cnt = sqlSession.insert("reply.add",vo);
+		int cnt2 = sqlSession.update("reply.upnb_count",vo);
 		
-		if(cnt > 0)
+		if(cnt > 0 && cnt2 > 0)
 			chk = true;
 		
 		return chk;

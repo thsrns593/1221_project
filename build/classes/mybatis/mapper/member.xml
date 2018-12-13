@@ -2,16 +2,29 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="member">  
-  
-  <insert id="addjoin" parameterType="mybatis.vo.MemberVO">
-  	INSERT INTO member (m_id, m_pwd, m_email)
-  	VALUES(#{m_id}, #{m_pwd}, #{m_email})
-  </insert>
-  
-  <select id="searchId" parameterType="String" resultType="mybatis.vo.MemberVO">
-  	SELECT * FROM member
-  	WHERE m_id = #{m_id}
-  </select>
+<mapper namespace="member">
+
+	<insert id="addjoin" parameterType="mybatis.vo.MemberVO">
+		INSERT INTO member (m_id, m_pwd, m_email)
+		VALUES(#{m_id}, #{m_pwd}, #{m_email})
+	</insert>
+
+	<select id="searchId" parameterType="String"
+		resultType="mybatis.vo.MemberVO">
+		SELECT * FROM member
+		WHERE m_id = #{m_id}
+	</select>
+
+	<update id="updateinfo" parameterType="mybatis.vo.MemberVO">
+		update member set
+		m_pwd = #{m_pwd},
+		m_email = #{m_email}
+		where m_id = #{m_id}
+	</update>
+
+	<update id="deldate" parameterType="mybatis.vo.MemberVO">
+		UPDATE member set m_odate = sysdate
+		where m_id = #{m_id}
+	</update>
 </mapper>
 
