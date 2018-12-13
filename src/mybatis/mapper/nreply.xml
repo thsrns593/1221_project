@@ -16,7 +16,7 @@
 		ORDER BY nreply_group ASC,nreply_cdate ASC
 	</select>
 	
-	<!-- 게시물 추가 -->
+	<!-- 댓글 추가 -->
 	<insert id="add" parameterType="mybatis.vo.NreplyVO">
 		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_to,nreply_group, nreply_content,
             						nreply_cdate,nreply_ip,nreply_status)
