@@ -54,4 +54,22 @@ public class BookDAO {
 		
 		return b;
 	}
+	//게시물 조회수 증가
+	public boolean upHit(String num) {
+		int cnt =ss.update("book.upHit", num);
+		boolean b =false;
+		if(cnt >0)
+			b= true;
+		return b;
+	}
+	
+	//글쓰기
+	public boolean writeBook(BookVO vo) {
+		boolean chk=false;
+		int cnt = ss.insert("book.writeBook", vo);
+		if(cnt >0) 
+			chk = true;
+		
+		return chk;
+	}
 }
