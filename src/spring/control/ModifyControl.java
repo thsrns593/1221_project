@@ -38,7 +38,7 @@ public class ModifyControl {
 		
 		boolean chk = m_dao.delDate(vo);
 		
-		mv.setViewName("logout");
+		mv.setViewName("redirect:/logout.inc");
 		
 		return mv;
 	}

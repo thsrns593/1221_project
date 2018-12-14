@@ -63,7 +63,7 @@
 							</div>
 							<a href="javascript: login()" class="lo_btn">로그인</a> <a
 								href="javascript: join()" class="jo_btn">회원가입 하러가기</a> <a
-								href="" class="ka_btn" style="background: url(${pageContext.request.contextPath}/images/kakao.jpg) no-repeat !important;">카카오 아이디로 로그인</a>
+								href="" class="ka_btn">카카오 아이디로 로그인</a>
 						</fieldset>
 					</form>
 				</div>

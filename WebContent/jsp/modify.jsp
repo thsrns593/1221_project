@@ -434,24 +434,7 @@
 		function delid() {
 			var m_id = $("#m_id").val();
 			alert("회원탈퇴 하시겠습니까?");
-			alert("진짜 회원탈퇴 하시겠습니까?");
-			alert("정말로 회원탈퇴 하시겠습니까?");
-			alert("다시 생각해보세요");
-			alert("다시 생각해도 똑같습니까?");
-			alert("그럼 마지막으로 10초 시간 드리겠습니다");
-			alert("10");
-			alert("9");
-			alert("8");
-			alert("7");
-			alert("6");
-			alert("5");
-			alert("4");
-			alert("3");
-			alert("2");
-			alert("1");
-			alert("변함 없으신가요");
-			alert("그럼 어쩔수 없네요");
-			alert("그냥 안해줄래");
+			
 			$("#upinform").attr("action", "deldate.inc" );
 			$("#upinform").submit();
 		}
