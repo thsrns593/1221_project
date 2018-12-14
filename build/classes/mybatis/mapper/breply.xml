@@ -9,7 +9,7 @@
 	</select>
 	
 	<!-- 댓글 리스트를 가져오는 기능 -->
-	<select id="getList" resultType="mybatis.vo.BreplyVO" parameterType="mybatis.vo.BreplyVO">
+	<select id="getList" resultType="mybatis.vo.BreplyVO" parameterType="java.util.Map">
 		SELECT * FROM
 			(SELECT rownum r_num, a.* FROM
 				(SELECT * FROM book_reply 
@@ -22,7 +22,13 @@
 	<insert id="reply" parameterType="mybatis.vo.BreplyVO">
 		INSERT INTO book_reply(breply_num,bb_num,	m_id,breply_to,breply_group, breply_content,
             						breply_cdate,breply_ip,breply_status)
-		VALUES(book_reply_seq.NEXTVAL, #{bb_num},	#{m_id},#{breply_to}
+		VALUES(book_reply_seq.NEXTVAL, #{bb_num},	#{m_id}
+				<if test="breply_to !=null">
+					,#{breply_to}					
+				</if>
+				<if test="breply_to == null">
+					,''
+				</if>
 				<if test="breply_group != null">
 					, #{breply_group}
 				</if>

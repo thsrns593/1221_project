@@ -256,20 +256,26 @@
 			reply_list.innerHTML +="";
 			var bb_num = "${vo.bb_num}";
 			var m_id = "${m_id}";
-			var breply_content = frm.breply_content;
+			var breply_content = frm.breply_content.value;
 			$.ajax({
 				url:"breply_write.inc",
 				data : "bb_num="+bb_num+"&m_id="+m_id+"&breply_content="+breply_content;
 				dataType : "json",
 				type:"post"
 			}).done(function(data){
-				
+				var ar =data.ar;
+				toTable(ar)
 			}).fail(function(err){
-				console.log("댓글실패")
+				console.log("댓글실패");
 			});
 			frm.action="breply_write.inc";
 			frm.method="post";
 			frm.submit();
+		}
+		function toTable(ar) {
+			var str="";
+			for()
+			return str;
 		}
 	</script>
   </body>
