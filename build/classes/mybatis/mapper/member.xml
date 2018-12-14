@@ -15,15 +15,22 @@
 		WHERE m_id = #{m_id}
 	</select>
 
+	<select id="searchEmail" parameterType="String"
+		resultType="mybatis.vo.MemberVO">
+		SELECT * FROM member
+		WHERE m_email = #{m_email}
+	</select>
 	<update id="updateinfo" parameterType="mybatis.vo.MemberVO">
 		update member set
-		m_pwd = #{m_pwd},
+		m_pwd =
+		#{m_pwd},
 		m_email = #{m_email}
 		where m_id = #{m_id}
 	</update>
 
 	<update id="deldate" parameterType="mybatis.vo.MemberVO">
-		UPDATE member set m_odate = sysdate
+		UPDATE member set m_odate =
+		sysdate
 		where m_id = #{m_id}
 	</update>
 </mapper>

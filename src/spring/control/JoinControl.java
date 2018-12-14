@@ -80,6 +80,20 @@ public class JoinControl {
 		return map;
 	}
 	
+	@RequestMapping(value="checkemail.inc", method=RequestMethod.POST)
+	@ResponseBody
+	public Map<String, String> checkemail(String email) {
+		MemberVO vo = m_dao.searchEmail(email);
+		Map<String, String> map = new HashMap<String, String>();
+		if(vo == null) {
+			map.put("msg", "1");
+		}else {
+			map.put("msg", "0");
+		}
+		
+		return map;
+	}
+	
 }
 
 
