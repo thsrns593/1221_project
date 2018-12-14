@@ -46,14 +46,14 @@
 												value="Remember Me" onclick="chk()">&nbsp;아이디 기억
 											<td>
 												<button
-													onclick="window.open('find.inc','window_name','width=430,height=600,location=no,status=no,scrollbars=yes');"
+													onclick="window.open('find.inc','window_name','width=530,height=600,location=no,status=no,scrollbars=yes');"
 													type="button" id="r_id1" name="r_id1" value="아이디 찾기">아이디
 													찾기</button>
 											</td>
 											<td>/</td>
 											<td>
 												<button
-													onclick="window.open('find.inc','window_name','width=430,height=600,location=no,status=no,scrollbars=yes');"
+													onclick="window.open('find.inc','window_name','width=530,height=600,location=no,status=no,scrollbars=yes');"
 													type="button" id="r_id2" name="r_id1" value="비밀번호 찾기">비밀번호
 													찾기</button>
 											</td>
@@ -63,7 +63,7 @@
 							</div>
 							<a href="javascript: login()" class="lo_btn">로그인</a> <a
 								href="javascript: join()" class="jo_btn">회원가입 하러가기</a> <a
-								href="" class="ka_btn">카카오 아이디로 로그인</a>
+								href="" class="ka_btn" style="background: url(${pageContext.request.contextPath}/images/kakao.jpg) no-repeat !important;">카카오 아이디로 로그인</a>
 						</fieldset>
 					</form>
 				</div>
