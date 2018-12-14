@@ -126,16 +126,27 @@ public class Text_ReadControl {
 	@RequestMapping("nreply.inc")
 	@ResponseBody
 	public Map<String, String> addNreply(NreplyVO vo, HttpServletRequest request){
+		
 		NreplyVO[] nreplyar = null;
 		
 		vo.setNreply_ip(request.getRemoteAddr());
 		
+		int begin = (vo.getNowPage()-1)*10+1;
+		int end = begin+9;
+		
+		if(begin < 1) {
+			begin = 1;
+			end = 10;
+		}
+		
+		vo.setBegin(begin);
+		vo.setEnd(end);
 		
 		if(vo.getNreply_to() == null ) {
 			vo.setNreply_to("");
 		}
 		
-		if(vo.getNreply_content() != null || vo.getNreply_content().trim().length() > 1) {
+		if(vo.getNreply_content() != null && vo.getNreply_content().trim().length() > 1) {
 
 			nreply_dao.addNreply(vo);
 			
@@ -145,7 +156,7 @@ public class Text_ReadControl {
 		nreplyar = nreply_dao.getNreplyList(vo);
 		
 		StringBuffer sb = new StringBuffer();
-		
+
 		for(NreplyVO nrvo : nreplyar) {
 			sb.append("#");
 			sb.append(nrvo.getM_id());
@@ -153,11 +164,10 @@ public class Text_ReadControl {
 				sb.append(nrvo.getNreply_to());
 				sb.append("->");
 				}
-			sb.append("  :  ");
-			sb.append(nrvo.getNreply_content());
-			sb.append("<p >");
 			sb.append(nrvo.getNreply_cdate());
-			sb.append("</p>");
+			sb.append("<tr><td>");
+			sb.append(nrvo.getNreply_content());
+			sb.append("</td></tr>");
 			sb.append("#");
 		}
 		
