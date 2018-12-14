@@ -60,7 +60,7 @@ public class JoinControl {
 		boolean chk = m_dao.join(vo);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("redirect:main.inc");
+		mv.setViewName("redirect:login.inc");
 		
 		return mv;
 	}

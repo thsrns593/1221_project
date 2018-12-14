@@ -22,7 +22,6 @@
 .card {
 	width: 500px;
 	margin: auto auto 150px auto;
-	border: 1px solid red !important;
 }
 
 .card-header {
