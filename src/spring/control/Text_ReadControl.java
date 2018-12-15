@@ -267,8 +267,6 @@ public class Text_ReadControl {
 	@RequestMapping("nreply3.inc")
 	@ResponseBody
 	public Map<String, String> addNreply2(NreplyVO vo, HttpServletRequest request){
-
-		System.out.println(vo.getNreply_num());
 		
 		nreply_dao.delNreply(vo);
 		
