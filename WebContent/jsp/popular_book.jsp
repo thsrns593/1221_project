@@ -22,6 +22,7 @@
 .btn{
 	    padding: .375rem .75rem !important;
 }
+
 </style>	
 	
    <!--  Custom fonts for this template-->
