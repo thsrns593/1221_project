@@ -6,7 +6,8 @@ public class NreplyVO {
 	
 	private int nowPage, begin, end;
 	
-	
+
+
 	public int getNowPage() {
 		return nowPage;
 	}

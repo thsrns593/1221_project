@@ -21,16 +21,13 @@
 	
 	<!-- 댓글 추가 -->
 	<insert id="add" parameterType="mybatis.vo.NreplyVO">
-		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_to,nreply_group, nreply_content,
-            						nreply_cdate,nreply_ip,nreply_status)
-		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},#{nreply_to}
-				<if test="nreply_group != null">
-					, #{nreply_group}
-				</if>
-				<if test="nreply_group == null">
-					, normal_reply_group_seq.NEXTVAL
-				</if>
-			, #{nreply_content},sysdate,#{nreply_ip},0)
+		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_group, nreply_content,nreply_cdate,nreply_ip,nreply_status)
+		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},normal_reply_group_seq.NEXTVAL, #{nreply_content},sysdate,#{nreply_ip},0)
+	</insert>
+	<!-- 댓글 추가2 -->
+	<insert id="add2" parameterType="mybatis.vo.NreplyVO">
+		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_to,nreply_group, nreply_content,nreply_cdate,nreply_ip,nreply_status)
+		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},#{nreply_to}, #{nreply_group}, #{nreply_content},sysdate,#{nreply_ip},0)
 	</insert>
 	
 	<!-- 댓글 삭제 -->

@@ -12,7 +12,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <title>일반게시물보기</title>
 
 
@@ -145,6 +145,8 @@
 	font-size: 20px;
 	font-weight: bold;
 }
+
+
 </style>
 
 </head>
@@ -165,7 +167,7 @@
 								<button type="button" class="btn btn-outline btn-success bts"
 									onclick="javascript:location.href='board_free.inc?nowPage=${param.nowPage}'">돌아가기</button>
 								<button type="button" class="btn btn-outline btn-warning bts"
-									onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
+ 									onclick="javascript:location.href='text_del.inc?nb_num=${param.nb_num}'">삭제</button>
 								<button type="button" class="btn btn-outline btn-info bts"
 									onclick="javascript:location.href='text_edit.inc?nb_num=${param.nb_num}&nowPage=${param.nowPage}'">수정</button>
 							</c:if>
@@ -204,7 +206,7 @@
 										${vo.getNb_oname()} </a>
 								</div>
 							</td>
-						</tr>
+						</tr>               
 					</tfoot>
 				</table>
 				<span><label>글쓴이:</label><input class="writerinfo"
@@ -221,13 +223,13 @@
 					<c:if test="${sessionScope.m_id ne null }">
 						<input type="text" style="width: 800px;" id="nreply_content"
 							name="nreply_content" />
-						<button type="button" onclick="addreply()" style="width: 100px;">댓글달기</button>
+						<button type="button" onclick="goPage(1)" style="width: 100px;">댓글달기</button>
 						<input type="hidden" value="${vo.getNb_num() }" name="nb_num">
 						<input type="hidden" value="${sessionScope.m_id}" name="m_id">
-						<input type="hidden" value="" name="nreply_to">
-					</c:if>
 
+					</c:if>
 				</form>
+				<div style="height: 30px;"></div>
 				<c:if test="${sessionScope.m_id eq null}">
 					<div>
 						<input type="text" style="width: 800px;" placeholder="로그인 해주세요~"
@@ -247,41 +249,82 @@
 							</c:if>
 							<c:forEach items="${nreplyar}" var="item">
 								<tr>
-									<td><c:if test="${item.nreply_to ne null }">
-											ㄴ${item.m_id }
-										</c:if> <c:if test="${item.nreply_to eq null }">
-											${item.m_id }
-										</c:if> <c:if test="${item.nreply_to ne null }">
-											--> ${item.nreply_to }
-										</c:if>
-									${item.nreply_cdate }
-								</td>
-								</tr>							
-								<tr>
 									<td>
-										<c:if test="${item.nreply_status eq '0' }">
-											  ${item.nreply_content }
-										</c:if> <c:if test="${item.nreply_status eq '1' }">
-											  삭제된 댓글입니다.
+										<c:if test="${item.nreply_to eq null }">
+											<button type="button" class="button"
+												onclick="newreplybox(this)"
+												value="${item.m_id},${item.nreply_group}" id="${item.m_id}">
+												${item.m_id }
+											</button>
 										</c:if>
-									</td>	
+										<c:if test="${item.nreply_to ne null }">
+											&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+											<label > ${item.m_id } </label> 
+										</c:if>
+										 ${item.nreply_cdate } 
+										<input type="hidden" value="${item.nreply_group}" id="nreply_group"> <input type="hidden" value="${item.m_id}" id="m_id">
+									</td>
 								</tr>
+								<tr>
+									<c:if test="${item.nreply_to ne null }">
+										<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<c:if test="${item.nreply_status eq '0' }"> &nbsp;&nbsp;${item.nreply_content } <c:if test="${sessionScope.m_id == item.m_id}"> <button type="button" onclick="nreply_status(this)" value="${item.nreply_num }" >삭제</button> </c:if>
+											</c:if> <c:if test="${item.nreply_status eq '1' }">
+												  삭제된 글입니다.
+											</c:if>
+											</td>
 
+									</c:if>
+									<c:if test="${item.nreply_to eq null }">
+										<td>&nbsp;&nbsp;<c:if
+												test="${item.nreply_status eq '0' }">
+												  &nbsp;&nbsp;${item.nreply_content }  <c:if test="${sessionScope.m_id == item.m_id}"> <button type="button" onclick="nreply_status(this)" value="${item.nreply_num }" >삭제</button> </c:if>
+											</c:if> <c:if test="${item.nreply_status eq '1' }">
+												 삭제된 글입니다.
+											</c:if></td>
+									</c:if>
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>
-						${nrpageCode }
+					<div id="nrpageCode">${nrpageCode }</div>
 					<br />
 					<div style="height: 50px;"></div>
 				</div>
+
 			</div>
 		</div>
-	</div>
+	</div> 
 
 	<jsp:include page="footer.jsp"></jsp:include>
-	
-	<input type="text" value="${param.nb_num}" id="nrnb_num">
+
+	<form action="nreply.inc" name="addnreply2">
+
+		<c:if test="${sessionScope.m_id ne null }">
+			<input type="hidden" value="${vo.getNb_num() }" name="nb_num"
+				id="nb_num1">
+			<input type="hidden" value="${sessionScope.m_id}" name="m_id"
+				id="m_id1">
+			<input type="hidden" value="" name="nreply_to" id="nreply_to1">
+			<input type="hidden" value="" name="nreply_group" id="nreply_group1">
+			<input type="hidden" value="" name="nreply_num" id="nreply_num1">
+		</c:if>
+	</form>  
+
 	<script type="text/javascript">
+	
+		function nreply_status(a) {
+			
+			var  nreply_num = $(a).val();
+			
+			$("#nreply_num1").val(nreply_num);
+			
+			console.log(nreply_num);
+			
+			goPage3(1);
+			
+		}
+		
 		function download(fname) {
 
 			location.href = "FileDownload?dir=upload&filename="
@@ -289,76 +332,246 @@
 			//위의 FileDownload는 서블릿이다.
 		}
 
-		function goPage() {
-			addreply();
-			var frm = document.forms[0];
-			frm.nowPage.value = pg;
-			frm.action = "";
-			frm.method = "post";
-			frm.submit();
-		}
-
-		function addreply() {
-
-			var postvalue = $("form[name=addnreply]").serialize();
-
-			$.ajax({
-				type : "post",
-				url : "nreply.inc",
-				data : postvalue,
-				dataType : 'text'
-			}).done(function(data) {
-				var list = data.split("#");
-				var removeItem = "";
-				list = jQuery.grep(list, function(value) {
-					return value != removeItem;
-				});
-
-				var str = "";
-				var a = 0;
-				for (var i = 1; i < list.length - 1; i++) {
-					var tr = "<tr><td>" + list[i] + "</td></tr>";
-					a = i;
-				}
-				$("#replybody").html(str);
-				$("#nreplynum").text("댓글수 : " + a);
-			}).fail(function(err) {
-				console.log("실패" + err);
-			});
-			$("#nreply_content").val("");
-		}
-
 		function goPage(pg) {
+			var postvalue = $("form[name=addnreply]").serialize();
 			var nb_num = $("#nrnb_num").val();
 			$.ajax({
-				type : "post",
-				url : "nreply.inc?nowPage=" + pg + "&nb_num=" + nb_num,
-				dataType : 'text'
-			}).done(function(data) {
-				var list = data.split("#");
-				var removeItem = "";
-				list = jQuery.grep(list, function(value) {
-					return value != removeItem;
-				});
+						type : "get",
+						url : "nreply.inc?nowPage=" + pg + "&" + postvalue,
+						dataType : 'text'
+					}).done( 
+							function(data) {
+								var list = data.split("#");
+								var removeItem = "";
+								list = jQuery.grep(list, function(value) {
+									return value != removeItem;
+								});
 
-				var str = "";
-				var a = 0;
-				var br = "<tr><td> </td></tr><tr><td> </td></tr>";
+								var str = "";
+								var a = 0;
 
-				for (var i = 1; i < list.length - 1; i++) {
-					var tr = "<tr><td>" + list[i] + "</td></tr>";
+								for (var i = 1; i < list.length - 1; i++) {
+									var ar = list[i].split("@");
+									var removeItem = "";
+									ar = jQuery.grep(ar, function(value) {
+										return value != removeItem;
+									});
+									if($.inArray("1", ar) != -1){
+										ar[3] = "삭제된 글입니다.";
+										}
+									if (ar[1] != "null")
+										str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>" + ar[0] + "</label>";
+									if ((ar[1] == "null"))
+										str += "<tr><td><button type='button' class='button' onclick='newreplybox(this)' value='"+ ar[0]+ ","+ ar[4]+ "'>"+ ar[0] + "</button>";
 
-					str += tr;
-					str += br;
-					a = i;
+									str += "&nbsp;" + ar[2] + "</td></tr>";
+									
+									if (ar[1] != "null")
+									str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									if ((ar[1] == "null"))
+									str += "<tr><td>&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									
+									if($.inArray("삭제된 글입니다.", ar) == -1){
+										if($.inArray("<%=(String)session.getAttribute("m_id")%>", ar) != -1){
+											str += "<button type='button' onclick='nreply_status(this)' value='"+ar[5]+"' >삭제</button>" +"</td></tr>";
+	
+											}
+										}
 
-				}
-				$("#replybody").html(str);
-				$("#nreplynum").text("댓글수 : " + a);
-			}).fail(function(err) {
-				console.log("실패" + err);
-			});
+								}
+
+								$("#replybody").html(str);
+
+								var pageCode = data.split("!");
+								pageCode = jQuery.grep(pageCode,
+										function(value) {
+											return value != removeItem;
+										});
+								$("#nrpageCode").html(pageCode[1]);
+								var count = data.split("^");
+								count = jQuery.grep(count, function(value) {
+									return value != removeItem;
+								});
+								$("#nreplynum").text("댓글수 : " + count[1]);
+							}).fail(function(err) {
+						console.log("실패" + err);
+					});
 			$("#nreply_content").val("");
+
+		}
+
+		function newreplybox(a) {
+
+			var list = $(a).val();
+			list = list.split(",");
+			var removeItem = "";
+			list = jQuery.grep(list, function(value) {
+				return value != removeItem;
+			});
+			var nreply_group = list[1];
+			var nreply_to = list[0];
+
+			$("#nreply_to1").val(nreply_to);
+			$("#nreply_group1").val(nreply_group);
+
+			$("#nreply_content2").remove();
+			$("#nreply_content2").next().remove();
+//			$(a).remove();
+/* 			$(a).closest("tr").close.next().after("<label style='color: #0101DF;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> "+nreply_to+ " 님에게</label><input type='text' style='width: 600px;' id='nreply_content2'name='nreply_content2'/> <button type='button' onclick='goPage2(1)' style='width: 100px;'>댓글달기</button>");
+ */			
+ 
+ 
+ 			var flage = true;
+ 
+ 			if(flage){
+ 				$("#newinputtd").remove();
+ 				$(a).closest("tr").next().after("<td id='newinputtd'><label style='color: #0101DF;'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; --> "+nreply_to+ " 님에게</label><input type='text' style='width: 600px;' id='nreply_content2'name='nreply_content2'/> <button type='button' onclick='goPage2(1)' style='width: 100px;'>댓글달기</button></td>");
+ 				flage = false;
+ 			}else{
+ 				$("#newinputtd").remove();
+ 				flage = true;
+ 			}
+ 			
+			
+
+		}
+		function goPage2(pg) {
+
+			var postvalue = $("form[name=addnreply2]").serialize();
+			var nreply_content = $("#nreply_content2").val();
+
+			$.ajax(
+							{
+								type : "get",
+								url : "nreply2.inc?nowPage=" + pg + "&"+ postvalue + "&nreply_content="+ nreply_content,
+								dataType : 'text'
+							}).done(
+							function(data) {
+								var list = data.split("#");
+								var removeItem = "";
+								list = jQuery.grep(list, function(value) {
+									return value != removeItem;
+								});
+
+								var str = "";
+								var a = 0;
+
+								for (var i = 1; i < list.length - 1; i++) {
+									var ar = list[i].split("@");
+									var removeItem = "";
+									ar = jQuery.grep(ar, function(value) {
+										return value != removeItem;
+									});
+									if($.inArray("1", ar) != -1){
+										ar[3] = "삭제된 글입니다.";
+										}
+									if (ar[1] != "null")
+										str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>" + ar[0] + "</label>";
+									if ((ar[1] == "null"))
+										str += "<tr><td><button type='button' class='button' onclick='newreplybox(this)' value='"+ ar[0]+ ","+ ar[4]+ "'>"+ ar[0] + "</button>";
+
+									str += "&nbsp;" + ar[2] + "</td></tr>";
+
+									if (ar[1] != "null")
+										str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									if ((ar[1] == "null"))
+										str += "<tr><td>&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									
+									if($.inArray("삭제된 글입니다.", ar) == -1){
+										if($.inArray("<%=(String)session.getAttribute("m_id")%>", ar) != -1){
+											str += "<button type='button' onclick='nreply_status(this)' value='"+ar[5]+"' >삭제</button>" +"</td></tr>";
+	
+											}
+										}
+
+								}
+								$("#replybody").html(str);
+
+								var pageCode = data.split("!");
+								pageCode = jQuery.grep(pageCode,
+										function(value) {
+											return value != removeItem;
+										});
+								$("#nrpageCode").html(pageCode[1]);
+								var count = data.split("^");
+								count = jQuery.grep(count, function(value) {
+									return value != removeItem;
+								});
+								$("#nreplynum").text("댓글수 : " + count[1]);
+							}).fail(function(err) {
+						console.log("실패" + err);
+					});
+			$("#nreply_content").val("");
+
+		}
+		function goPage3(pg) {
+
+			var postvalue = $("form[name=addnreply2]").serialize();
+			var nreply_content = $("#nreply_content2").val();
+
+			$.ajax(
+							{
+								type : "get",
+								url : "nreply3.inc?nowPage=" + pg + "&"+ postvalue + "&nreply_content="+ nreply_content,
+								dataType : 'text'
+							}).done(
+							function(data) {
+								var list = data.split("#");
+								var removeItem = "";
+								list = jQuery.grep(list, function(value) {
+									return value != removeItem;
+								});
+
+								var str = "";
+								var a = 0;
+
+								for (var i = 1; i < list.length - 1; i++) {
+									var ar = list[i].split("@");
+									var removeItem = "";
+									ar = jQuery.grep(ar, function(value) {
+										return value != removeItem;
+									});
+									if($.inArray("1", ar) != -1){
+										ar[3] = "삭제된 글입니다.";
+										}
+									if (ar[1] != "null")
+										str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label>" + ar[0] + "</label>";
+									if ((ar[1] == "null"))
+										str += "<tr><td><button type='button' class='button' onclick='newreplybox(this)' value='"+ ar[0]+ ","+ ar[4]+ "'>"+ ar[0] + "</button>";
+
+									str += "&nbsp;" + ar[2] + "</td></tr>";
+
+									if (ar[1] != "null")
+									str += "<tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									if ((ar[1] == "null"))
+									str += "<tr><td>&nbsp;&nbsp;&nbsp;" + ar[3]; 
+									
+									if($.inArray("삭제된 글입니다.", ar) == -1){
+										if($.inArray("<%=(String)session.getAttribute("m_id")%>", ar) != -1){
+											str += "<button type='button' onclick='nreply_status(this)' value='"+ar[5]+"' >삭제</button>" +"</td></tr>";
+	
+											}
+										}
+
+								}
+								$("#replybody").html(str);
+
+								var pageCode = data.split("!");
+								pageCode = jQuery.grep(pageCode,
+										function(value) {
+											return value != removeItem;
+										});
+								$("#nrpageCode").html(pageCode[1]);
+								var count = data.split("^");
+								count = jQuery.grep(count, function(value) {
+									return value != removeItem;
+								});
+								$("#nreplynum").text("댓글수 : " + count[1]);
+							}).fail(function(err) {
+						console.log("실패" + err);
+					});
+			$("#nreply_content").val("");
+
 		}
 	</script>
 </body>

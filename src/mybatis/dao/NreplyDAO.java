@@ -51,6 +51,18 @@ public class NreplyDAO {
 		
 		return chk;
 	}
+	//게시물의 댓글 추가하기
+	public boolean addNreply2(NreplyVO vo) {
+		boolean chk = false;
+		
+		int cnt = sqlSession.insert("reply.add2",vo);
+		int cnt2 = sqlSession.update("reply.upnb_count",vo);
+		
+		if(cnt > 0 && cnt2 > 0)
+			chk = true;
+		
+		return chk;
+	}
 	
 	//게시물 삭제
 	public boolean delNreply(NreplyVO vo) {

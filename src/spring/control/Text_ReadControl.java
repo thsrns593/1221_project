@@ -127,52 +127,207 @@ public class Text_ReadControl {
 	@ResponseBody
 	public Map<String, String> addNreply(NreplyVO vo, HttpServletRequest request){
 		
-		NreplyVO[] nreplyar = null;
-		
+
 		vo.setNreply_ip(request.getRemoteAddr());
 		
-		int begin = (vo.getNowPage()-1)*10+1;
-		int end = begin+9;
-		
-		if(begin < 1) {
-			begin = 1;
-			end = 10;
-		}
-		
-		vo.setBegin(begin);
-		vo.setEnd(end);
-		
-		if(vo.getNreply_to() == null ) {
-			vo.setNreply_to("");
-		}
-		
-		if(vo.getNreply_content() != null && vo.getNreply_content().trim().length() > 1) {
-
+		if(vo.getNreply_content() != null && vo.getNreply_content().trim().length() >1)
 			nreply_dao.addNreply(vo);
 			
+
+		NormalVO nvo = new NormalVO();
+		
+		nvo.setNb_num(vo.getNb_num());
+		
+		nvo = n_dao.getText(nvo);
+		
+		PageUtil pvo = new PageUtil(vo.getNowPage(), Integer.parseInt(nvo.getNb_reply_count()), BLOCK_LIST, BLOCK_PAGE); 
+		
+		
+		vo.setBegin(pvo.getEnd());
+		vo.setBegin(pvo.getBegin());
+		
+		NreplyVO[] nreplyar = null;
+		
+		
+		
+		if(pvo.getBegin() <1 ) {
+			pvo.setBegin(1);
+			pvo.setEnd(10);
 		}
 		
-		
+		vo.setBegin(pvo.getBegin());
+		vo.setEnd(pvo.getEnd());
+
 		nreplyar = nreply_dao.getNreplyList(vo);
 		
+			
 		StringBuffer sb = new StringBuffer();
 
 		for(NreplyVO nrvo : nreplyar) {
 			sb.append("#");
 			sb.append(nrvo.getM_id());
-			if(nrvo.getNreply_to() != null) {
-				sb.append(nrvo.getNreply_to());
-				sb.append("->");
-				}
+			sb.append("@");
+			sb.append(nrvo.getNreply_to());
+			sb.append("@");
 			sb.append(nrvo.getNreply_cdate());
-			sb.append("<tr><td>");
+			sb.append("@");
 			sb.append(nrvo.getNreply_content());
-			sb.append("</td></tr>");
+			sb.append("@");
+			sb.append(nrvo.getNreply_group());
+			sb.append("@");
+			sb.append(nrvo.getNreply_num());
+			sb.append("@");
+			sb.append(nrvo.getNreply_status());
+			sb.append("#");
+		}
+
+		pageCode = pvo.getSb().toString();
+				
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
+		map.put("pageCode", "!"+pageCode+"!");
+		map.put("replylist", sb.toString());
+		
+		return map;
+		
+	}
+	
+	//댓글추가 2
+	@RequestMapping("nreply2.inc")
+	@ResponseBody
+	public Map<String, String> addNreply1(NreplyVO vo, HttpServletRequest request){
+		
+		vo.setNreply_ip(request.getRemoteAddr());
+
+		nreply_dao.addNreply2(vo);
+		
+		NormalVO nvo = new NormalVO();
+		
+		nvo.setNb_num(vo.getNb_num());
+		
+		nvo = n_dao.getText(nvo);
+		
+		nvo.getNb_reply_count();
+		
+		if(vo.getNowPage() == 0)
+			vo.setNowPage(1);
+		
+		PageUtil pvo = new PageUtil(vo.getNowPage(), Integer.parseInt(nvo.getNb_reply_count()), BLOCK_LIST, BLOCK_PAGE); 
+		
+		vo.setBegin(pvo.getEnd());
+		vo.setBegin(pvo.getBegin());
+		
+		NreplyVO[] nreplyar = null;
+
+		if(pvo.getBegin() <0 ) {
+			pvo.setBegin(1);
+			pvo.setEnd(10);
+		}
+		
+		vo.setBegin(pvo.getBegin());
+		vo.setEnd(pvo.getEnd());
+			
+		nreplyar = nreply_dao.getNreplyList(vo);
+		
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for(NreplyVO nrvo : nreplyar) {
+			sb.append("#");
+			sb.append(nrvo.getM_id());
+			sb.append("@");
+			sb.append(nrvo.getNreply_to());
+			sb.append("@");
+			sb.append(nrvo.getNreply_cdate());
+			sb.append("@");
+			sb.append(nrvo.getNreply_content());
+			sb.append("@");
+			sb.append(nrvo.getNreply_group());
+			sb.append("@");
+			sb.append(nrvo.getNreply_num());
+			sb.append("@");
+			sb.append(nrvo.getNreply_status());
 			sb.append("#");
 		}
 		
+		pageCode = pvo.getSb().toString();
+		
 		Map<String, String> map = new HashMap<>();
 		
+		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
+		map.put("pageCode", "!"+pageCode+"!");
+		map.put("replylist", sb.toString());
+		
+		return map;
+		
+	}
+	
+	//댓글삭제
+	@RequestMapping("nreply3.inc")
+	@ResponseBody
+	public Map<String, String> addNreply2(NreplyVO vo, HttpServletRequest request){
+
+		System.out.println(vo.getNreply_num());
+		
+		nreply_dao.delNreply(vo);
+		
+		
+		NormalVO nvo = new NormalVO();
+		
+		nvo.setNb_num(vo.getNb_num());
+		
+		nvo = n_dao.getText(nvo);
+		
+		nvo.getNb_reply_count();
+		
+		if(vo.getNowPage() == 0)
+			vo.setNowPage(1);
+		
+		PageUtil pvo = new PageUtil(vo.getNowPage(), Integer.parseInt(nvo.getNb_reply_count()), BLOCK_LIST, BLOCK_PAGE); 
+		
+		vo.setBegin(pvo.getEnd());
+		vo.setBegin(pvo.getBegin());
+		
+		NreplyVO[] nreplyar = null;
+		
+		if(pvo.getBegin() <0 ) {
+			pvo.setBegin(1);
+			pvo.setEnd(10);
+		}
+		
+		vo.setBegin(pvo.getBegin());
+		vo.setEnd(pvo.getEnd());
+		
+		nreplyar = nreply_dao.getNreplyList(vo);
+		
+		
+		StringBuffer sb = new StringBuffer();
+		
+		for(NreplyVO nrvo : nreplyar) {
+			sb.append("#");
+			sb.append(nrvo.getM_id());
+			sb.append("@");
+			sb.append(nrvo.getNreply_to());
+			sb.append("@");
+			sb.append(nrvo.getNreply_cdate());
+			sb.append("@");
+			sb.append(nrvo.getNreply_content());
+			sb.append("@");
+			sb.append(nrvo.getNreply_group());
+			sb.append("@");
+			sb.append(nrvo.getNreply_num());
+			sb.append("@");
+			sb.append(nrvo.getNreply_status());
+			sb.append("#");
+		}
+		
+		pageCode = pvo.getSb().toString();
+		
+		Map<String, String> map = new HashMap<>();
+		
+		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
+		map.put("pageCode", "!"+pageCode+"!");
 		map.put("replylist", sb.toString());
 		
 		return map;
