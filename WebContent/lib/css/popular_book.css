@@ -157,7 +157,7 @@ label{
 .region1{
 	margin : 0;
 	padding: 0;
-	width : 60px;
+	width : 100px;
 	height : 30px;
 	float : left;
 	border-top : #EAEAEA 1px solid;
@@ -267,6 +267,7 @@ label{
 	 padding:7px 12px;
 	 border:1px solid silver;
 	 color:silver;
+	 pointer-events: none;
 }
 	
 .now {

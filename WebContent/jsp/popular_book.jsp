@@ -48,30 +48,33 @@
 			</div>	
 		<!-- -------------------------------------------------- -->
     
-		<div id="t1">
-			<div class="region_div">
-				<ul id="menu1">
-				 <!--<li class="region" onclick="prev" id=r1><a href="" > <span class="region_a">◀</span></a></li>-->
-					<li class="region1 total"><a href="javascript:exe(null,1,3)"> <span class="region_a">전국</span></a></li>
-					<li class="region1"><a href="javascript:exe(11,1,3)"> <span class="region_a seoul">서울</span></a></li>
-					<li class="region1"><a href="javascript:exe(21,1,3)"> <span class="region_a busan">부산</span></a></li>
-					<li class="region1"><a href="javascript:exe(22,1,3)"> <span class="region_a daegu">대구</span></a></li>
-					<li class="region1"><a href="javascript:exe(23,1,3)"> <span class="region_a incheon">인천</span></a></li>
-					<li class="region1"><a href="javascript:exe(24,1,3)"> <span class="region_a gwangju">광주</span></a></li>
-					<li class="region1"><a href="javascript:exe(25,1,3)"> <span class="region_a daejeon">대전</span></a></li>
-					<li class="region1"><a href="javascript:exe(26,1,3)"> <span class="region_a ulsan">울산</span></a></li>
-					<li class="region1"><a href="javascript:exe(29,1,3)"> <span class="region_a sejong">세종</span></a></li>
-					<li class="region1"><a href="javascript:exe(31,1,3)"> <span class="region_a gyeonggi">경기</span></a></li>
-					<li class="region1"><a href="javascript:exe(32,1,3)"> <span class="region_a gangwon">강원</span></a></li>
-					<li class="region1"><a href="javascript:exe(33,1,3)"> <span class="region_a chungcheong">충북</span></a></li>
-					<li class="region1"><a href="javascript:exe(34,1,3)"> <span class="region_a chungnam">충남</span></a></li>
-					<li class="region1"><a href="javascript:exe(36,1,3)"> <span class="region_a jeolanam">전남</span></a></li>
-					<li class="region1"><a href="javascript:exe(35,1,3)"> <span class="region_a jeollabuk">전북</span></a></li>		
-				</ul>
-			</div>
+				<div id="t1">
+					<div class="region_div">
+						<ul id="menu1">
+						 <!--<li class="region" onclick="prev" id=r1><a href="" > <span class="region_a">◀</span></a></li>-->
+							<li class="region1 total"><a href="javascript:exe(null,1,3)"> <span class="region_a">전국</span></a></li>
+							<li class="region1"><a href="javascript:exe(11,1,3)"> <span class="region_a seoul">서울</span></a></li>
+							<li class="region1"><a href="javascript:exe(21,1,3)"> <span class="region_a busan">부산</span></a></li>
+							<li class="region1"><a href="javascript:exe(22,1,3)"> <span class="region_a daegu">대구</span></a></li>
+							<li class="region1"><a href="javascript:exe(23,1,3)"> <span class="region_a incheon">인천</span></a></li>
+							<li class="region1"><a href="javascript:exe(24,1,3)"> <span class="region_a gwangju">광주</span></a></li>
+							<li class="region1"><a href="javascript:exe(25,1,3)"> <span class="region_a daejeon">대전</span></a></li>
+							<li class="region1"><a href="javascript:exe(26,1,3)"> <span class="region_a ulsan">울산</span></a></li>
+							<li class="region1"><a href="javascript:exe(29,1,3)"> <span class="region_a sejong">세종</span></a></li>
+							<li class="region1"><a href="javascript:exe(31,1,3)"> <span class="region_a gyeonggi">경기</span></a></li>
+							<li class="region1"><a href="javascript:exe(32,1,3)"> <span class="region_a gangwon">강원</span></a></li>
+							<li class="region1"><a href="javascript:exe(33,1,3)"> <span class="region_a chungcheong">충북</span></a></li>
+							<li class="region1"><a href="javascript:exe(34,1,3)"> <span class="region_a chungnam">충남</span></a></li>
+							<li class="region1"><a href="javascript:exe(35,1,3)"> <span class="region_a jeollabuk">전북</span></a></li>
+							<li class="region1"><a href="javascript:exe(36,1,3)"> <span class="region_a jeolanam">전남</span></a></li>
+							<li class="region1"><a href="javascript:exe(37,1,3)"> <span class="region_a jeollabuk">경북</span></a></li>
+							<li class="region1"><a href="javascript:exe(38,1,3)"> <span class="region_a jeollabuk">경남</span></a></li>
+							<li class="region1"><a href="javascript:exe(39,1,3)"> <span class="region_a jeollabuk">제주</span></a></li>
+						</ul>
+					</div>
 			
-			<div id=tabImg>
-				<ul class="bookListSize">
+					<div id=tabImg>
+						<ul class="bookListSize">
 				
 <%-- 					<c:set var="doneLoop" value="true"/>
 						
@@ -103,167 +106,72 @@
 	<!-- 첫번째 탭 끝!!!! -->
 	
 	
-	<!-- 두번째 탭 시작!!! -->
-		<div id="t2">
-			
-			<div class="region_div">
-				<ul id="menu2">
-					<li class="region2 total"><a href="javascript:exe(null,1,4)"> <span class="region_a">전체</span></a></li>
-					<li class="region2"><a href="javascript:exe(0,1,4)"> <span class="region_a seoul">영유아</span></a></li>
-					<li class="region2"><a href="javascript:exe(6,1,4)"> <span class="region_a busan">유아</span></a></li>
-					<li class="region2"><a href="javascript:exe(8,1,4)"> <span class="region_a daegu">초등</span></a></li>
-					<li class="region2"><a href="javascript:exe(14,1,4)"> <span class="region_a incheon">청소년</span></a></li>
-					<li class="region2"><a href="javascript:exe(20,1,4)"> <span class="region_a gwangju">20대</span></a></li>
-					<li class="region2"><a href="javascript:exe(30,1,4)"> <span class="region_a daejeon">30대</span></a></li>
-					<li class="region2"><a href="javascript:exe(40,1,4)"> <span class="region_a ulsan">40대</span></a></li>
-					<li class="region2"><a href="javascript:exe(50,1,4)"> <span class="region_a sejong">50대</span></a></li>
-					<li class="region2"><a href="javascript:exe(60,1,4)"> <span class="region_a gyeonggi">60대 이상</span></a></li>
-				</ul>
-			
-			</div>
-				<div id=tabImg>
-					<ul class="bookListSize">
-					
-					</ul>
-				</div> <!-- 이미지가 들어간 탭사이즈 -->
-				
-				<!-- 페이징 -->
-				<div id="pageCode2"></div>
-			</div>
-		<!-- 두번째 탭 끝!!! -->
-		
-		
-		<!-- 세번째 탭 시작!!! -->	
-		<div id="t3">
-			<div class="region_div">
-				<ul id="menu3">
-					<li class="region3 total"><a href="javascript:exe(null,1,0)"> <span class="region_a3">전체</span></a></li>
-					<li class="region3"><a href="javascript:exe(0,1,0)"> <span class="region_a3">영유아(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(0,1,1)"> <span class="region_a3">영유아(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(6,1,0)"> <span class="region_a3">유아(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(6,1,1)"> <span class="region_a3">유아(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(8,1,0)"> <span class="region_a3">초등(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(8,1,1)"> <span class="region_a3">초등(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(14,1,0)"> <span class="region_a3">청소년(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(14,1,1)"> <span class="region_a3">청소년(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(20,1,0)"> <span class="region_a3">20대(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(20,1,1)"> <span class="region_a3">20대(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(30,1,0)"> <span class="region_a3">30대(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(30,1,1)"> <span class="region_a3">30대(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(40,1,0)"> <span class="region_a3">40대(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(40,1,1)"> <span class="region_a3">40대(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(50,1,0)"> <span class="region_a3">50대(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(50,1,1)"> <span class="region_a3">50대(여)</span></a></li>
-					<li class="region3"><a href="javascript:exe(60,1,0)"> <span class="region_a3">60대 이상(남)</span></a></li>
-					<li class="region3"><a href="javascript:exe(60,1,1)"> <span class="region_a3">60대 이상(여)</span></a></li>
-				</ul>
-			</div>
-			
-			<div id=tabImg>
-				<ul class="bookListSize">
-	<!-- 				 <li class="bookList">
-					
-						<a href="#" class="imageStyle"> 
-							
-							<img src="../images/to1.PNG" class="imageSize"/>
-							<span class=" fontStyle">골든아워 </span>
-						</a> 
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to2.PNG" class="imageSize"/>
-							<span class="fontStyle">12가지 인생의 법칙</span>
-						</a>
-					</li>				
-				
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to3.PNG" class="imageSize"/>
-							<span class="fontStyle">골든아워2</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to4.PNG" class="imageSize"/>
-							<span class="fontStyle">나는 그것에 대해 아주 오랫동안 생각해</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to5.PNG" class="imageSize"/>
-							<span class="fontStyle">죽고 싶지만 떡볶이는 먹고싶어: 백세희</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to1.PNG" class="imageSize"/>
-							<span class="fontStyle">골든아워 :이국종 에세이</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to2.PNG" class="imageSize"/>
-							<span class="fontStyle">12가지 인생의 법칙: 조던B피터슨</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to3.PNG" class="imageSize"/>
-							<span class="fontStyle">골든아워2:이국종 에세이</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to4.PNG" class="imageSize"/>
-							<span class="fontStyle">나는 그것에 대해 아주 오랫동안 생각해: 김금희</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to5.PNG" class="imageSize"/>
-							<span class="fontStyle">죽고 싶지만 떡볶이는 먹고싶어: 백세희</span>
-						</a>
-					</li>
-					
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to1.PNG" class="imageSize"/>
-							<span class="fontStyle">골든아워 :이국종 에세이</span>
-						</a>
-					</li>
-					
-				
-					<li class="bookList">
-						<a href="#" class="imageStyle">
-							<img src="../images/to2.PNG" class="imageSize"/>
-							<span class="fontStyle">12가지 인생의 법칙: 조던B피터슨</span>
-						</a>
-					</li> 
-					
-					<li class="end"></li>  -->
-					</ul>
+				<!-- 두번째 탭 시작!!! -->
+				<div id="t2">
+					<div class="region_div">
+						<ul id="menu2">
+							<li class="region2 total"><a href="javascript:exe(null,1,4)"> <span class="region_a">전체</span></a></li>
+							<li class="region2"><a href="javascript:exe(0,1,4)"> <span class="region_a seoul">영유아</span></a></li>
+							<li class="region2"><a href="javascript:exe(6,1,4)"> <span class="region_a busan">유아</span></a></li>
+							<li class="region2"><a href="javascript:exe(8,1,4)"> <span class="region_a daegu">초등</span></a></li>
+							<li class="region2"><a href="javascript:exe(14,1,4)"> <span class="region_a incheon">청소년</span></a></li>
+							<li class="region2"><a href="javascript:exe(20,1,4)"> <span class="region_a gwangju">20대</span></a></li>
+							<li class="region2"><a href="javascript:exe(30,1,4)"> <span class="region_a daejeon">30대</span></a></li>
+							<li class="region2"><a href="javascript:exe(40,1,4)"> <span class="region_a ulsan">40대</span></a></li>
+							<li class="region2"><a href="javascript:exe(50,1,4)"> <span class="region_a sejong">50대</span></a></li>
+							<li class="region2"><a href="javascript:exe(60,1,4)"> <span class="region_a gyeonggi">60대 이상</span></a></li>
+						</ul>
+					</div>
+						
+					<div id=tabImg>
+						<ul class="bookListSize"></ul>
 					</div> <!-- 이미지가 들어간 탭사이즈 -->
-					
+							
+					<!-- 페이징 -->
+					<div id="pageCode2"></div>
+				</div><!-- 두번째 탭 끝!!! -->
+		
+		
+		
+				<!-- 세번째 탭 시작!!! -->	
+				<div id="t3">
+					<div class="region_div">
+						<ul id="menu3">
+							<li class="region3 total"><a href="javascript:exe(null,1,0)"> <span class="region_a3">전체</span></a></li>
+							<li class="region3"><a href="javascript:exe(0,1,0)"> <span class="region_a3">영유아(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(0,1,1)"> <span class="region_a3">영유아(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(6,1,0)"> <span class="region_a3">유아(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(6,1,1)"> <span class="region_a3">유아(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(8,1,0)"> <span class="region_a3">초등(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(8,1,1)"> <span class="region_a3">초등(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(14,1,0)"> <span class="region_a3">청소년(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(14,1,1)"> <span class="region_a3">청소년(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(20,1,0)"> <span class="region_a3">20대(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(20,1,1)"> <span class="region_a3">20대(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(30,1,0)"> <span class="region_a3">30대(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(30,1,1)"> <span class="region_a3">30대(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(40,1,0)"> <span class="region_a3">40대(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(40,1,1)"> <span class="region_a3">40대(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(50,1,0)"> <span class="region_a3">50대(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(50,1,1)"> <span class="region_a3">50대(여)</span></a></li>
+							<li class="region3"><a href="javascript:exe(60,1,0)"> <span class="region_a3">60대 이상(남)</span></a></li>
+							<li class="region3"><a href="javascript:exe(60,1,1)"> <span class="region_a3">60대 이상(여)</span></a></li>
+						</ul>
+					</div>
+				
+					<div id=tabImg>
+						<ul class="bookListSize"></ul>
+					</div> <!-- 이미지가 들어간 탭사이즈 -->
+								
 					<!-- 페이징 -->
 					<div id="pageCode3"></div>
-			 </div>	
-			 <!-- 세번째 탭 끝!! -->
-				 	
+				</div>	<!-- 세번째 탭 끝!! -->
+		 	
+			</div>
 		</div>
-	</div>
 	</form>
-<!-- 	<form name="pform">
-		<input type="hidden" name="nowPage">
-		<input type="hidden" name="loc" value="11">
-	</form>  -->
+
+	  
 	  <jsp:include page="footer.jsp"></jsp:include> 
 	
 	 <script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.min.js"></script>
@@ -284,34 +192,30 @@
 			});
 			
 			$("#tab1").click(function(){ //전국 탭을 눌렀을 때 전체 데이터 	
-				
+
 				exe(null,1,3);
-				
-	 				$("li").each(function(){	
+	 			$("li").each(function(){	
 	 					$("li").removeClass("selected");
 						$('.total').addClass("selected");
 					});	 
 				});
 			
 			$("#tab2").click(function(){ //연령별 탭을 눌렀을 때 전체 데이터
-					exe(null,1,4);
-					
-					$("li").each(function(){
+				exe(null,1,4);	
+				$("li").each(function(){
 						$("li").removeClass("selected");
 						$('.total').addClass("selected");
 					});
 				});
 			
 			$("#tab3").click(function(){ //성별 탭을 눌렀을 때 전체 데이터
-					exe(null,1,0);
-			
-					$("li").each(function(){
+				exe(null,1,0);
+				$("li").each(function(){
 						$('.total').removeClass("selected");
 						$('.total').addClass("selected");
 					});
 				});
-			
-		});
+			});
 		
 
 		function test(n){ //탭을 눌렀을 때 css
