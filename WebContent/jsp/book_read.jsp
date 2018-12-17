@@ -340,7 +340,7 @@
 	});
 	
 	var size = 20;
-	var count = 1;
+	var count = 2;
 	
 	function ajaxMethod(){
 		//비동기식 통신
