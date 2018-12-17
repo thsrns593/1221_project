@@ -11,13 +11,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.BookDAO;
+import mybatis.dao.BreplyDAO;
 import mybatis.vo.BookVO;
+import mybatis.vo.BreplyVO;
 import spring.util.BoardUtil;
 
 @Controller
 public class Book_ReadControl {
 	@Autowired
 	BookDAO b_dao;
+	@Autowired
+	private BreplyDAO br_dao;
 	@Autowired
 	HttpSession session;
 	
@@ -44,6 +48,9 @@ public class Book_ReadControl {
 			vo.setBb_hit(String.valueOf(hit+1));
 		}
 		mv.addObject("vo",vo);
+		BreplyVO[] r_list = br_dao.getList(bu.getNum(), "1");
+		mv.addObject("r_list", r_list);
+		System.out.println("댓글 갯수: "+r_list.length);
 		mv.setViewName("book_read");
 		return mv;
 	}

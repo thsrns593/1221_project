@@ -26,6 +26,9 @@ public class BreplyDAO {
 		Map<String, String> map = new HashMap<>();
 		int begin = 0;
 		int end =0;
+		if(replyPage == null || replyPage.equals("")) {
+			replyPage = "1";
+		}
 		begin = (Integer.parseInt(replyPage) -1 )* BLOCK_LIST +1;
 		end = begin + BLOCK_LIST -1;
 		map.put("begin", String.valueOf(begin));
@@ -37,5 +40,12 @@ public class BreplyDAO {
 			list.toArray(ar);
 		}
 		return ar;
+	}
+	public boolean deleteReply(String breply_num) {
+		System.out.println("삭제 idx : "+breply_num);
+		int cnt =ss.update("breply.del", breply_num );
+		if(cnt >0)
+			return true;
+		return false;
 	}
 }

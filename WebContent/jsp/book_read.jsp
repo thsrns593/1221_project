@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -122,6 +123,10 @@
 		.hidden {
 			display: none;
 		}
+		tbody#reply_list tr{
+			height: 60px;
+		}
+		
     </style>
 
   </head>
@@ -213,28 +218,72 @@
 												<col width="40px">
 												<col width="*">
 											</colgroup>
-											<thead>
-												<tr id="i1">
-													<td colspan="2">
-														<form>
-															<input type ="hidden" name="breply_num" value="댓글기본키">
-															<input type="hidden" name="m_id" value="댓글작성자">
-															<input type="hidden" name="breply_group" value="댓글그룹">
-															<div><span class="reply_from">작성자</span><input type="button" onclick="rereply(this)" value="답글"></div>
-															<div><span>댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
-														</form>
-													</td>
-												</tr>
-												<tr>
-													<td>ㄴ</td>
-													<td>
-														<div><span class="reply_to">@누구에게</span><span class="reply_from">작성자</span></div>
-														<div><span class="reply_content">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
-													</td>
-												</tr>
-											</thead>
+		<!--
+			<tr id="i1">
+			<td colspan="2">
+				<form>
+					<input type ="hidden" name="breply_num" value="댓글기본키">
+					<input type="hidden" name="m_id" value="댓글작성자">
+					<input type="hidden" name="breply_group" value="댓글그룹">
+					<div><span class="reply_from">작성자</span><input type="button" onclick="rereply(this)" value="답글"></div>
+					<div><span class="reply_content">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
+				</form>
+			</td>
+		</tr>
+		<tr>
+			<td>ㄴ</td>
+			<td>
+				<div><span class="reply_to">@누구에게</span><span class="reply_from">작성자</span></div>
+				<div><span class="reply_content">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
+			</td>
+		</tr> 
+		 -->
 											<tbody id="reply_list">
-												
+												<c:forEach items="${r_list }" var="br">
+													<c:if test="${ br.breply_status == 0}">
+														<c:if test="${br.breply_to ne null}">
+															<tr>
+																<td>ㄴ</td>
+																<td>
+																	<div><span class="reply_to">${br.breply_to }</span><span class="reply_from">${br.m_id }</span></div>
+																	<div><span class="reply_content">${br.breply_content }</span></div>
+																</td>
+															</tr>
+														</c:if>
+														<c:if test="${br.breply_to eq null}">
+															<tr>
+																<td colspan="2">
+																	<form>
+																		<input type ="hidden" name="breply_num" value="${br.breply_num }">
+																		<input type="hidden" name="m_id" value="${br.m_id }">
+																		<input type="hidden" name="breply_group" value="${br.breply_group }">
+																		<div><span class="reply_from">${br.m_id }</span>
+																		<input type="button" onclick="rereply(this)" value="답글">
+																		<c:if test="${br.m_id == m_id }">
+																			<input type="button" onclick="delReply(this.form)" value="삭제">
+																		</c:if>
+																		</div>
+																		<div><span class="reply_content">${br.breply_content }</span></div>
+																	</form>
+																</td>
+															</tr>
+														</c:if>
+													</c:if>
+													<c:if test="${ br.breply_status !=0}">
+														<c:if test="${ br.breply_to != null}">
+															<tr>
+																<td>ㄴ</td><td>삭제된 댓글입니다</td>
+															</tr>
+														</c:if>	
+														<c:if test="${ br.breply_to == null}">
+															<tr>
+																<td colspan ="2">
+																	삭제된 댓글입니다
+																</td>
+															</tr>
+														</c:if>
+													</c:if>
+												</c:forEach>
 											</tbody>
 										</table>
 									</div>                   				
@@ -251,15 +300,17 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 		<form id="hideForm">
 			<input type ="hidden" name="bb_num" value="${vo.bb_num }">
 			<input type="hidden" name="breply_content">
-			<input type="hidden" name="breply_group">
+			<input type="hidden" id="brg" name="breply_group">
 			<input type="hidden" name="breply_to">
     	</form>
     <jsp:include page="footer.jsp"></jsp:include>
     <script type="text/javascript" src=""></script>
 	<script type="text/javascript">
-	var loginId ="${m_id}";
+	var reply_list = document.getElementById("reply_list");
+	var bb_num = "${vo.bb_num}";
+	var login_id = "${m_id}";
 		function del(frm) {
-			if(!loginId) {
+			if(!login_id) {
 				alert("로그인을 해주세요");
 				return;
 			}
@@ -283,47 +334,41 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 			});
 		}
 		function edit(frm) {
-			if(!loginId) {
+			if(!login_id) {
 				alert("로그인을 해주세요");
 				return;
 			}
 			location.href="editBook.inc?num="+frm.bb_num.value;
 		}
 		$(function(){
-			var loginId = "${m_id}";
+			var login_id = "${m_id}";
 			var m_id =$("input[name=m_id]").val();
-			console.log(m_id);
-			if(m_id != loginId) {
+			if(m_id != login_id) {
 				$("#delBtn").prop("disabled",true);
 				$("#editBtn").prop("disabled",true);
 			}
 		});
 		
+		
 		function reply(frm) {
-			if(!loginId) {
+			if(!login_id) {
 				alert("로그인을 해주세요");
 				return;
 			}
-			var reply_list = document.getElementById("reply_list");
-			reply_list.innerHTML +="";
-			var bb_num = "${vo.bb_num}";
-			var m_id = "${m_id}";
+			
 			var breply_content = frm.breply_content.value;
+			myData = "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+breply_content;
 			$.ajax({
 				url:"breply_write.inc",
-				data : "bb_num="+bb_num+"&m_id="+m_id+"&breply_content="+breply_content,
+				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+breply_content,
 				dataType : "json",
 				type:"post"
 			}).done(function(data){
-				var ar =data.ar;
-				var str =toTable(ar);
-				$("#reply_list").append(str);
+				var str =toTable(data.ar);
+				$("#reply_list").html(str);
 			}).fail(function(err){
 				console.log("댓글실패");
 			});
-			frm.action="breply_write.inc";
-			frm.method="post";
-			frm.submit();
 		}
 		/*
 		<tr id="i1">
@@ -353,7 +398,11 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 					sb+= "<tr><td colspan='2'><form><input type ='hidden' name='breply_num' value='"+ar[i].breply_num +"'>";
 					sb+= "<input type='hidden' name='m_id' value='"+ar[i].m_id+"'>";
 					sb+= "<input type='hidden' name='breply_group' value='"+ar[i].breply_group+"'>";
-					sb+= "<div><span class='reply_from'>"+ar[i].m_id+"</span><input type='button' onclick='rereply(this)' value='답글'></div>";
+					sb+= "<div><span class='reply_from'>"+ar[i].m_id+"</span><input type='button' onclick='rereply(this)' value='답글'>";
+					if(ar[i].m_id == login_id) {
+						sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
+					}
+					sb+= "</div>";
 					sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
 					sb+= "</form></td></tr>";
 				}else {
@@ -365,28 +414,32 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 			}
 			return sb;
 		}
-		
-		var replyOpen = true;
+		var replyPage="${replyPage}";
+		if(replyPage == "") {
+			replyPage =1;
+		} 
+		var replyOpen = false;
 		var breply_to="";
 		var bb_num = "${vo.bb_num}";
 		var breply_group="";
 		function rereply(t) {
-			if(!loginId) {
+			if(!login_id) {
 				alert("로그인을 해주세요");
 				return;
 			}
 			var replyTr = $(t).closest('tr');
 			var replyForm = $(t).closest('form');
+			
 			//대댓글창이 열려있으면
-			if(replyOpen) {
+			if(!replyOpen) {
 				//기존댓글창 및 값 정리
 				$("#reply_input").remove();
 				breply_to = $(replyForm).children("input[name=m_id]");
 				breply_group = $(replyForm).find("input[name=breply_group]");
-				replyOpen=false;
+				replyOpen=true;
 				$(replyTr).after("<tr id='reply_input'><td colspan=2><form><input type='text' name='breply_content'><input onclick='sendRr(this.form)' type='button' value='보내기'></form></td></tr>");
 			}else {
-				replyOpen = true;
+				replyOpen = false;
 				$("#reply_input").remove();
 				breply_to="";
 				breply_group="";
@@ -396,17 +449,41 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 		function sendRr(frm) {
 			var bt =breply_to.val();
 			var bg = breply_group.val();
+			var bc =$(frm).find("input[name=breply_content]").val();
 			console.log("bt"+bt);
 			console.log("bg"+bg);
-			var bc =$(frm).find("input[name=breply_content]").val();
 			console.log("bc"+bc);
-			$("hideForm").find("input[name=breply_content]").val(bc);
-			$("hideForm").find("input[name=breply_to]").val(bt);
-			$("hideForm").find("input[name=breply_group]").val(breply_group.val(bg));
-			frm.action="breply_write.inc";
-			frm.method="post";
-			frm.submit();
 			
+			$.ajax({
+				url:"breply_write.inc",
+				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+bc+"&breply_group="+bg+"&breply_to="+bt,
+				dataType : "json",
+				type:"post"
+			}).done(function(data){
+				var str =toTable(data.ar);
+				$("#reply_list").html(str);
+			}).fail(function(err){
+				console.log("댓글실패");
+			});
+			
+			replyOpen = false;
+			$("#reply_input").remove();
+			breply_to="";
+			breply_group="";
+		}
+		function delReply(frm) {
+			alert(frm.breply_num.value);
+			$.ajax({
+				url:"breply_delete.inc",
+				data : "breply_num="+bb_num+"&replyPage="+replyPage+"&breply_num="+frm.breply_num.value,
+				dataType : "json",
+				type:"post"
+			}).done(function(data){
+				var str =toTable(data.ar);
+				$("#reply_list").html(str);
+			}).fail(function(err){
+				console.log("댓글실패");
+			});
 		}
 	</script>
   </body>
