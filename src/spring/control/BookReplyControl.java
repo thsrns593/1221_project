@@ -38,7 +38,6 @@ public class BookReplyControl {
 		Map<String, Object> map = new HashMap<>();
 		boolean b =br_dao.addReply(vo);
 		//책 게시물의 댓글 수 컬럼을 증가 시켜야 한다
-		
 		System.out.println("댓글? : "+b);
 		if(replyPage == null || replyPage.equals("")) 
 			replyPage ="1";

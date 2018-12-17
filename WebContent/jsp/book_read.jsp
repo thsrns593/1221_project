@@ -254,12 +254,17 @@
 															<tr>
 																<td>
 																	<div class="rereplyBox">
-																		<div><span class="reply_to">@${br.breply_to }</span><span class="reply_from">${br.m_id }</span>
-																		<c:if test="${m_id == br.m_id }">
-																			<input type='button' onclick='delReply(this.form)' value='삭제'>
-																		</c:if>
-																		</div>
-																		<div><span class="reply_content">${br.breply_content }</span></div>
+																		<form>
+																			<input type ="hidden" name="breply_num" value="${br.breply_num }">
+																			<input type="hidden" name="m_id" value="${br.m_id }">
+																			<input type="hidden" name="breply_group" value="${br.breply_group }">
+																			<div><span class="reply_to">@${br.breply_to }</span><span class="reply_from">${br.m_id }</span>
+																			<c:if test="${m_id == br.m_id }">
+																				<input type='button' onclick='delReply(this.form)' value='삭제'>
+																			</c:if>
+																			</div>
+																			<div><span class="reply_content">${br.breply_content }</span></div>
+																		</form>
 																	</div>
 																</td>
 															</tr>
@@ -422,14 +427,16 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 						sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
 						sb+= "</form></div></td></tr>";
 					}else {
-						sb+= "<tr><td><div class='rereplyBox'>";
+						sb+= "<tr><td><div class='rereplyBox'><form><input type ='hidden' name='breply_num' value='"+ar[i].breply_num +"'>";
+						sb+= "<input type='hidden' name='m_id' value='"+ar[i].m_id+"'>";
+						sb+= "<input type='hidden' name='breply_group' value='"+ar[i].breply_group+"'>";
 						sb+= "<div><span class='reply_to'>@"+ar[i].breply_to+"</span><span class='reply_from'>"+ar[i].m_id+"</span>";
 						if(ar[i].m_id == login_id) {
 							sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
 						}
 						sb+="</div>";
 						sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
-						sb+= "</div></td></tr>";
+						sb+= "</form></div></td></tr>";
 					}
 				}else {
 					/*

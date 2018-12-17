@@ -159,7 +159,11 @@
 										<tr>
 											<td>${item.bb_num }</td>
 											<td>${item.bb_category }</td>
-											<td><a href="javascript:goView(${item.bb_num })">${item.bb_title }</a></td>
+											<td><a href="javascript:goView(${item.bb_num })">${item.bb_title }</a>
+												<c:if test="${item.bb_replyCount != null and item.bb_replyCount !=0 }">
+													[${item.bb_replyCount }]
+												</c:if>
+											</td>
 											<td>${item.bb_bname }</td>
 											<td>${item.bb_author }</td>
 											<td>${item.m_id }</td>

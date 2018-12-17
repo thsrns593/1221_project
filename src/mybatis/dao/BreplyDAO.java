@@ -13,6 +13,8 @@ public class BreplyDAO {
 	@Autowired
 	SqlSessionTemplate ss;
 	public static final int BLOCK_LIST = 20;
+	
+	//댓글 및 대댓글 추가
 	public boolean addReply(BreplyVO vo) {
 		boolean chk = false;
 		int cnt =ss.insert("breply.reply", vo);
@@ -21,6 +23,9 @@ public class BreplyDAO {
 		}
 		return chk;
 	}
+
+	
+	//댓글 및 대댓글 리스트 가져오기
 	public BreplyVO[] getList(String bb_num,String replyPage) {
 		BreplyVO[] ar = null;
 		Map<String, String> map = new HashMap<>();
@@ -41,6 +46,8 @@ public class BreplyDAO {
 		}
 		return ar;
 	}
+	
+	//댓글 및 대댓글 삭제처리
 	public boolean deleteReply(String breply_num) {
 		System.out.println("삭제 idx : "+breply_num);
 		int cnt =ss.update("breply.del", breply_num );

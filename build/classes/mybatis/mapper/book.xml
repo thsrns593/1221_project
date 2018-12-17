@@ -31,8 +31,14 @@
 	  </if>
   </select>
   
+  <!-- 게시물의 댓글수를 채워주는 resultMap -->
+  <resultMap type="mybatis.vo.BookVO" id="map1">
+  	<id property="bb_num" column="bb_num"/>
+  	<association property="bb_replyCount" column="bb_num" select="replyCount"></association>
+  </resultMap>
+  
   <!-- 카테고리, 검색타입, 검색어에 맞는 게시물들을 반환 -->
-  <select id="list" parameterType="java.util.Map" resultType="mybatis.vo.BookVO">
+  <select id="list" parameterType="java.util.Map" resultType="map1">
   	select * from 
    		(select rownum r_num,a.* from       
       		(select * from book_board where
@@ -109,5 +115,14 @@
   		bb_bname = #{bb_bname}, bb_author = #{bb_author}, bb_press = #{bb_press}, bb_edate = sysdate
   	where bb_num = #{bb_num}
   </update>
+  
+  <!-- 게시물의 댓글 수 갱신 -->
+  <update id="editRC" parameterMap="java.util.Map">
+  	update book_board set bb_replyCount = #{bb_replyCount} where bb_num = #{bb_num}
+  </update>
+  <!-- 게시물의 댓글 수 출력 -->
+  <select id="replyCount" parameterType="String" resultType="int">
+  	select count(*) from book_reply where bb_num =#{bb_num}
+  </select>
 </mapper>
 
