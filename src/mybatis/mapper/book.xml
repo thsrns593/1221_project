@@ -38,7 +38,7 @@
   </resultMap>
   
   <!-- 카테고리, 검색타입, 검색어에 맞는 게시물들을 반환 -->
-  <select id="list" parameterType="java.util.Map" resultType="map1">
+  <select id="list" parameterType="java.util.Map" resultMap="map1">
   	select * from 
    		(select rownum r_num,a.* from       
       		(select * from book_board where
@@ -79,7 +79,7 @@
   </select>
   
   <!-- 카테고리 별로 검색된 게시물들 반환 -->
-  <select id="cate" parameterType="java.util.Map" resultType="mybatis.vo.BookVO">
+  <select id="cate" parameterType="java.util.Map" resultMap="map1">
 	select * from 
    		(select rownum r_num,a.* from       
       		(select * from book_board where   
@@ -116,12 +116,9 @@
   	where bb_num = #{bb_num}
   </update>
   
-  <!-- 게시물의 댓글 수 갱신 -->
-  <update id="editRC" parameterMap="java.util.Map">
-  	update book_board set bb_replyCount = #{bb_replyCount} where bb_num = #{bb_num}
-  </update>
+  
   <!-- 게시물의 댓글 수 출력 -->
-  <select id="replyCount" parameterType="String" resultType="int">
+  <select id="replyCount" parameterType="String" resultType="String">
   	select count(*) from book_reply where bb_num =#{bb_num}
   </select>
 </mapper>

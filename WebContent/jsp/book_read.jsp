@@ -312,24 +312,56 @@
 							<br/>				
 							<br/>				
 			</div> 
-			<!-- 대댓글 달기를 하기 위해 필요한 정보 -->
 			
-			
-			<!-- 
-breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
-	breply_cdate,breply_ip,	breply_status -->
-		<form id="hideForm">
-			<input type ="hidden" name="bb_num" value="${vo.bb_num }">
-			<input type="hidden" name="breply_content">
-			<input type="hidden" id="brg" name="breply_group">
-			<input type="hidden" name="breply_to">
-    	</form>
     <jsp:include page="footer.jsp"></jsp:include>
     <script type="text/javascript" src=""></script>
 	<script type="text/javascript">
+	var bb_num = "${vo.bb_num}";
 	var reply_list = document.getElementById("reply_list");
 	var bb_num = "${vo.bb_num}";
 	var login_id = "${m_id}";
+	//
+	var flag = true;
+	$(function(){
+		
+		$(window).scroll(function(){
+			//스크롤이 움직일 때마다 수행하는 곳!!
+			
+			//스크롤이 창의 아래쪽에 도달했을 때를 가려내기 위해
+			//필요한 작업
+			var doc_h = $(document).height();
+			var win_h = $(window).height();
+			var win_top = $(window).scrollTop();
+			
+			if(doc_h <= (win_top + win_h+5))
+				if(flag)
+					ajaxMethod();
+		});
+	});
+	
+	var size = 20;
+	var count = 1;
+	
+	function ajaxMethod(){
+		//비동기식 통신
+		flag = false;
+		$.ajax({
+			url:"breply_list.inc",
+			data : "bb_num="+bb_num+"&replyPage="+count,
+			dataType : "json",
+			type:"post"
+		}).done(function(data){
+			var str =toTable(data.ar);
+			count++;
+			$("#reply_list").append(str);
+			flag = true;
+		}).fail(function(err){
+			console.log("댓글실패");
+		});
+	}
+	//
+	
+	
 		function del(frm) {
 			if(!login_id) {
 				alert("로그인을 해주세요");
@@ -391,26 +423,7 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 				console.log("댓글실패");
 			});
 		}
-		/*
-		<tr id="i1">
-			<td colspan="2">
-				<form>
-					<input type ="hidden" name="breply_num" value="댓글기본키">
-					<input type="hidden" name="m_id" value="댓글작성자">
-					<input type="hidden" name="breply_group" value="댓글그룹">
-					<div><span class="reply_from">작성자</span><input type="button" onclick="rereply(this)" value="답글"></div>
-					<div><span class="reply_content">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td>ㄴ</td>
-			<td>
-				<div><span class="reply_to">@누구에게</span><span class="reply_from">작성자</span></div>
-				<div><span class="reply_content">댓글 내용 댓글 내용 댓글 내용 댓글 내용 댓글 내용 </span></div>
-			</td>
-		</tr>
-		*/
+		
 		function toTable(ar) {
 			var sb="";
 			for(var i =0; i<ar.length; i++) {
@@ -470,7 +483,7 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 		} 
 		var replyOpen = false;
 		var breply_to="";
-		var bb_num = "${vo.bb_num}";
+		
 		var breply_group="";
 		function rereply(t) {
 			if(!login_id) {
@@ -534,6 +547,7 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 				console.log("댓글실패");
 			});
 		}
+		
 	</script>
   </body>
 

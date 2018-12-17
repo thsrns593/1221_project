@@ -23,6 +23,7 @@ public class BookReplyControl {
 	@Autowired
 	HttpServletRequest request;
 	
+	//댓글쓰기
 	@RequestMapping(value="breply_write.inc", method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String, Object> breply_write(String bb_num, String m_id, String breply_content, String replyPage,String breply_to, String breply_group) {
@@ -47,6 +48,8 @@ public class BookReplyControl {
 		
 		return map;
 	}
+	
+	//댓글삭제
 	@RequestMapping("breply_delete.inc")
 	@ResponseBody
 	public Map<String, Object> breply_delete(String bb_num,  String replyPage,String breply_num) {
@@ -57,6 +60,16 @@ public class BookReplyControl {
 		BreplyVO[] ar = br_dao.getList(bb_num, replyPage);
 		map.put("ar", ar);
 		
+		return map;
+	}
+	
+	//댓글리스트 출력
+	@RequestMapping("breply_list.inc")
+	@ResponseBody
+	public Map<String,Object> breply_list(String bb_num, String replyPage) {
+		Map<String, Object> map = new HashMap<>();
+		BreplyVO[] r_list = br_dao.getList(bb_num, replyPage);
+		map.put("ar", r_list);
 		return map;
 	}
 }
