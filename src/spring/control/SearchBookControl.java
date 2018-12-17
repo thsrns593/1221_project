@@ -36,7 +36,6 @@ public class SearchBookControl {
 
 			System.out.println(response.getHeaders());
 			System.out.println(response.getBody());
-
 			
 		} catch (Exception e) {
 

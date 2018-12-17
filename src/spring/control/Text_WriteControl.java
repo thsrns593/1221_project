@@ -50,7 +50,7 @@ public class Text_WriteControl {
 
 		
 			String path = application.getRealPath(uploadPath);
-
+			
 			String f_name = mf.getOriginalFilename();
 			
 			vo.setNb_oname(f_name);
