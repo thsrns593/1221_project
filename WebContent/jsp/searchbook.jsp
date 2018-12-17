@@ -72,13 +72,13 @@
 				</div>
 				<div class="">
 					<div class="panel-body">
-						<form action="">
+						<form action="searchbook.inc" method="post" id="searchbookform">
 							<div>
 								<label style="line-height: 100%; border: 1px solid #E0F8E0; background-color: #E0F8E0; color: gray; width: 70px; padding: 2px; font-size: 20px;">도서명</label>
-								<input type="text" id="bookname" placeholder="도서명" size="110">
+								<input type="text" id="bookname" name="bookname" placeholder="도서명" size="110">
 								<span class="input-group-btn">
-									<button class="btn btn-default" type="button"
-										onclick="javascript:location.href='table.inc'">
+									<button type="button"
+										onclick="searchbook()">
 										<i class="fa fa-search"></i>
 									</button>
 								</span>
@@ -140,10 +140,9 @@
 
 	   
     <script>
-    $(function(){
-
-
-	});
+   	function searchbook() {
+		$("#searchbookform").submit();
+	}
    
     </script>
     
