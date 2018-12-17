@@ -2,6 +2,12 @@ package spring.control;
 
 import java.net.URI;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.RequestEntity;
@@ -10,6 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
+
+import com.google.gson.JsonArray;
+
+import mybatis.vo.SearchBookVO;
 
 @Controller
 public class SearchBookControl {
@@ -32,10 +42,22 @@ public class SearchBookControl {
 		try {
 			RequestEntity<String> rq = new RequestEntity<String>(headers, HttpMethod.GET, new URI(apiURL));
 
-			ResponseEntity<String> response = template.exchange(rq, String.class);
+			ResponseEntity<Map> response = template.exchange(rq, Map.class);
 
-			System.out.println(response.getHeaders());
-			System.out.println(response.getBody());
+			ArrayList jar = (ArrayList)response.getBody().get("documents");
+			
+			System.out.println("----------------------------------------");
+			for(int i = 0; i < jar.size() ; i++) {
+				
+				LinkedHashMap<String, String> lmap = (LinkedHashMap<String, String>)jar.get(i);				
+				
+				System.out.println(lmap.get("title"));
+				System.out.println(lmap.get("isbn"));
+				
+			}
+			System.out.println("----------------------------------------");
+			
+		
 			
 		} catch (Exception e) {
 
