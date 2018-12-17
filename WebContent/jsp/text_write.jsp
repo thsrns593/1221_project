@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <title>일반게시판글쓰기</title>
@@ -124,7 +125,7 @@
 				                <div class="panel-footer">
 	                            	<p>
 		                                <button type="button" class="btn btn-outline btn-success bts"
-		                                onclick="javascript:location.href='nb.inc'">돌아가기</button>
+		                                onclick="javascript:location.href='board_free.inc'">돌아가기</button>
 	                            	</p>
                         		</div>
 				                <!-- /.col-lg-12 -->

@@ -40,8 +40,25 @@ public class NormalDAO {
 	public NormalVO getText(NormalVO vo) {
 		return ss.selectOne("normal.view",vo);
 	}
+	public boolean delText(NormalVO vo) {
+		int cnt = ss.update("normal.del",vo);
+		if(cnt>0)
+			return true;
+		else
+			return false;
+		
+	}
+	
 	public boolean editText(NormalVO vo ) {
 		int cnt = ss.update("normal.edit", vo);
+		if(cnt>0)
+			return true;
+		else
+			return false;
+	}
+	
+	public boolean updateHit(NormalVO vo) {
+		int cnt = ss.update("normal.updateHit",vo);
 		if(cnt>0)
 			return true;
 		else

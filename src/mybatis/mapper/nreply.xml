@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="reply">  
+  	<!-- 댓글 수를 반환 -->
+	<select id="totalCount" resultType="int" parameterType="mybatis.vo.NreplyVO">
+		SELECT COUNT(*) FROM normal_reply WHERE nb_num = #{nb_num}
+	</select>
+	
+	<!-- 댓글 리스트를 가져오는 기능 -->
+	<select id="list" resultType="mybatis.vo.NreplyVO"
+		parameterType="mybatis.vo.NreplyVO">
+		SELECT * FROM
+			(SELECT rownum r_num, a.* FROM
+				(SELECT * FROM normal_reply 
+				WHERE nb_num = #{nb_num}
+				ORDER BY nreply_group DESC,nreply_cdate ASC)a)
+		WHERE r_num BETWEEN  #{begin} AND #{end}
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="add" parameterType="mybatis.vo.NreplyVO">
+		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_group, nreply_content,nreply_cdate,nreply_ip,nreply_status)
+		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},normal_reply_group_seq.NEXTVAL, #{nreply_content},sysdate,#{nreply_ip},0)
+	</insert>
+	<!-- 댓글 추가2 -->
+	<insert id="add2" parameterType="mybatis.vo.NreplyVO">
+		INSERT INTO normal_reply(nreply_num,nb_num,	m_id,nreply_to,nreply_group, nreply_content,nreply_cdate,nreply_ip,nreply_status)
+		VALUES(normal_reply_seq.NEXTVAL, #{nb_num},	#{m_id},#{nreply_to}, #{nreply_group}, #{nreply_content},sysdate,#{nreply_ip},0)
+	</insert>
+	
+	<!-- 댓글 삭제 -->
+	<update id="del" parameterType="mybatis.vo.NreplyVO">
+		UPDATE normal_reply set nreply_status = 1 WHERE nreply_num = #{nreply_num} 
+	</update>
+	
+	
+	<!-- 게시물 테이블 댓글 수 증가 -->
+	<update id="upnb_count" parameterType="mybatis.vo.NreplyVO">
+		UPDATE normal_board set 
+		
+		nb_reply_count = nb_reply_count + 1
+		
+		WHERE nb_num = #{nb_num} 
+	</update>
+</mapper>
+

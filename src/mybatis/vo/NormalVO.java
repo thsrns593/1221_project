@@ -4,14 +4,20 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class NormalVO {
 	
-	private String nb_num, nb_title, m_id, nb_category, nb_hit, nb_content, nb_fname,nb_oname,nb_cdate,nb_edate,nb_ip,nb_status;
+	private String nb_num, nb_title, m_id, nb_category, nb_hit, nb_content, nb_fname,nb_oname,nb_cdate,nb_edate,nb_ip,nb_status,nb_reply_count;
 	
 	private String cate,searchType,searchValue;
 	private int nowPage, begin, end;
 	public String getCate() {
 		return cate;
 	}
+	public String getNb_reply_count() {
+		return nb_reply_count;
+	}
 
+	public void setNb_reply_count(String nb_reply_count) {
+		this.nb_reply_count = nb_reply_count;
+	}
 	public void setCate(String cate) {
 		this.cate = cate;
 	}

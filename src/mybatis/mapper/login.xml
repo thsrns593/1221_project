@@ -6,8 +6,17 @@
   
   <select id="log" resultType="mybatis.vo.MemberVO" parameterType="java.util.Map">
   	SELECT * FROM member
-  	WHERE m_id = #{id} AND m_pwd = #{pw}
+  	WHERE m_id = #{m_id} AND m_pwd = #{m_pwd}
   </select>
   
+  <select id="loginInfo" resultType="mybatis.vo.MemberVO">
+  	SELECT
+  		m_id AS m_id,
+  		m_pwd AS m_pwd,
+  		m_email AS m_email,
+  		m_odate AS m_odate
+  	FROM member
+  	WHERE m_id = #{m_id} AND m_pwd = #{m_pwd} 
+  </select>
 </mapper>
 

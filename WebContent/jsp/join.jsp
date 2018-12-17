@@ -54,7 +54,7 @@
                   <input id="m_pwd" name="m_pwd" type="password" class="form-control" 
                   placeholder="User password(8~15자) ">
                 </span>
-                <small> 특수문자,영문,숫자가  모두 포함되어야 합니다.</small>
+                <small> 비밀번호는 특수문자,영문,숫자가  모두 포함되어야 합니다.</small>
               </div>
               
               <div class="input-group">
@@ -95,7 +95,21 @@
                   <input id="m_email" name="m_email" type="text" class="form-control" placeholder="User email">
                 </span>
                 <span class="input-group-btn">
-                  <button class="btn btn-secondary" type="button">이메일 인증</button>
+                  <button class="btn btn-secondary" type="button" onclick="javascript:sendMail()">이메일 인증</button>
+                </span>
+              </div>
+              
+              <div class="input-group">
+              	<span class="input-group-btn">
+              	  <label id="email_lb" for="m_email" class="form-control">
+              	  	<i class="fa fa-key"></i> 
+              	  </label>
+                </span>
+                <span class="input-group-btn">
+                  <input id="m_att" name="m_att" type="text" class="form-control" placeholder="User key">
+                </span>
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" onclick="javascript:mailAtt()">인증번호 확인</button>
                 </span>
               </div>
         
@@ -149,6 +163,8 @@
 	});
     var chkId = false;
     var chkPwd = false;
+    var chkSend = false;
+    var chkAtt = false;
     var str_space = /\s/;
     var regType1 = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9])$/;
     var regType2 = /^[A-Za-z0-9+]*$/;
@@ -159,6 +175,59 @@
     var regType6 = /^[0-9]*$/;
     var regType7 = /^[!@#$%^*+=-]*$/;
     var regType8 = /(^[a-zA-Z])/;
+    
+    var id2 = null;
+    var email2 = null;
+    
+    function mailAtt(){
+    	var att = $("#m_att").val();
+    	var num = sessionStorage.getItem("joinCode");
+
+    	if(att.trim().length < 1){
+			alert("인증번호를 입력하세요.");
+			$("#m_att").focus();
+			return;
+		}
+    	console.log(num);
+    	if(num == att){
+    		chkAtt = true;
+    		alert("인증번호 확인 완료!");
+    	}else{
+    		alert("올바른 인증번호가 아닙니다.");
+    		return;
+    	}
+    }
+    
+    function sendMail(){
+    	var email = $("#m_email").val();
+    	
+    	if(email.trim().length < 1){
+			alert("이메일을 입력하세요.");
+			$("#m_email").focus();
+			return;
+		}
+    	
+    	var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		if (email.match(regExp) == null) {
+		    alert("이메일이 올바른 형식이 아닙니다.");
+		    return;
+		}
+		
+		alert("메일 전송, 확인버튼을 누르세요");
+		
+		$.ajax({
+			url: "sendMail.inc",
+			data: "email="+ email,
+			type: "POST",
+			dataType: "json",
+		}).done(function(data){
+			sessionStorage.setItem("joinCode", data.joinCode);
+			chkSend = true;
+		}).fail(function(){
+		});
+		
+		email2 = $("#m_email").val();
+    } 
     
     function checkId(){
     	var id = $("#m_id").val();
@@ -195,6 +264,9 @@
 			}
 		}).fail(function(){
 		});
+		
+		id2 = $("#m_id").val();
+		
     }
     
     function checkPwd(){
@@ -247,45 +319,78 @@
 		var pwd = $("#m_pwd").val();
 		var r_pwd = $("#mr_pwd").val();
 		var email = $("#m_email").val();
+		var att = $("#m_att").val();
 		
 		if(id.trim().length < 1){
-			alert("아이디를 입력하세요");
+			alert("아이디를 입력하세요.");
 			$("#m_id").focus();
 			return;
 		}
 		
+		if(chkId == false){
+			alert("중복 확인 버튼을 누르세요.");
+			return;
+		}
+		
 		if(pwd.trim().length < 1){
-			alert("비밀번호를 입력하세요");
+			alert("비밀번호를 입력하세요.");
 			$("#m_pwd").focus();
 			return;
 		}
 		
 		if(r_pwd.trim().length < 1){
-			alert("비밀번호를  재입력하세요");
+			alert("비밀번호를  재입력하세요.");
 			$("#mr_pwd").focus();
 			return;
 		}
 		
-		if(email.trim().length < 1){
-			alert("이메일을 입력하세요");
-			$("#m_email").focus();
+		if(chkPwd == false){
+			alert("비밀번호 확인 버튼을 눌러주세요.");
 			return;
 		}
 		
-	 	if(chkId == false){
-			alert("중복 확인 버튼을 누르세요");
+		if(pwd != r_pwd){
+			alert("동일한 비밀번호를 입력해야합니다.");
 			return;
 		}
-	 	
-	 	if(chkPwd == false){
-			alert("비밀번호를 확인하세요");
+		
+		if(email.trim().length < 1){
+			alert("이메일을 입력하세요.");
+			$("#m_email").focus();
 			return;
 		}
 	 	
 		var regExp = /([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		
 		if (email.match(regExp) == null) {
-		    alert('이메일이 올바른 형식이 아닙니다.');
+		    alert("이메일이 올바른 형식이 아닙니다.");
 		    return;
+		}
+		
+		if(chkSend == false){
+			alert("이메일 인증 버튼을 누르세요.");
+			return;
+		}
+		
+		if(att.trim().length < 1){
+			alert("인증번호를 입력하세요.");
+			$("#m_att").focus();
+			return;
+		}
+		
+		if(chkAtt == false){
+			alert("인증번호 확인 버튼을 눌러주세요.");
+			return;
+		}
+		
+		if(id != id2){
+			alert("중복 확인 버튼을 다시 누르세요.");
+			return;
+		}
+		
+		if(email != email2){
+			alert("이메일이 바뀌었습니다 재인증 해주세요.");
+			return;
 		}
 		
 		alert("회원가입 완료!");

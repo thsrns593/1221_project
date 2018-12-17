@@ -4,6 +4,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -112,7 +113,9 @@
 									<option <%if(cate.equals("질문")) {out.print(" selected='selected' ");} %>value="질문">질문</option>
 								</select>
 							</div>
+							<c:if test="${sessionScope.m_id ne null }">
 							<div id="top_right"><input type="button" class="btn btn-default" value="글쓰기" onclick="javascript:location.href='text_write.inc'"></div>
+							</c:if>
 						</div>
 						<table class="table table-striped table-bordered table-hover" id="dataTable">
 							<colgroup>
@@ -133,13 +136,22 @@
 									<th>등록일</th>
 									<th>조회수</th>
 								</tr>
+								<jsp:useBean id="today2" class="java.util.Date" />
+								<fmt:formatDate var="today" value="${today2}" pattern="yyyy-MM-dd" />
+								
 								<c:forEach items="${ar }" var="item" varStatus="st">
 									<tr>
 										<td>${item.nb_num}</td>
 										<td>${item.nb_category }</td>
 										<td>${item.m_id }</td>
-										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }</a></td>
-										<td>${item.nb_cdate }</td>
+										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }
+										<c:if test="${item.nb_reply_count ne '0'}">
+											[${item.nb_reply_count}]
+										</c:if>
+										</a></td>
+										<td><c:if test="${fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,10,16) }</c:if> 
+											<c:if test="${!fn:startsWith(item.nb_cdate,today) }">${fn:substring(item.nb_cdate,5,10) }</c:if>
+										</td>
 										<td>${item.nb_hit }</td>
 									</tr>
 								</c:forEach>

@@ -65,7 +65,7 @@ public class Text_WriteControl {
 			vo.setNb_fname("");
 			vo.setNb_oname("");
 		}
-		vo.setM_id("손오공");
+		vo.setM_id((String)session.getAttribute("m_id")); 
 		vo.setNb_ip(request.getRemoteAddr());
 				
 		boolean chk = n_dao.writeText(vo);

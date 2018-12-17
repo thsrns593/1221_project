@@ -68,13 +68,34 @@
 	<!-- 게시물 추가 -->
 	<insert id="add" parameterType="mybatis.vo.NormalVO">
 		INSERT INTO normal_board(nb_num, nb_title, m_id, nb_category, nb_hit, nb_content,
-									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status)
-		VALUES(nb_seq.NEXTVAL, #{nb_title}, #{m_id}, #{nb_category}, 0, #{nb_content},
-									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0)
+									nb_fname, nb_oname, nb_cdate, nb_ip, nb_status, nb_reply_count)
+		VALUES(normal_board_seq.NEXTVAL, #{nb_title}, #{m_id}, #{nb_category}, 0, #{nb_content},
+									#{nb_fname}, #{nb_oname}, sysdate, #{nb_ip}, 0, 0)
 	</insert>
 	
+	<!-- 게시물 보기 -->
 	<select id="view" parameterType="mybatis.vo.NormalVO" resultType="mybatis.vo.NormalVO">
 		SELECT * FROM normal_board WHERE nb_num = #{nb_num}
 	</select>
+	<!-- 게시물 삭제 -->
+	<update id="del" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board set nb_status = 1 WHERE nb_num = #{nb_num} 
+	</update>
+	
+	<!-- 게시물 수정 -->
+	<update id="edit" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board 
+		set nb_title = #{nb_title},
+			nb_category = #{nb_category},
+			nb_content = #{nb_content},
+			nb_edate = sysdate,
+			nb_ip = #{nb_ip}
+		WHERE nb_num = #{nb_num}
+	</update>
+	
+	<!-- 게시물 조회수 증가 -->
+	<update id="updateHit" parameterType="mybatis.vo.NormalVO">
+		UPDATE normal_board set nb_hit = nb_hit + 1 WHERE nb_num = #{nb_num}
+	</update>
 </mapper>
 

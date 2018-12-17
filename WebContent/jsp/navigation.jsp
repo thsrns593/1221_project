@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- 메인 css -->
 	<link href="${pageContext.request.contextPath}/lib/css/common.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
@@ -41,12 +41,28 @@
                 <span class="sr-only">(current)</span>
               </a>
             </li>
+            <c:if test="${sessionScope.m_id == null }">
             <li class="nav-item">
               <a class="nav-link" href="join.inc">회원가입</a> <!-- 로그인 시, 마이페이지 -->
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="login.inc">로그인</a> <!-- 로그인 시, 로그아웃 -->
-            </li>
+            </c:if>
+            <c:if test="${sessionScope.m_id != null }">
+            	<a></a>
+            </c:if>
+            <c:if test="${sessionScope.m_id == null }">
+            	<li class="nav-item">
+            		<a class="nav-link" href="login.inc">로그인 </a>
+            	</li>
+            	</c:if>
+            
+			<c:if test="${sessionScope.m_id != null }">
+            	<li class="nav_logout">
+            		<a href="modify.inc" style="color: #ebeced !important;">${sessionScope.m_id}님이 로그인중입니다.</a>
+            	</li>
+            	<li class="nav-item">
+            		<a class="nav-link" href="logout.inc" >로그아웃</a>
+            	</li>
+            </c:if>
             <!-- <li class="nav-item">
               <a class="nav-link" href="#"></a>
             </li> -->

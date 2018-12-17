@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+.nav_logout{
+	padding-top: 7px !important;
+}
+
 #header_logo{
 	border-bottom: 2px solid #ebeced;
 	color: #ebeced;
@@ -9,7 +13,7 @@
 	background-color: #343a40;
 }
 .container-fluid{
-	margin-left: -16px;
+	margin-left: -16px !important;
 }
 .btn-secondary{
 	background-color: #687672;

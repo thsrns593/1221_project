@@ -33,6 +33,8 @@ xmlns:context="http://www.springframework.org/schema/context"
 	<bean id="n_dao" class="mybatis.dao.NormalDAO"/>
 	<bean id="b_dao" class="mybatis.dao.BookDAO"/>
 	<bean id="l_dao" class="mybatis.dao.LoginDAO"/>
+	<bean id="nreply_dao" class="mybatis.dao.NreplyDAO"/>
+	<bean id="br_dao" class="mybatis.dao.BreplyDAO"/>
 </beans>
 
 

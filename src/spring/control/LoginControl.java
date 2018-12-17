@@ -3,6 +3,7 @@ package spring.control;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.storeconfig.StoreRegistry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.AlternativeJdkIdGenerator;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import mybatis.dao.LoginDAO;
+import mybatis.vo.MemberVO;
 
 @Controller
 public class LoginControl {
@@ -27,9 +29,11 @@ public class LoginControl {
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
 	public ModelAndView login(String email, String password) {
 		ModelAndView mv = new ModelAndView();
-	
-		if(l_dao.login(email, password) != null) {
+		MemberVO vo = null;
+		vo = l_dao.login(email, password);
+		if(vo != null && vo.getM_odate() == null) {
 			session.setAttribute("m_id", email);
+			System.out.println((String)session.getAttribute("m_id"));
 			mv.setViewName("main");
 		}else {
 			
@@ -38,5 +42,12 @@ public class LoginControl {
 		return mv;
 	}
 	
+	@RequestMapping("logout.inc")
+	public ModelAndView logout(HttpSession session) {
+		session.removeAttribute("m_id");
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("main");
+		return mv;
+	}
 	
 }

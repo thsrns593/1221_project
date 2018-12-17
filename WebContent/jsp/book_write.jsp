@@ -1,5 +1,8 @@
+<%@page import="mybatis.vo.BookVO"%>
+<%@page import="spring.util.BoardUtil"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -114,6 +117,8 @@
 	<jsp:include page="navigation.jsp"></jsp:include>
 		<div class="row" id="content">  
                 <div class="col-md-12" >
+                  	<form action="${ac }" method="post">
+                  	  <input type="hidden" name ="bb_num" value="${vo.bb_num}"/>
                       <div class="panel-heading">
                            <div class="row">
 				                <div class="bts titlebox">
@@ -130,22 +135,20 @@
                         </div>
                         <div class="">
 	                        <div class="formstyle">
-	                        	<form action="">
 	                        		<div>
-	                        			<select>
-	                        				<option value="자랑">&nbsp;호이&nbsp;</option>
+	                        		
+	                        			<select id="bb_category" name="bb_category">
+	                        				<option value="평가">&nbsp;평가&nbsp;</option>
+	                        				<option value="나눔">&nbsp;나눔&nbsp;</option>
 	                        				<option value="교환">&nbsp;교환&nbsp;</option>
 	                        				<option value="대여">&nbsp;대여&nbsp;</option>
-	                        				<option value="나눔">&nbsp;나눔&nbsp;</option>
 	                        			</select>
-	                        			<input type="text" size="120px" style="margin-bottom: 10px;"/>
+	                        			<input name="bb_title" type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }"/>
 	                        		</div>
-	                        		<div id="imagediv"></div>
 									<div id="textdiv">
-										&nbsp;
-										<div><label>도서명:</label>&nbsp;<input type="text" /></div>
-										<div><label>저자명:</label>&nbsp;<input type="text"/></div>
-										<div><label>출판사:</label>&nbsp;<input type="text"/></div>
+										<div><label>도서명:</label>&nbsp;<input name="bb_bname" type="text" value="${vo.bb_bname }"/></div>
+										<div><label>저자명:</label>&nbsp;<input name="bb_author" type="text" value="${vo.bb_author }"></div>
+										<div><label>출판사:</label>&nbsp;<input name="bb_press" type="text" value="${vo.bb_press }"></div>
 									</div>
   									<table>
   										<tfoot>
@@ -155,29 +158,41 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea rows="10px" cols="132px" ></textarea>
+  													<textarea name="bb_content" rows="10px" cols="132px" >${vo.bb_content }</textarea>
   												</td>
   											</tr>
   										</tfoot>
   									</table>		
-								</form>	                        				
 							</div>					
 						</div> 
 						<div class="" >
 	                        <p>
 		                        <button type="button" class="btn btn-outline btn-danger bts"
-		                        onclick="javascript:location.href='board_share.inc'">취소</button>
+		                        onclick="goBack(this.form)">취소</button>
 			                    <button type="button" class="btn btn-outline btn-success bts"
-			                    onclick="javascript:location.href='board_share.inc'">완료</button>
+			                    onclick="sendData(this.form)">완료</button>
 	                        </p>
                         </div>   
+                        
+					</form>	                        				
 				</div>                
         </div>
         
 
     <jsp:include page="footer.jsp"></jsp:include>
 
-    
+	<script type="text/javascript">
+		var test = "${vo.bb_category}";
+		if(test != "")
+			$("#bb_category").val("${vo.bb_category}").prop("selected", true);
+		
+		function goBack(frm) {
+			location.href="board_share.inc";
+		}
+		function sendData(frm) {
+			frm.submit();
+		}
+	</script>    
     
   </body>
 
