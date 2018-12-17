@@ -74,8 +74,8 @@ public class Paging_popular {
 			if(value !=null) {
 				sb.append(value);
 				sb.append(",");
-				//sb.append(nowPage + blockPage);
-				sb.append(nowPage + 1);
+				//sb.append(nowPage - blockPage);
+				sb.append(nowPage - 1);
 				sb.append(",");
 				sb.append(value2);
 				sb.append(")'aria-label='Previous'>");
@@ -106,7 +106,7 @@ public class Paging_popular {
 			// a태그를 지정하지 않고 숫자만 출력한다.
 			if(i == nowPage) {
 				sb.append("<li class='page-item'>");
-				sb.append("<li class='page-link'>");
+				sb.append("<li class='page-link disable'>");
 				sb.append(i);
 				sb.append("</li>");
 				sb.append("</li>");
