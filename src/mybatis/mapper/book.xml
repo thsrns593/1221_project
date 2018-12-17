@@ -106,7 +106,7 @@
   <!-- 글쓰기 bb_num ,bb_category bb_title bb_bname bb_author bb_press bb_content-->
   <insert id="writeBook" parameterType="mybatis.vo.BookVO">
   	insert into book_board values(book_board_seq.nextval, #{bb_title}, #{m_id},#{bb_category},0,#{bb_content},#{bb_bname},
-  		#{bb_author},#{bb_press},sysdate,sysdate,#{bb_ip},0)
+  		#{bb_author},#{bb_press},sysdate,sysdate,#{bb_ip},0,0)
   </insert>
   
   <!-- 글수정하기 -->
