@@ -21,7 +21,7 @@ public class SearchBookControl {
 
 	@RequestMapping(value = "searchbook.inc", method = RequestMethod.POST)
 	public String searchbook1(String bookname) throws Exception {
-
+		//RestTemplate
 		RestTemplate template = new RestTemplate();
 		
 		String apiURL = "https://dapi.kakao.com/v3/search/book?query="+URLEncoder.encode(bookname,"utf-8");
