@@ -102,5 +102,12 @@
   	insert into book_board values(book_board_seq.nextval, #{bb_title}, #{m_id},#{bb_category},0,#{bb_content},#{bb_bname},
   		#{bb_author},#{bb_press},sysdate,sysdate,#{bb_ip},0)
   </insert>
+  
+  <!-- 글수정하기 -->
+  <update id="editBbs" parameterType="mybatis.vo.BookVO">
+  	update book_board set bb_title = #{bb_title}, bb_category = #{bb_category}, bb_content = #{bb_content},
+  		bb_bname = #{bb_bname}, bb_author = #{bb_author}, bb_press = #{bb_press}, bb_edate = sysdate
+  	where bb_num = #{bb_num}
+  </update>
 </mapper>
 

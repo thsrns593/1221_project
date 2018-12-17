@@ -85,15 +85,10 @@
 		}
 
 		#textdiv {
-			float: left;
-			margin: 0;
-			padding: auto;
-			width: 450px;
-			height: 200px;
+			padding : 10px;
+			width: 100%;
 			border: 1px solid gray;
 			border-radius:5px;
-			margin: auto;
-			padding: 0;
 		}
 		
 		#textdiv div {
@@ -101,7 +96,7 @@
 		}
 		
 		.bookinfo{
-			width: 350px;
+			width: 230px;
 			border-radius: 5px;
 		}
 		.writerinfo{
@@ -123,9 +118,27 @@
 		.hidden {
 			display: none;
 		}
-		tbody#reply_list tr{
-			height: 60px;
+		tbody#reply_list td {
+			padding: 5px;
 		}
+		tbody#reply_list div {
+			padding: 5px;
+		}
+		tbody#reply_list .replyBox {
+			display:inline-block;
+			border : 1px solid #ababab;
+			border-radius: 5px;
+		}
+		tbody#reply_list .rereplyBox {
+			display:inline-block;
+			margin-left: 80px;
+			border :1px solid #ababab;
+			border-radius: 5px;
+		}
+		div.infoRow {
+			display: inline-block;
+		}
+		
 		
     </style>
 
@@ -169,12 +182,11 @@
                		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" name="m_id" /></span>
                		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" /></span>
                		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" /></span>
-               		<div id="imagediv"> 사진 </div>
+               		
 					<div id="textdiv">
-						&nbsp;
-						<div><label>도서명:</label><input class="bookinfo" type="text" value="${vo.bb_bname }" readonly="readonly"/></div>
-						<div><label>저자명:</label><input class="bookinfo" type="text" value="${vo.bb_author }" readonly="readonly"/></div>
-						<div><label>출판사:</label><input class="bookinfo" type="text" value="${vo.bb_press }" readonly="readonly"/></div>
+						<div class="infoRow"><div>도서명</div><div><input class="bookinfo" type="text" value="${vo.bb_bname }" readonly="readonly"/></div></div>
+						<div class="infoRow"><div>저자명</div><div><input class="bookinfo" type="text" value="${vo.bb_author }" readonly="readonly"/></div></div>
+						<div class="infoRow"><div>출판사</div><div><input class="bookinfo" type="text" value="${vo.bb_press }" readonly="readonly"/></div></div>
 					</div>
 						<table>
 							<tfoot>
@@ -214,10 +226,7 @@
 											</form>
 										</div>
 										<table>
-											<colgroup>
-												<col width="40px">
-												<col width="*">
-											</colgroup>
+											
 		<!--
 			<tr id="i1">
 			<td colspan="2">
@@ -243,28 +252,35 @@
 													<c:if test="${ br.breply_status == 0}">
 														<c:if test="${br.breply_to ne null}">
 															<tr>
-																<td>ㄴ</td>
 																<td>
-																	<div><span class="reply_to">${br.breply_to }</span><span class="reply_from">${br.m_id }</span></div>
-																	<div><span class="reply_content">${br.breply_content }</span></div>
+																	<div class="rereplyBox">
+																		<div><span class="reply_to">@${br.breply_to }</span><span class="reply_from">${br.m_id }</span>
+																		<c:if test="${m_id == br.m_id }">
+																			<input type='button' onclick='delReply(this.form)' value='삭제'>
+																		</c:if>
+																		</div>
+																		<div><span class="reply_content">${br.breply_content }</span></div>
+																	</div>
 																</td>
 															</tr>
 														</c:if>
 														<c:if test="${br.breply_to eq null}">
 															<tr>
-																<td colspan="2">
-																	<form>
-																		<input type ="hidden" name="breply_num" value="${br.breply_num }">
-																		<input type="hidden" name="m_id" value="${br.m_id }">
-																		<input type="hidden" name="breply_group" value="${br.breply_group }">
-																		<div><span class="reply_from">${br.m_id }</span>
-																		<input type="button" onclick="rereply(this)" value="답글">
-																		<c:if test="${br.m_id == m_id }">
-																			<input type="button" onclick="delReply(this.form)" value="삭제">
-																		</c:if>
-																		</div>
-																		<div><span class="reply_content">${br.breply_content }</span></div>
-																	</form>
+																<td>
+																	<div class="replyBox">
+																		<form>
+																			<input type ="hidden" name="breply_num" value="${br.breply_num }">
+																			<input type="hidden" name="m_id" value="${br.m_id }">
+																			<input type="hidden" name="breply_group" value="${br.breply_group }">
+																			<div><span class="reply_from">${br.m_id }</span>
+																			<input type="button" onclick="rereply(this)" value="답글">
+																			<c:if test="${br.m_id == m_id }">
+																				<input type="button" onclick="delReply(this.form)" value="삭제">
+																			</c:if>
+																			</div>
+																			<div><span class="reply_content">${br.breply_content }</span></div>
+																		</form>
+																	</div>
 																</td>
 															</tr>
 														</c:if>
@@ -272,13 +288,13 @@
 													<c:if test="${ br.breply_status !=0}">
 														<c:if test="${ br.breply_to != null}">
 															<tr>
-																<td>ㄴ</td><td>삭제된 댓글입니다</td>
+																<td><div class="rereplyBox">삭제된 댓글입니다</div></td>
 															</tr>
 														</c:if>	
 														<c:if test="${ br.breply_to == null}">
 															<tr>
-																<td colspan ="2">
-																	삭제된 댓글입니다
+																<td>
+																	<div class="replyBox">삭제된 댓글입니다</div>
 																</td>
 															</tr>
 														</c:if>
@@ -393,23 +409,50 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 		function toTable(ar) {
 			var sb="";
 			for(var i =0; i<ar.length; i++) {
-				console.log("누구에게 : "+ar[i].breply_to + "//"+!ar[i].breply_to);
-				if(!ar[i].breply_to) {
-					sb+= "<tr><td colspan='2'><form><input type ='hidden' name='breply_num' value='"+ar[i].breply_num +"'>";
-					sb+= "<input type='hidden' name='m_id' value='"+ar[i].m_id+"'>";
-					sb+= "<input type='hidden' name='breply_group' value='"+ar[i].breply_group+"'>";
-					sb+= "<div><span class='reply_from'>"+ar[i].m_id+"</span><input type='button' onclick='rereply(this)' value='답글'>";
-					if(ar[i].m_id == login_id) {
-						sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
+				if(ar[i].breply_status ==0) {
+					if(!ar[i].breply_to) {
+						sb+= "<tr><td><div class='replyBox'><form><input type ='hidden' name='breply_num' value='"+ar[i].breply_num +"'>";
+						sb+= "<input type='hidden' name='m_id' value='"+ar[i].m_id+"'>";
+						sb+= "<input type='hidden' name='breply_group' value='"+ar[i].breply_group+"'>";
+						sb+= "<div><span class='reply_from'>"+ar[i].m_id+"</span><input type='button' onclick='rereply(this)' value='답글'>";
+						if(ar[i].m_id == login_id) {
+							sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
+						}
+						sb+= "</div>";
+						sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
+						sb+= "</form></div></td></tr>";
+					}else {
+						sb+= "<tr><td><div class='rereplyBox'>";
+						sb+= "<div><span class='reply_to'>@"+ar[i].breply_to+"</span><span class='reply_from'>"+ar[i].m_id+"</span>";
+						if(ar[i].m_id == login_id) {
+							sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
+						}
+						sb+="</div>";
+						sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
+						sb+= "</div></td></tr>";
 					}
-					sb+= "</div>";
-					sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
-					sb+= "</form></td></tr>";
 				}else {
-					sb+= "<tr><td>ㄴ</td><td>";
-					sb+= "<div><span class='reply_to'>@"+ar[i].breply_to+"</span><span class='reply_from'>"+ar[i].m_id+"</span></div>";
-					sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
-					sb+= "</td></tr>";
+					/*
+					<c:if test="${ br.breply_status !=0}">
+						<c:if test="${ br.breply_to != null}">
+							<tr>
+								<td>ㄴ</td><td>삭제된 댓글입니다</td>
+							</tr>
+						</c:if>	
+						<c:if test="${ br.breply_to == null}">
+							<tr>
+								<td colspan ="2">
+									삭제된 댓글입니다
+								</td>
+							</tr>
+						</c:if>
+					</c:if>
+					*/
+					if(ar[i].breply_to != null) {
+						sb+= "<tr><td><div class='rereplyBox'>삭제된 댓글입니다</div></td></tr>";
+					}else {
+						sb+= "<tr><td><div class='replyBox'>삭제된 댓글입니다</div></td></tr>";
+					}
 				}
 			}
 			return sb;
@@ -472,10 +515,9 @@ breply_num,	bb_num, m_id, breply_to,breply_group, breply_content,
 			breply_group="";
 		}
 		function delReply(frm) {
-			alert(frm.breply_num.value);
 			$.ajax({
 				url:"breply_delete.inc",
-				data : "breply_num="+bb_num+"&replyPage="+replyPage+"&breply_num="+frm.breply_num.value,
+				data : "bb_num="+bb_num+"&replyPage="+replyPage+"&breply_num="+frm.breply_num.value,
 				dataType : "json",
 				type:"post"
 			}).done(function(data){

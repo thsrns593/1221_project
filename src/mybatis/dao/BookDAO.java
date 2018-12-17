@@ -72,4 +72,12 @@ public class BookDAO {
 		
 		return chk;
 	}
+	
+	//게시물 수정
+	public boolean editBbs(BookVO vo ) {
+		int cnt = ss.update("book.editBbs", vo);
+		if(cnt>0) 
+			return true;
+		return false;
+	}
 }

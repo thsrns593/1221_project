@@ -1,5 +1,6 @@
 package spring.control;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class Book_EditControl {
 	BookDAO b_dao;
 	@Autowired
 	private HttpSession session;
+	@Autowired
+	private HttpServletRequest request;
 	//GET방식으로 수정하기로 온경우
 	@RequestMapping(value="editBook.inc", method = RequestMethod.GET)
 	public ModelAndView goForm(BoardUtil bu) {
@@ -35,8 +38,12 @@ public class Book_EditControl {
 		return mv;
 	}
 	@RequestMapping(value="editBook.inc", method=RequestMethod.POST)
-	public ModelAndView editBook() {
+	public ModelAndView editBook(BookVO vo) {
 		ModelAndView mv = new ModelAndView();
+		vo.setBb_ip(request.getRemoteAddr());
+		boolean chk = b_dao.editBbs(vo);
+		String bb_num = vo.getBb_num();
+		mv.setViewName("redirect:book_read.inc?num="+bb_num);
 		return mv;
 	}
 }
