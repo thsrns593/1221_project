@@ -27,7 +27,7 @@
       <div class="container">
         <a class="navbar-brand" href="main.inc">
    		  <!-- <img src="http://placehold.it/300x60?text=Logo" width="150" height="30" alt=""> -->
-       	  <h2 id="header_logo">우리 동네 도서관</h2>
+       	  <h2 id="header_logo"><i class="fa  fa-book">우리 동네 도서관</i></h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
           data-target="#navbarResponsive" aria-controls="navbarResponsive" 
@@ -37,13 +37,14 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="main.inc">Home
-                <span class="sr-only">(current)</span>
+              <a class="nav-link" href="main.inc" style="color: white !important; font-size: x-large !important;
+               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-home"></i>
               </a>
             </li>
             <c:if test="${sessionScope.m_id == null }">
             <li class="nav-item">
-              <a class="nav-link" href="join.inc">회원가입</a> <!-- 로그인 시, 마이페이지 -->
+              <a class="nav-link" href="join.inc" style="color: white !important; font-size: x-large !important;
+               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user"></i></a> <!-- 로그인 시, 마이페이지 -->
             </li>
             </c:if>
             <c:if test="${sessionScope.m_id != null }">
@@ -51,16 +52,18 @@
             </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
-            		<a class="nav-link" href="login.inc">로그인 </a>
+            		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important;
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i></a>
             	</li>
             	</c:if>
-            
 			<c:if test="${sessionScope.m_id != null }">
             	<li class="nav_logout">
-            		<a href="modify.inc" style="color: #ebeced !important;">${sessionScope.m_id}님이 로그인중입니다.</a>
+            		<a href="modify.inc" style="color: white !important; font-size: x-large !important; 
+            		padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user-md"></i></a>
             	</li>
             	<li class="nav-item">
-            		<a class="nav-link" href="logout.inc" >로그아웃</a>
+            		<a class="nav-link" href="logout.inc" style="color: white !important; font-size: x-large !important;
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa  fa-sign-out"></i></a>
             	</li>
             </c:if>
             <!-- <li class="nav-item">
