@@ -71,6 +71,9 @@
      		float: right;
      		 width: 80px;
      	}
+     	.btss{
+     		margin-bottom: 30px;
+     	}
      	.titlebox{
      		margin: auto;
      		padding-left: 100px;
@@ -182,9 +185,9 @@
 						</div> 
 						<div class="btn_two" >
 	                        <p>
-		                        <input type="button" class="btn btn-outline btn-danger bts"
+		                        <input type="button" class="btn btn-outline btn-danger bts btss"
 		                        onclick="javascript:location.href='board_free.inc'" value="취소"></input>
-			                    <input type="button" class="btn btn-outline btn-success bts"
+			                    <input type="button" class="btn btn-outline btn-success bts btss"
 			                    onclick="textwrite()" value="완료"></input>
 	                        </p>
                         </div>   
@@ -204,65 +207,30 @@
     	$(function() {
     		$("#nb_content").summernote({
                 //placeholder: 'Hello stand alone ui',
+			    toolbar: [
+			        ['style', ['style']],
+			        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			        ['fontface', ['fontname']],
+			        ['textsize', ['fontsize']],
+			        ['color', ['color']],
+			        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+			        ['height', ['height']],
+			        ['table', ['table']],
+			        ['insert', ['link']]
+			    ],
                   tabsize: 2,
                   lang: "ko-KR",
                   maxHeight: 500,
                   minHeight: 200,
-                  height: 500,
+                  height: 300,
                   maxWidth:950,
                   minWidth:950,
                   width:950,
                   focus: true,/* 커서를 미리 가져다 놓는다. */
-                  callbacks:{
-                     onImageUpload:function(files, editor){
-                        //이미지가 에디터에 추가될 때마다 수행하는 곳!!
-                        // 이미지를 첨부하면 배열로 인식된다.
-                        //이것을 서버로 비동기식 통신을 수행하는
-                        //함수를 호출하여 보낸다.
-                        for(var i=0; i<files.length; i++)
-                           sendFile(files[i], editor);
-                     },
-                  }
-             });
+                 });
              
-             $("#nb_content").summernote("lineHeight", 0.7);
           });
-    	 function sendFile(file, editor){
-//           alert(files.length+":^^");
-           
-           // 파라미터를 전달하기 위해 폼객체를 만든다.
-           var frm = new FormData();
-           // <form></form>
-           
-           //보내고자 하는 자원들을 파라미터 값으로 등록
-           frm.append("upload",file);
-           
-           //비동기식 통신
-           $.ajax({
-              url: "jsp/saveImage.jsp",
-              data: frm,
-              cache: false,
-              contentType: false,
-              processData: false,
-              type: "post",
-              dataType: "json" // 나중 받을 데이터의 형식
-           }).done(function(data){
-              //도착함수
-              //alert(data.url);
-              
-              // 에디터에 img태그로 저장하기 위해
-              //다음과 같이 img태그를 정의한다.
-              //var image = $("<img>").attr("src", data.url);
-              //에디터에 정의한 img태그를 넣어준다.
-              //$("#content").summernote("insertNode", image[0]);
-              
-              $("#nb_content").summernote(
-                 "editor.insertImage", data.url);
-           }).fail(function(e){
-              //오류발생 시
-              console.log(e);
-           });
-        }
+    	 
 
     </script>
   </body>

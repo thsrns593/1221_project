@@ -26,7 +26,7 @@ public class ModifyControl {
 	
 		boolean chk = m_dao.upInfo(vo);
 		
-		mv.setViewName("main");
+		mv.setViewName("redirect:/main.inc");
 		
 		return mv;
 	}
