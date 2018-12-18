@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import mybatis.dao.LibDAO;
 import mybatis.dao.NormalDAO;
 import mybatis.vo.NormalVO;
 import spring.util.Paging;
@@ -13,9 +14,9 @@ import spring.util.Paging;
 public class SearchDetailControl {
 
 	@Autowired
-	private NormalDAO n_dao;
+	private LibDAO lib_dao;
 	
-	public static final int BLOCK_LIST = 7;
+	public static final int BLOCK_LIST = 5;
 	public static final int BLOCK_PAGE = 5;
 	
 	int nowPage;
