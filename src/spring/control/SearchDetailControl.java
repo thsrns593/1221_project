@@ -54,7 +54,7 @@ public class SearchDetailControl {
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
 		mv.addObject("pageCode", pageCode);
-		mv.setViewName("table");
+		mv.setViewName("searchDetail");
 		return mv;
 	}
 }
