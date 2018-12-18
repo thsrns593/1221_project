@@ -30,11 +30,10 @@ public class LibraryControl {
 	
 	@RequestMapping("addlib.inc")
 	@ResponseBody
-	public void addlib(String page) {
+	public void addlib() {
 		
 		RestTemplate template = new RestTemplate();
-		System.out.println(page);
-		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo="+page+"&pageSize=120&format=json";
+		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo=1&pageSize=830&format=json";
 
 		try {
 			System.out.println("보내기");
