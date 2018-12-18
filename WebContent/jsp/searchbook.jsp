@@ -212,7 +212,7 @@ table td, table tr{
 								for (var i = 0; i < json1.documents.length; i++) {
 
 									str += "<tr><td class='imgrow'><img src='"+json1.documents[i].thumbnail+"'></td>";
-									str += "<td><a href='searchDetail.inc?"
+									str += "<td><a href='searchDetail.inc?isbn="
 											+ json1.documents[i].isbn + "'>"
 											+ json1.documents[i].title
 											+ "</a></td>";
