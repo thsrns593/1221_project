@@ -49,7 +49,7 @@
      	}
      	.textarea{
      		height:70%;
-     		width:100%;
+     		width:900px;
      		border:1;
      		overflow:visible;
      		text-overflow:ellipsis;
@@ -121,6 +121,9 @@
 		}
 		.btn_two{
 			padding-right: 300px;
+		}
+		#nb_title{
+			width: 800px;
 		}
     </style>
 
@@ -206,9 +209,9 @@
                   maxHeight: 500,
                   minHeight: 200,
                   height: 500,
-                  maxWidth:900,
-                  minWidth:900,
-                  width:900,
+                  maxWidth:950,
+                  minWidth:950,
+                  width:950,
                   focus: true,/* 커서를 미리 가져다 놓는다. */
                   callbacks:{
                      onImageUpload:function(files, editor){
