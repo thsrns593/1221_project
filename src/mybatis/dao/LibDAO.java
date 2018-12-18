@@ -12,11 +12,11 @@ public class LibDAO {
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
-	public LibraryVO[] selectLib(LibraryVO vo) {
+	public LibraryVO[] selectLib(String address) {
 		
 		LibraryVO[] ar = null;
 		
-		List<LibraryVO> list = sqlSession.selectList("lib.selectlib",vo);
+		List<LibraryVO> list = sqlSession.selectList("lib.selectlib",address);
 		
 		
 		if(list != null) {

@@ -95,11 +95,8 @@ public class LibraryControl {
 				
 				if(jobj.get("lib").getAsJsonObject().get("BookCount") != null)					
 					bookcount = jobj.get("lib").getAsJsonObject().get("BookCount").toString().replaceAll("\"", "");;
-
-				
+			
 				LibraryVO lvo = new LibraryVO(libCode, libName, address, tel, fax, latitude, longitude, homepage, closed, operationTime, bookcount);
-				
-				
 				
 				lib_dao.insertLib(lvo);
 			}
