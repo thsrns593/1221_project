@@ -27,7 +27,7 @@ import spring.util.PageUtil;
 @Controller
 public class SearchBookControl {
 	
-	public static final int BLOCK_LIST = 10;
+	public static final int BLOCK_LIST = 20;
 	public static final int BLOCK_PAGE = 5;
 
 	String pageCode;
@@ -59,7 +59,7 @@ public class SearchBookControl {
 
 			if(nowPage == null || nowPage.equals("0"))
 				nowPage = "0";
-			
+
 			int rowTotal = map.get("pageable_count");
 			
 			PageUtil pvo = new PageUtil(Integer.parseInt(nowPage), rowTotal, BLOCK_LIST, BLOCK_PAGE);
