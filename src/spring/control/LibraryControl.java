@@ -15,6 +15,7 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -44,8 +45,14 @@ public class LibraryControl {
 			JsonParser parser = new  JsonParser();
 			Object obj = parser.parse(response.getBody());
 			jobj = (JsonObject)obj;
+
+			JsonArray jar =  jobj.getAsJsonObject("response").getAsJsonArray("libs");
+
+
+			for(JsonElement vo : jar) {
+				System.out.println(vo.getAsJsonObject().getAsJsonObject("libCode"));
+			}
 			
-			 
 
 			
 		} catch (Exception e) {
