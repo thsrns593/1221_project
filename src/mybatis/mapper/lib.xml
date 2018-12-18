@@ -9,7 +9,7 @@
 	</select>
 	
 	<insert id="insertlib" parameterType="mybatis.vo.LibraryVO">
-		INSERT INTO librarys VALUES(#{libCode}, #{libName}, #{address}, #{tel}, #{fax}, #{latitude}, #{longitude}, #{homepage}, #{closed}, #{operationTime}, #{bookcount});
+		INSERT INTO librarys VALUES(#{libCode}, #{libName}, #{address}, #{tel}, #{fax}, #{latitude}, #{longitude}, #{homepage}, #{closed}, #{operationTime}, #{bookcount})
 	</insert>
 	
 </mapper>

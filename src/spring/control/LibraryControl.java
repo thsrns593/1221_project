@@ -30,11 +30,11 @@ public class LibraryControl {
 	
 	@RequestMapping("addlib.inc")
 	@ResponseBody
-	public void addlib() {
+	public void addlib(String page) {
 		
 		RestTemplate template = new RestTemplate();
-		
-		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo=1&pageSize=10&format=json";
+		System.out.println(page);
+		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo="+page+"&pageSize=120&format=json";
 
 		try {
 			System.out.println("보내기");
@@ -47,10 +47,62 @@ public class LibraryControl {
 			jobj = (JsonObject)obj;
 
 			JsonArray jar =  jobj.getAsJsonObject("response").getAsJsonArray("libs");
-
+			
+			String libCode = null;
+			String libName = null;
+			String address = null;
+			String tel = null;
+			String fax = null;
+			String latitude = null;
+			String longitude = null;
+			String homepage = null;
+			String closed = null; 
+			String operationTime = null;
+			String bookcount = null;
 
 			for(JsonElement vo : jar) {
-				System.out.println(vo.getAsJsonObject().getAsJsonObject("libCode"));
+				obj = parser.parse(vo.toString());
+				jobj = (JsonObject)obj;
+				
+				if(jobj.get("lib").getAsJsonObject().get("libCode") != null)
+					libCode = jobj.get("lib").getAsJsonObject().get("libCode").toString().replaceAll("\"", "");
+				
+				if(jobj.get("lib").getAsJsonObject().get("libName") != null)
+					libName = jobj.get("lib").getAsJsonObject().get("libName").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("address") != null)
+					address = jobj.get("lib").getAsJsonObject().get("address").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("tel") != null)
+					tel = jobj.get("lib").getAsJsonObject().get("tel").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("fax") != null)			
+					fax = jobj.get("lib").getAsJsonObject().get("fax").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("latitude") != null)					
+					latitude = jobj.get("lib").getAsJsonObject().get("latitude").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("longitude") != null)					
+					longitude = jobj.get("lib").getAsJsonObject().get("longitude").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("homepage") != null)					
+					homepage = jobj.get("lib").getAsJsonObject().get("homepage").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("closed") != null)					
+					closed = jobj.get("lib").getAsJsonObject().get("closed").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("operatingTime") != null)					
+					operationTime = jobj.get("lib").getAsJsonObject().get("operatingTime").toString().replaceAll("\"", "");;
+				
+				if(jobj.get("lib").getAsJsonObject().get("BookCount") != null)					
+					bookcount = jobj.get("lib").getAsJsonObject().get("BookCount").toString().replaceAll("\"", "");;
+
+				
+				LibraryVO lvo = new LibraryVO(libCode, libName, address, tel, fax, latitude, longitude, homepage, closed, operationTime, bookcount);
+				
+				
+				
+				lib_dao.insertLib(lvo);
 			}
 			
 
