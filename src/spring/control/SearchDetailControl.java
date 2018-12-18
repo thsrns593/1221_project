@@ -88,6 +88,7 @@ public class SearchDetailControl {
 			mv.addObject("thumbnail", thumbnail);
 			mv.addObject("title", title);
 			mv.addObject("translators", translators);
+			mv.addObject("isbn13", isbn13);
 			
 		} catch (Exception e) {
 
