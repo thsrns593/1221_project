@@ -101,6 +101,8 @@ public class SearchDetailControl {
 	@RequestMapping("searchLib.inc")
 	@ResponseBody
 	public Map<String, Object> searchLib(String isbn13, String address) {
+		if(address == null)
+			address = "서울특별시 관악구";
 		Map<String, Object> map = new HashMap<>();
 		LibraryVO[] ar = lib_dao.selectLib(address);
 		JsonParser parser = new JsonParser();
