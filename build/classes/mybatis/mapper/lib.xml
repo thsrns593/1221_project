@@ -5,7 +5,7 @@
 <mapper namespace="lib">
 	
 	<select id="selectlib" resultType="mybatis.vo.LibraryVO" parameterType="mybatis.vo.LibraryVO">
-		SELECT * FROM librarys WHERE ADDRESS LIKE #{address}||'%'
+		SELECT * FROM librarys WHERE ADDRESS LIKE '%'||#{address}||'%'
 	</select>
 	
 	<insert id="insertlib" parameterType="mybatis.vo.LibraryVO">
