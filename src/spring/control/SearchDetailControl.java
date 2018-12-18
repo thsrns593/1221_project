@@ -10,7 +10,7 @@ import mybatis.vo.NormalVO;
 import spring.util.Paging;
 
 @Controller
-public class TableControl {
+public class SearchDetailControl {
 
 	@Autowired
 	private NormalDAO n_dao;
@@ -22,7 +22,7 @@ public class TableControl {
 	int rowTotal;
 	String pageCode;
 
-	@RequestMapping("table.inc")
+	@RequestMapping("searchDetail.inc")
 	public ModelAndView table(NormalVO vo) {
 		
 		String c_page = String.valueOf(vo.getNowPage());
@@ -54,7 +54,7 @@ public class TableControl {
 		mv.addObject("rowTotal", rowTotal);
 		mv.addObject("blockList", BLOCK_LIST);
 		mv.addObject("pageCode", pageCode);
-		mv.setViewName("table");
+		mv.setViewName("searchDetail");
 		return mv;
 	}
 }

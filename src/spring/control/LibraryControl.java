@@ -1,0 +1,63 @@
+package spring.control;
+
+import java.net.URI;
+import java.util.ArrayList;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import mybatis.dao.LibDAO;
+import mybatis.vo.LibraryVO;
+
+@Controller
+public class LibraryControl {
+
+	@Autowired
+	private LibDAO lib_dao;
+	
+	@RequestMapping("addlib.inc")
+	@ResponseBody
+	public void addlib() {
+		
+		RestTemplate template = new RestTemplate();
+		
+		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo=1&pageSize=10&format=json";
+
+		try {
+			System.out.println("보내기");
+			RequestEntity<String> rq = new RequestEntity<String>(HttpMethod.GET, new URI(apiURL));
+			ResponseEntity<String> response= template.getForEntity(new URI(apiURL), String.class);
+			
+			JsonObject jobj = null;
+			JsonParser parser = new  JsonParser();
+			Object obj = parser.parse(response.getBody());
+			jobj = (JsonObject)obj;
+
+			JsonArray jar =  jobj.getAsJsonObject("response").getAsJsonArray("libs");
+
+
+			for(JsonElement vo : jar) {
+				System.out.println(vo.getAsJsonObject().getAsJsonObject("libCode"));
+			}
+			
+
+			
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+	}
+}

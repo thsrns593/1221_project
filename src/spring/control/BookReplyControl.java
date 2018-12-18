@@ -22,7 +22,7 @@ public class BookReplyControl {
 	BreplyDAO br_dao;
 	@Autowired
 	HttpServletRequest request;
-	
+	//ss
 	//댓글쓰기
 	@RequestMapping(value="breply_write.inc", method=RequestMethod.POST)
 	@ResponseBody
