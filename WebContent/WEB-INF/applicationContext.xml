@@ -35,6 +35,7 @@ xmlns:context="http://www.springframework.org/schema/context"
 	<bean id="l_dao" class="mybatis.dao.LoginDAO"/>
 	<bean id="nreply_dao" class="mybatis.dao.NreplyDAO"/>
 	<bean id="br_dao" class="mybatis.dao.BreplyDAO"/>
+	<bean id="lib_dao" class="mybatis.dao.LibDAO"/>
 </beans>
 
 

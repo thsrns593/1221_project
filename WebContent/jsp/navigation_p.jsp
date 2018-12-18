@@ -29,7 +29,7 @@
       <div class="container">
         <a class="navbar-brand" href="main.inc">
    		  <!-- <img src="http://placehold.it/300x60?text=Logo" width="150" height="30" alt=""> -->
-       	  <h2 id="header_logo">우리 동네 도서관</h2>
+       	  <h2 id="header_logo"><i class="fa  fa-book">우리 동네 도서관</i></h2>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" 
           data-target="#navbarResponsive" aria-controls="navbarResponsive" 
