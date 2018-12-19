@@ -2,7 +2,6 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
 <meta charset="utf-8">
@@ -11,6 +10,8 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <title>로그인</title>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.2.js" charset="utf-8"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <link href="${pageContext.request.contextPath}/lib/css/login.css"
 	rel="stylesheet">
 </head>
@@ -27,14 +28,37 @@
 				<div class="panel-body b_color">
 					<form method="post" id="frm" action="login.inc">
 						<fieldset>
-							<div class="form-group">
+							<div class="input-group">
+			              	<span class="input-group-btn">
+			              	  <label id="id_lb" for="email" class="form-control">
+			              	  	<i class="fa fa-user"></i>
+			              	  </label>
+			                </span>
+			                <span class="input-group-btn">
+			                  <input id="email" name="email" autofocus type="text" class="form-control" placeholder="User id">
+			                </span>      
+			              </div>
+			              
+			              <div class="input-group">
+			              	<span class="input-group-btn">
+			              	  <label id="pw_lb" for="password" class="form-control">
+			              	  	<i class="fa fa-lock"></i>
+			              	  </label>              	  
+			                </span>
+			                <span class="input-group-btn">
+			                  <input id="password" name="password" type="password" class="form-control" 
+			                  placeholder="User password">
+			                </span>              
+			              </div>
+			          
+							<!-- <div class="form-group">
 								<input class="form-control" id="email" placeholder="ID"
 									name="email" type="email" autofocus>
 							</div>
 							<div class="form-group1">
 								<input class="form-control" id="password" placeholder="Password"
 									name="password" type="password" value="">
-							</div>
+							</div> -->
 							<div class="checkbox">
 								<table>
 									<thead>
@@ -58,9 +82,10 @@
 									</thead>
 								</table>
 							</div>
-							<a href="javascript: login()" class="lo_btn">로그인</a> <a
-								href="javascript: join()" class="jo_btn">회원가입</a> <a
-								href="" class="ka_btn">네이버 로그인</a>
+							<a href="javascript: login()" class="lo_btn">로그인</a> 
+							<a href="javascript: join()" class="jo_btn">회원가입</a>
+							<div id="naver_id_login" style="text-align:center"><a href="${url}">
+<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
 						</fieldset>
 					</form>
 				</div>
@@ -69,8 +94,9 @@
 		<input type="hidden" id="check" value="${param.check}" />
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
-	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+	
 	<script type="text/javascript">
+	
 		$(function() {
 			
 			var m_id = localStorage.getItem("m_id");

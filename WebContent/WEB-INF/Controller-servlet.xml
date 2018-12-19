@@ -50,5 +50,9 @@
 		<property name="suffix" value=".jsp" />
 		<property name="prefix" value="/jsp/" />
 	</bean>
+	
+	<context:component-scan base-package="com.test.sts" />
+	<bean id="naverLoginBO" class="com.test.sts.NaverLoginBO"/>
+	<bean id="jsonStringParse" class="com.test.sts.JsonStringParse"/>
 
 </beans>
