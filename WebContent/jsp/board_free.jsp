@@ -143,7 +143,14 @@
 									<tr>
 										<td>${item.nb_num}</td>
 										<td>${item.nb_category }</td>
-										<td>${item.m_id }</td>
+										<td>
+											<c:if test="${fn:contains(item.m_id,'@naver')}">
+												<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(item.m_id,0,fn:indexOf(item.m_id,'@')) }
+											</c:if> 
+											<c:if test="${!fn:contains(item.m_id,'@naver') }">
+												${item.m_id }
+											</c:if> 
+										</td>
 										<td><a href="text_read.inc?nowPage=${nowPage }&nb_num=${item.nb_num}">${item.nb_title }
 										<c:if test="${item.nb_reply_count ne '0'}">
 											[${item.nb_reply_count}]

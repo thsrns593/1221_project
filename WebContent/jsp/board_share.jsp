@@ -166,7 +166,14 @@
 											</td>
 											<td>${item.bb_bname }</td>
 											<td>${item.bb_author }</td>
-											<td>${item.m_id }</td>
+											<td>
+												<c:if test="${fn:contains(item.m_id,'@naver')}">
+													<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(item.m_id,0,fn:indexOf(item.m_id,'@')) }
+												</c:if> 
+												<c:if test="${!fn:contains(item.m_id,'@naver') }">
+													${item.m_id }
+												</c:if>
+											</td>
 											<td><c:if test="${fn:startsWith(item.bb_cdate,today) }">${fn:substring(item.bb_cdate,10,16) }</c:if> 
 												<c:if test="${!fn:startsWith(item.bb_cdate,today) }">${fn:substring(item.bb_cdate,5,10) }</c:if></td>
 											<td>${item.bb_hit }</td>
