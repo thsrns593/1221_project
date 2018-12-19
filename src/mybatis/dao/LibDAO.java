@@ -30,7 +30,7 @@ public class LibDAO {
 	}
 	
 	public boolean insertLib(LibraryVO vo){
-		
+
 		boolean chk = false;
 		
 		int cnt = sqlSession.insert("lib.insertlib",vo);
