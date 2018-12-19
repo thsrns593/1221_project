@@ -25,7 +25,7 @@ import spring.util.Paging_popular;
 @Controller
 public class MainControl {
 	int maxSize = 30;
-	int block_list = 6;
+	int block_list = 8;
 	int block_page =3;
 	
 	@Autowired
