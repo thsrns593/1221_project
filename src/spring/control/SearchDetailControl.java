@@ -113,6 +113,7 @@ public class SearchDetailControl {
 		ResponseEntity<String> response = null;
 		String url = null;
 		List<LibraryVO> list = new ArrayList<>();
+		System.out.println("isbn13 :" + isbn13 + " addr : "+address);
 		for(LibraryVO vo : ar) {
 			libCode =vo.getLibCode();
 			if(libCode !=null && isbn13 !=null) {
@@ -128,9 +129,10 @@ public class SearchDetailControl {
 					JsonObject jsonObj = (JsonObject)obj;
 					jsonObj = jsonObj.getAsJsonObject("response");
 					jsonObj.get("result").toString();
-					String hasBook = jsonObj.get("result").toString();
+					String hasBook = jsonObj.get("result").getAsString();
 					System.out.println("Lib : "+ libCode + ", hasBook : "+hasBook);
 					if(hasBook.equals("Y")) {//책을 갖고 있는 경우
+						System.out.println("추가");
 						list.add(vo);
 					}
 				} catch (Exception e) {
@@ -141,6 +143,7 @@ public class SearchDetailControl {
 		}
 		LibraryVO[] hasLibs = new LibraryVO[list.size()];
 		list.toArray(hasLibs);
+		System.out.println(list.size());
 		map.put("ar", hasLibs);
 		
 		return map;
