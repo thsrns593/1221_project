@@ -117,7 +117,7 @@
 	        <!-- /#sidebar-wrapper -->
          	<!-- Page Content -->
 	        <div id="page-content-wrapper">
-	            <div class="container-fluid">
+	            <div class="container-fluid" id="spy-menu" style="position: absolute; position:fixed; z-index: 10;">
 	                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">menu</a>
 	            </div>
 	        </div>

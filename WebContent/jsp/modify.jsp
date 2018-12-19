@@ -364,6 +364,7 @@
 		function reg(){
 			// 반드시 입력이 되야하는 값을 비교
 			// id, pw, r_pw, email
+			var m_id = $("#m_id").val();
 			var pwd = $("#pw").val();
 			var r_pwd = $("#m_pwd").val();
 			var email = $("#m_email").val();
@@ -425,7 +426,9 @@
 				alert("이메일이 바뀌었습니다 재인증 해주세요.");
 				return;
 			}
-			
+			if(m_id == null){
+				alert
+			}
 			alert("정보수정 완료!");
 			$("#upinform").attr("action", "upinfo.inc" );
 			$("#upinform").submit();

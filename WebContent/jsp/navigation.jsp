@@ -44,26 +44,23 @@
             <c:if test="${sessionScope.m_id == null }">
             <li class="nav-item">
               <a class="nav-link" href="join.inc" style="color: white !important; font-size: x-large !important;
-               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user"></i></a> <!-- 로그인 시, 마이페이지 -->
+               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user"></i>회원가입</a> <!-- 로그인 시, 마이페이지 -->
             </li>
-            </c:if>
-            <c:if test="${sessionScope.m_id != null }">
-            	<a></a>
             </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
             		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important;
-            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i></a>
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i>로그인</a>
             	</li>
             	</c:if>
 			<c:if test="${sessionScope.m_id != null }">
             	<li class="nav_logout">
             		<a href="modify.inc" style="color: white !important; font-size: x-large !important; 
-            		padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user-md"></i></a>
+            		padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user-md"></i>${m_id }</a>
             	</li>
             	<li class="nav-item">
             		<a class="nav-link" href="logout.inc" style="color: white !important; font-size: x-large !important;
-            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa  fa-sign-out"></i></a>
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa  fa-sign-out"></i>로그아웃</a>
             	</li>
             </c:if>
             <!-- <li class="nav-item">
@@ -114,8 +111,8 @@
 	        <!-- /#sidebar-wrapper -->
          	<!-- Page Content -->
 	        <div id="page-content-wrapper">
-	            <div class="container-fluid">
-	                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">menu</a>
+	            <div class="container-fluid" id="spy-menu" style="position: absolute; position:fixed; z-index: 10;">
+	                <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle" >menu</a>
 	            </div>
 	        </div>
 	        <!-- /#page-content-wrapper -->
@@ -188,5 +185,5 @@
 	    e.preventDefault();
 	    $("#wrapper").toggleClass("toggled");
 	});  
- 
+	
 	</script>
