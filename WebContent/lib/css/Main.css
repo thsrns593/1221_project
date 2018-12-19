@@ -55,3 +55,22 @@
 	margin-bottom: 0 !important;
 }
 
+.pagination{ /*페이징   */
+	margin-top: 50px;
+}
+
+.disable {
+	 padding:7px 12px;
+	 border:1px solid silver !important;
+	 color:silver !important;
+	 pointer-events: none;
+}
+
+.row2{
+	display:-ms-flexbox;
+	display:flex;
+	-ms-flex-wrap:wrap;
+	flex-wrap:wrap;
+	margin-right:-15px;
+	margin-left:-15px;
+}

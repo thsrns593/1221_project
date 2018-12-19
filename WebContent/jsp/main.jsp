@@ -15,7 +15,7 @@
 	<!-- 인기도서 자동넘김 CSS -->
 	<link href="${pageContext.request.contextPath}/lib/css/shop-homepage.css" rel="stylesheet" />
 
-
+	<link href="${pageContext.request.contextPath}/lib/css/Main.css" rel="stylesheet" />
   </head>
 
   <body>
@@ -119,8 +119,8 @@
       <h1 class="my-4">추천도서
       </h1>
 
-      <div class="row">
-        <div class="col-lg-4 col-sm-6 portfolio-item">
+      <div class="row2">
+ <%--        <div class="col-lg-4 col-sm-6 portfolio-item">
           <div class="card h-100">
             <a href="#"><img class="card-img-top" src="${pageContext.request.contextPath}/images/1.jpg" alt=""></a>
             <div class="card-body">
@@ -185,12 +185,12 @@
               <p class="card-text">책 소개 내용</p>
             </div>
           </div>
-        </div>
+        </div> --%>
       </div>
       <!-- /.row -->
 
       <!-- Pagination -->
-      <ul class="pagination justify-content-center">
+<!--       <ul class="pagination justify-content-center">
         <li class="page-item">
           <a class="page-link" href="#" aria-label="Previous">
             <span aria-hidden="true">&laquo;</span>
@@ -212,14 +212,57 @@
             <span class="sr-only">Next</span>
           </a>
         </li>
-      </ul>
-
+      </ul> -->
+	 <div id="pageCode"></div>
     </div>
+   
     <!-- /.container -->
     
    <jsp:include page="footer.jsp"></jsp:include>
 	
-  </body>
+	
+	 <script src="${pageContext.request.contextPath}/lib/js/jquery-3.3.1.min.js"></script>
+	 <script src="${pageContext.request.contextPath}/lib/js/jquery-ui.min.js"></script>  <!-- ui는 위의 core가 있어야 움직이므로 두개의 js파일의 순서가 바뀌면 안됨! -->
+	
+	<script type="text/javascript">
+	var myIsbn = "9788937473135";
+	$(function(){
+		//jQuery시작부분!!!
+		
+		exe(myIsbn,1); //전국 1위의 책으로 추천도서를 호출. //9788937473135는 전국 1위의 ISBN
+		
+	});
+	
+	
+	function exe(value,np){
+		var pageCode = document.getElementById("pageCode");
+		console.log("exe() value:"+value +" page : "+np);
+		$.ajax({
+			url : "main_recommend.inc",
+			type : "POST",
+			dataType : "json",
+			data : "value="+encodeURIComponent(value)+"&nowPage="+np
+			
+		}).done(function(data){
+			var str="";
+			
+			$.each(data.b_list, function(index, item){
+				console.log(index+","+item.bookname);
+				str += "<div class='col-lg-4 col-sm-6 portfolio-item'><div class='card h-100'><a href='#'><img class='card-img-top' src="+item.bookImageURL+"></a><div class='card-body'><h4 class='card-title'><a href='#'>"+item.bookname+"</a></h4><p class='card-text'>책 소개 내용</p></div></div></div>";
+			
+			})
+			
+			$(".row2").html(str);
+			
+			pageCode.innerHTML = data.pageCode; //페이징 코드
+			
+		}).fail(function(er){
+			
+		});	
+	}
+	
+	</script>	
 
+  </body>
 </html>
 
