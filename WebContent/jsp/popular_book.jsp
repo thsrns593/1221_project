@@ -268,7 +268,8 @@
 					
 					$.each(data.b_list, function (index, item) { 
 	
-						str += "<li class='bookList'><a href='#' class='imageStyle'> <label>"+item.no+"</label><img src="+item.bookImageURL+" class='imageSize'/><span class=' fontStyle'>"+item.bookname+"</span></a></li>";
+						//str += "<li class='bookList'><a href='#' class='imageStyle'> <label>"+item.no+"</label><img src="+item.bookImageURL+" class='imageSize'/><span class=' fontStyle'>"+item.bookname+"</span></a></li>";
+						str += "<li class='bookList'><a href='searchDetail.inc?isbn="+item.isbn13+"' class='imageStyle'> <label>"+item.no+"</label><img src="+item.bookImageURL+" class='imageSize'/><span class=' fontStyle'>"+item.bookname+"</span></a></li>";
 						//console.log(str);
 						
 						if(item.no>=200) //no가 200위 까지만 나오게 한다.

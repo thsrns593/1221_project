@@ -96,6 +96,9 @@ public class Popular_BookControl {
 	public Map<String,Object> bookList(String value, String nowPage, String value2) throws Exception {
 		if(nowPage ==null)
 			nowPage ="1";
+		else if(Integer.parseInt(nowPage) >17) {
+			nowPage = String.valueOf(17);
+		}
 		System.out.println(value+nowPage+value2);
 		
 		String url_str ="";
@@ -151,7 +154,7 @@ public class Popular_BookControl {
 			}else if(value !=null && value2 !=null) {
 				pg = new Paging_popular(Integer.parseInt(nowPage), 200, 12, 5, value, value2); //페이징 객체 생성
 			}
-			
+		
 		System.out.println("b_list의 사이즈:"+b_list.size());
 		DataVO[] ar = new DataVO[b_list.size()]; // b_list사이즈만큼의 DataVO를 생성만 해놓음!!
 		
