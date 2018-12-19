@@ -13,7 +13,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
+<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 <title>일반게시판수정</title>
 
 
@@ -71,7 +71,9 @@
 	float: right;
 	width: 80px;
 }
-
+.btss{
+	margin-bottom: 30px;
+   	}
 .titlebox {
 	display: inline-block;
 	width: 900px;
@@ -164,7 +166,7 @@
 										<td height="10px;">
 									</tr>
 									<tr>
-										<td colspan="5"><textarea rows="10px" cols="132px" name="nb_content">${vo.getNb_content() }</textarea>
+										<td colspan="5"><textarea rows="10px" cols="132px" name="nb_content" id="nb_content">${vo.getNb_content() }</textarea>
 										</td>
 									</tr>
 									<tr>
@@ -179,9 +181,7 @@
 				</div>
 				<div class="">
 					<p>
-						<button type="button" class="btn btn-outline btn-warning bts"
-							onclick="javascript:location.href='text_read.inc'">삭제</button>
-						<button type="button" class="btn btn-outline btn-info bts"
+						<button type="button" class="btn btn-outline btn-info bts btss"
 							onclick="editText()">수정</button>
 					</p>
 				</div>
@@ -199,15 +199,42 @@
 	<!-- Bootstrap core JavaScript -->
 	<script
 		src="${pageContext.request.contextPath}/lib/js/bootstrap.bundle.min.js"></script>
-	<script type="text/javascript"
-		src="${pageContext.request.contextPath}/lib/js/jquery-ui.min.js"></script>
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="lib/js/jquery-ui.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+   	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
 		function editText(){
 			$("#editform").attr("action", "text_edit.inc");
 			$("#editform").submit();
 			
 		};
+		$(function() {
+    		$("#nb_content").summernote({
+                //placeholder: 'Hello stand alone ui',
+			    toolbar: [
+			        ['style', ['style']],
+			        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			        ['fontface', ['fontname']],
+			        ['textsize', ['fontsize']],
+			        ['color', ['color']],
+			        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+			        ['height', ['height']],
+			        ['table', ['table']],
+			        ['insert', ['link']]
+			    ],
+                  tabsize: 2,
+                  lang: "ko-KR",
+                  maxHeight: 500,
+                  minHeight: 200,
+                  height: 300,
+                  maxWidth:950,
+                  minWidth:950,
+                  width:950,
+                  focus: true,/* 커서를 미리 가져다 놓는다. */
+             });
+             
+          });
 	</script>
 
 

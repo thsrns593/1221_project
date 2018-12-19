@@ -3,6 +3,28 @@ package mybatis.vo;
 public class LibraryVO {
 	private String libCode, libName, address, tel, fax, latitude, longitude, homepage, closed, operationTime, bookcount;
 
+	
+	
+	public LibraryVO() {
+		super();
+	}
+
+	public LibraryVO(String libCode, String libName, String address, String tel, String fax, String latitude,
+			String longitude, String homepage, String closed, String operationTime, String bookcount) {
+		super();
+		this.libCode = libCode;
+		this.libName = libName;
+		this.address = address;
+		this.tel = tel;
+		this.fax = fax;
+		this.latitude = latitude;
+		this.longitude = longitude;
+		this.homepage = homepage;
+		this.closed = closed;
+		this.operationTime = operationTime;
+		this.bookcount = bookcount;
+	}
+
 	public String getLibCode() {
 		return libCode;
 	}

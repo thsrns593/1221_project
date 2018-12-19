@@ -129,7 +129,8 @@
 				</span> <span class="input-group-btn"> <input id="m_id" name="m_id"
 					type="text" class="form-control" value="${sessionScope.m_id }"
 					readonly="readonly">
-				</span> <span class="input-group-btn">
+				</span> 
+				<span class="input-group-btn">
 					<button class="btn btn-secondary" type="button"
 						style="color: #b00; font-weight: bold;" onclick="javascript:delid()">회원탈퇴</button>
 				</span>
@@ -432,10 +433,12 @@
 		
 		function delid() {
 			var m_id = $("#m_id").val();
-			alert("회원탈퇴 하시겠습니까?");
-			
-			$("#upinform").attr("action", "deldate.inc" );
-			$("#upinform").submit();
+			if (confirm("회원탈퇴 하시겠습니까?") == true){    //확인
+				$("#upinform").attr("action", "deldate.inc" );
+				$("#upinform").submit();
+			 }else{   //취소
+			     return false;
+			 }
 		}
 	</script>
 

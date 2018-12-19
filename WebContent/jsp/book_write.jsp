@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
     <title>책 게시판 글쓰기</title>
 	  
     <style type="text/css">
@@ -65,6 +65,9 @@
      	.bts{
      		float: right;
      		 width: 80px;
+     	}
+     	.btss{
+     		margin-bottom: 30px;
      	}
      	.titlebox{
      		display: inline-block;
@@ -158,7 +161,7 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea name="bb_content" rows="10px" cols="132px" >${vo.bb_content }</textarea>
+  													<textarea name="bb_content" rows="10px" cols="132px" id="nb_content">${vo.bb_content }</textarea>
   												</td>
   											</tr>
   										</tfoot>
@@ -167,9 +170,9 @@
 						</div> 
 						<div class="" >
 	                        <p>
-		                        <button type="button" class="btn btn-outline btn-danger bts"
+		                        <button type="button" class="btn btn-outline btn-danger bts btss"
 		                        onclick="goBack(this.form)">취소</button>
-			                    <button type="button" class="btn btn-outline btn-success bts"
+			                    <button type="button" class="btn btn-outline btn-success bts btss"
 			                    onclick="sendData(this.form)">완료</button>
 	                        </p>
                         </div>   
@@ -180,7 +183,10 @@
         
 
     <jsp:include page="footer.jsp"></jsp:include>
-
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="lib/js/jquery-ui.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+   	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
 		var test = "${vo.bb_category}";
 		if(test != "")
@@ -192,6 +198,33 @@
 		function sendData(frm) {
 			frm.submit();
 		}
+		$(function() {
+    		$("#nb_content").summernote({
+                //placeholder: 'Hello stand alone ui',
+			    toolbar: [
+			        ['style', ['style']],
+			        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			        ['fontface', ['fontname']],
+			        ['textsize', ['fontsize']],
+			        ['color', ['color']],
+			        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+			        ['height', ['height']],
+			        ['table', ['table']],
+			        ['insert', ['link']]
+			    ],
+                  tabsize: 2,
+                  lang: "ko-KR",
+                  maxHeight: 500,
+                  minHeight: 200,
+                  height: 300,
+                  maxWidth:950,
+                  minWidth:950,
+                  width:950,
+                  focus: true,/* 커서를 미리 가져다 놓는다. */
+             });
+             
+          });
+
 	</script>    
     
   </body>

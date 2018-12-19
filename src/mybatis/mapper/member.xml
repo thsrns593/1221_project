@@ -22,8 +22,7 @@
 	</select>
 	<update id="updateinfo" parameterType="mybatis.vo.MemberVO">
 		update member set
-		m_pwd =
-		#{m_pwd},
+		m_pwd = #{m_pwd},
 		m_email = #{m_email}
 		where m_id = #{m_id}
 	</update>

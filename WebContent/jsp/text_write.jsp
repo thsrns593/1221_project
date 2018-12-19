@@ -10,14 +10,13 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
-    <title>일반게시판글쓰기</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.css" rel="stylesheet">
 	
-   
+    <title>일반게시판글쓰기</title>
+
     <style type="text/css">
 
-     	#content{
+     	#row_content{
      		margin: auto;
      		padding: 0px;
      		width: 1000px;
@@ -25,14 +24,20 @@
      		min-height: 655px;
 
      	}
-     	.formstyle{
+     	#nb_content{
      		margin: auto;
+     		padding: 0px;
+     		width: 1000px;
+     		height: auto;
+     		min-height: 655px;
+     	}
+     	.formstyle{
+     		margin-left: 300px;
      		padding: 10px;
-     		width: auto;
+     		width: 1000px;
      		height: auto;
      		border: 1px solid #D7DF01; 
      		border-radius: 5px;
-
      	}
      	.top-margin{
 			margin-top: 10%;
@@ -44,7 +49,7 @@
      	}
      	.textarea{
      		height:70%;
-     		width:100%;
+     		width:900px;
      		border:1;
      		overflow:visible;
      		text-overflow:ellipsis;
@@ -66,9 +71,14 @@
      		float: right;
      		 width: 80px;
      	}
+     	.btss{
+     		margin-bottom: 30px;
+     	}
      	.titlebox{
+     		margin: auto;
+     		padding-left: 100px;
      		display: inline-block;
-     		width: 900px;
+     		width: 600px;
      		height: 50px;
      	}
    
@@ -108,14 +118,23 @@
 			border-radius: 5px;
 			text-align: center;
 		} 
-
+		.panel-footer{
+			margin: auto;
+			padding-right: 100px;
+		}
+		.btn_two{
+			padding-right: 300px;
+		}
+		#nb_title{
+			width: 800px;
+		}
     </style>
 
   </head>
 
   <body>
 	<jsp:include page="navigation.jsp"></jsp:include>
-		<div class="row" id="content">  
+		<div class="row" id="row_contant">  
                 <div class="col-md-12" >
                       <div class="panel-heading">
                            <div class="row">
@@ -150,7 +169,7 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea rows="10px" cols="132px" name="nb_content" ></textarea>
+  													<textarea rows="10px" cols="132px" name="nb_content" id="nb_content"></textarea>
   												</td>
   											</tr>
   											<tr>
@@ -164,11 +183,11 @@
 								</form>	                        				
 							</div>					
 						</div> 
-						<div class="" >
+						<div class="btn_two" >
 	                        <p>
-		                        <input type="button" class="btn btn-outline btn-danger bts"
+		                        <input type="button" class="btn btn-outline btn-danger bts btss"
 		                        onclick="javascript:location.href='board_free.inc'" value="취소"></input>
-			                    <input type="button" class="btn btn-outline btn-success bts"
+			                    <input type="button" class="btn btn-outline btn-success bts btss"
 			                    onclick="textwrite()" value="완료"></input>
 	                        </p>
                         </div>   
@@ -177,11 +196,42 @@
         
 
    <jsp:include page="footer.jsp"></jsp:include>
-    
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="lib/js/jquery-ui.min.js"></script>
+   	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
+   	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
     <script type="text/javascript">
     	function textwrite() {
     		$("#writeform").submit();
 		}
+    	$(function() {
+    		$("#nb_content").summernote({
+                //placeholder: 'Hello stand alone ui',
+			    toolbar: [
+			        ['style', ['style']],
+			        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
+			        ['fontface', ['fontname']],
+			        ['textsize', ['fontsize']],
+			        ['color', ['color']],
+			        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],
+			        ['height', ['height']],
+			        ['table', ['table']],
+			        ['insert', ['link']]
+			    ],
+                  tabsize: 2,
+                  lang: "ko-KR",
+                  maxHeight: 500,
+                  minHeight: 200,
+                  height: 300,
+                  maxWidth:950,
+                  minWidth:950,
+                  width:950,
+                  focus: true,/* 커서를 미리 가져다 놓는다. */
+                 });
+             
+          });
+    	 
+
     </script>
   </body>
 
