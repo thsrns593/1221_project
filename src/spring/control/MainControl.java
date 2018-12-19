@@ -49,7 +49,7 @@ public class MainControl {
 		Object obj = session.getAttribute("b_list");
 		if(obj == null) {
 			//URL 생성!
-			URL url = new URL("http://data4library.kr/api/recommandList?authKey=b04eff4b086e9b0502ac17bf55bdf725e21d3bffabc915362b7ddbf05f2bb67e&isbn13="+value+"&pageNo="+nowPage+"&pageSize=6");	
+			URL url = new URL("http://data4library.kr/api/recommandList?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&isbn13="+value+"&pageNo="+nowPage+"&pageSize=6");	
 		
 			//URL url = new URL("http://data4library.kr/api/loanItemSrch?authKey=b04eff4b086e9b0502ac17bf55bdf725e21d3bffabc915362b7ddbf05f2bb67e&startDt=2018-12-10&endDt=2018-12-16&pageSize=6&pageNo="+nowPage+"&region="+value);
 			

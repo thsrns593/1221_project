@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -91,18 +94,11 @@
 		    	</tr>
 		    	</thead>
 		    	<tbody>
-		    	<tr>
-		    		<td>3</td>
-		    		<td><a href="#">하기시러어어어어어엉어어어어어</a></td> <!-- 해당 글 이동 -->
-		    	</tr>
-		    	<tr>
-		    		<td>2</td>
-		    		<td><a href="#">안녕하세요</a></td> <!-- 해당 글 이동 -->
-		    	</tr>
-		    	<tr>
-		    		<td>1</td>
-		    		<td><a href="#">ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</a></td> <!-- 해당 글 이동 -->
-		    	</tr> 
+		    	<c:forEach items="${ar }" var="item" varStatus="st">
+									<tr>
+										<td>${item.nb_num}</td>
+									</tr>
+				</c:forEach>
 		    	</tbody>
 		    </table>   
 		    </div>
