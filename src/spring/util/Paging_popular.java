@@ -75,7 +75,7 @@ public class Paging_popular {
 				sb.append(value);
 				sb.append(",");
 				//sb.append(nowPage - blockPage);
-				sb.append(nowPage - 1);
+				sb.append(nowPage - blockPage);
 				sb.append(",");
 				sb.append(value2);
 				sb.append(")'aria-label='Previous'>");
@@ -85,7 +85,7 @@ public class Paging_popular {
 				sb.append("null");
 				sb.append(",");
 				//sb.append(nowPage - blockPage);
-				sb.append(nowPage - 1);
+				sb.append(nowPage - blockPage);
 				sb.append(",");
 				sb.append(value2);
 				sb.append(")'aria-label='Previous'>");
@@ -149,7 +149,7 @@ public class Paging_popular {
 				sb.append(value);
 				sb.append(",");
 				//sb.append(nowPage + blockPage);
-				sb.append(nowPage + 1);
+				sb.append(nowPage + blockPage);
 				sb.append(",");
 				sb.append(value2);
 				sb.append(")'aria-label='Next'>");
@@ -160,7 +160,7 @@ public class Paging_popular {
 				sb.append("null");
 				sb.append(",");
 				//sb.append(nowPage + blockPage);
-				sb.append(nowPage + 1);
+				sb.append(nowPage + blockPage);
 				sb.append(",");
 				sb.append(value2);
 				sb.append(")'aria-label='Next'>");
@@ -170,7 +170,7 @@ public class Paging_popular {
 		}else {
 			sb.append("<li class='disable page-link'>");
 			sb.append("<span aria-hidden='true'>></span>");
-			sb.append("<span class='sr-only\'>Previous</span></li>");
+			sb.append("<span class='sr-only'>Previous</span></li>");
 		}
 		sb.append("</ul>");
 	}//생성자의 끝!
