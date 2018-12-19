@@ -33,7 +33,7 @@ public class LibraryControl {
 	public void addlib() {
 		
 		RestTemplate template = new RestTemplate();
-		String apiURL = "http://data4library.kr/api/libSrch?authKey=9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5&pageNo=1&pageSize=830&format=json";
+		String apiURL = "http://data4library.kr/api/libSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&pageNo=1&pageSize=830&format=json";
 
 		try {
 			System.out.println("보내기");
