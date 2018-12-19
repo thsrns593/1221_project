@@ -150,6 +150,7 @@ table td, table tr{
 								</select> <select name="h_area2">
 									<option>-선택-</option>
 								</select>
+								
 							</div>
 						</form>
 						<table style="border-collapse: collapse; border: 1px solid gray;">

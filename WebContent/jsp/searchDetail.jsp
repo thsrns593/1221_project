@@ -277,9 +277,6 @@
 		
 		var address = h_area1.options[h_area1.selectedIndex].text+" "+h_area2.options[h_area2.selectedIndex].text;
 		var isbn13 = $("#isbn").val();
-		
-		console.log(address);
-		console.log(isbn13);
 		$.ajax({
 			url : "searchLib.inc?address="+address+"&isbn13="+isbn13,
 			type : "get",
@@ -287,14 +284,15 @@
 		}).done(function(data){
 			var ar = data.ar;
 			
+			if(ar.length == 0){
+				alert("책을 소장하고 있는 도서관이 없습니다.");
+			}
+			
+			
 			var points = new Array;
 
-			console.log(data);
-			
 	 		for(var i = 0; i < ar.length; i++){
-	 			//points.push(new daum.maps.LatLng(ar[i].latitude, ar[i].longitude));
-	 			console.log(ar[i].latitude);
-	 			console.log(ar[i].longitude);
+	 			points.push(new daum.maps.LatLng(ar[i].latitude, ar[i].longitude));
 			} 
 				// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
 				var bounds = new daum.maps.LatLngBounds();    
@@ -345,11 +343,7 @@
 					position : coords
 				});
 
-				// 인포윈도우로 장소에 대한 설명을 표시합니다
-				var infowindow = new daum.maps.InfoWindow({
-					content : '도서관'
-				});
-				infowindow.open(map, marker);
+
 
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
