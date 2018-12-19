@@ -77,7 +77,7 @@
 #map {
 	margin: auto;
 	width: auto;
-	height: 300px;
+	height: 500px;
 }
 
 .show {
@@ -300,9 +300,20 @@
 				var i, marker;
 				for (i = 0; i < points.length; i++) {
 				    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-				    marker = new daum.maps.Marker({ position : points[i] });
+				    marker = new daum.maps.Marker({ position : points[i], clickable: true });
 				    marker.setMap(map);
-				    
+				    var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+				    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+				    var infowindow = new daum.maps.InfoWindow({
+				        content : iwContent,
+				        removable : iwRemoveable
+				    });
+
+				    // 마커에 클릭이벤트를 등록합니다
+				    daum.maps.event.addListener(marker, 'click', function() {
+				          // 마커 위에 인포윈도우를 표시합니다
+				          infowindow.open(map, marker);  
+				    });
 				    // LatLngBounds 객체에 좌표를 추가합니다
 				    bounds.extend(points[i]);
 				}
@@ -310,14 +321,12 @@
 				 map.setBounds(bounds);
 		});  
 		
-		
-		
 	}
-	
+
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 		mapOption = {
 			center : new daum.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
-			level : 4
+			level : 3
 		// 지도의 확대 레벨
 		};
 		// 아래와 같이 옵션을 입력하지 않아도 된다
@@ -342,18 +351,10 @@
 					map : map,
 					position : coords
 				});
-
-
-
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
 			}
-			$("tbody a").bind("click", function() {
-				$("#map").slideToggle("fast");
-				resizeMap();
-				relayout();
-
-			});
+			
 			function relayout() {
 
 				// 지도를 표시하는 div 크기를 변경한 이후 지도가 정상적으로 표출되지 않을 수도 있습니다
@@ -361,11 +362,7 @@
 				// window의 resize 이벤트에 의한 크기변경은 map.relayout 함수가 자동으로 호출됩니다
 				map.relayout();
 			}
-			function resizeMap() {
-				var mapContainer = document.getElementById('map');
-				mapContainer.style.width = '650px';
-				mapContainer.style.height = '800px';
-			}
+			
 			// 지도 오른쪽에 줌 컨트롤이 표시되도록 지도에 컨트롤을 추가한다.
 			map.addControl(zoomControl, daum.maps.ControlPosition.RIGHT);
 		});
