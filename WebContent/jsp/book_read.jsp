@@ -196,7 +196,7 @@
 								</tr>
 								<tr>
 									<td colspan="5">
-										<textarea rows="10px" cols="132px"  readonly="readonly">${vo.bb_content }</textarea>
+										<div style="width: 950px; min-height: 300px; margin-top: 10px; border: 1px solid gray;">${vo.bb_content }</div>
 									</td>
 								</tr>
 							</tfoot>

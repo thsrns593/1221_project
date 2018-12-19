@@ -196,8 +196,7 @@
 							<td height="10px;">
 						</tr>
 						<tr>
-							<td colspan="5"><textarea rows="10px" cols="132px"
-									readonly="readonly">${vo.getNb_content() }</textarea></td>
+							<td colspan="5"><div style="width: 950px; min-height: 300px; margin-top: 10px; border: 1px solid gray;">${vo.getNb_content() }</div></td>
 						</tr>
 						<tr>
 							<td>
