@@ -150,7 +150,7 @@
 
 </head>
 
-<body onload="frm">
+<body>
 	<jsp:include page="navigation.jsp"></jsp:include>
 
 	<!-- /#page-content-wrapper -->
@@ -195,7 +195,7 @@
 									<td class="br_none left_td">${datetime}</td>
 									<th class="c_td">ISBN</th>
 									<td class="br_none left_td" colspan="3">
-									<input type="hidden" value="${isbn13}" id="isbn">
+									<input type="hidden" value="${isbn13}" id="isbn"/>
 									${isbn13}
 									</td>
 								</tr>
@@ -277,38 +277,35 @@
 		
 		var address = h_area1.options[h_area1.selectedIndex].text+" "+h_area2.options[h_area2.selectedIndex].text;
 		var isbn13 = $("#isbn").val();
-/* 		$.ajax({
+		$.ajax({
 			url : "searchLib.inc?address="+address+"&isbn13="+isbn13,
 			type : "get",
 			dataType : "json"
 		}).done(function(data){
-			var ar = data.ar;		
-		});  */
-		
-		var points = [
-		    new daum.maps.LatLng(33.452671, 126.574792),
-		    new daum.maps.LatLng(33.451744, 126.572441)
-		];
-		
-		points.push(new daum.maps.LatLng(33.452278, 126.567803));
-		
-/* 		for(var i = 0; i < ar.length; i++){
+			var ar = data.ar;
 			
-		} */
-			// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-			var bounds = new daum.maps.LatLngBounds();    
+			var points = [];
 
-			var i, marker;
-			for (i = 0; i < points.length; i++) {
-			    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-			    marker =     new daum.maps.Marker({ position : points[i] });
-			    marker.setMap(map);
-			    
-			    // LatLngBounds 객체에 좌표를 추가합니다
-			    bounds.extend(points[i]);
-			}
-			
-			 map.setBounds(bounds);
+	 		for(var i = 0; i < ar.length; i++){
+	 			points.push(new daum.maps.LatLng(ar[i].latitude, ar[i].longitude));
+			} 
+				// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
+				var bounds = new daum.maps.LatLngBounds();    
+
+				var i, marker;
+				for (i = 0; i < points.length; i++) {
+				    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+				    marker = new daum.maps.Marker({ position : points[i] });
+				    marker.setMap(map);
+				    
+				    // LatLngBounds 객체에 좌표를 추가합니다
+				    bounds.extend(points[i]);
+				}
+				
+				 map.setBounds(bounds);
+		});  
+		
+		
 		
 	}
 	
