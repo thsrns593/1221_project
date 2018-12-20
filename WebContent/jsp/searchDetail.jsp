@@ -288,37 +288,41 @@
 				alert("책을 소장하고 있는 도서관이 없습니다.");
 			}
 			
-			
+			var infowindow = new Array();
+			var marker =new Array();
 			var points = new Array;
-
+			var bounds;
+			var iwContent;
 	 		for(var i = 0; i < ar.length; i++){
 	 			points.push(new daum.maps.LatLng(ar[i].latitude, ar[i].longitude));
-			} 
+			 
 				// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-				var bounds = new daum.maps.LatLngBounds();    
+				bounds = new daum.maps.LatLngBounds();    
 
-				var i, marker;
-				for (i = 0; i < points.length; i++) {
-				    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-				    marker = new daum.maps.Marker({ position : points[i], clickable: true });
-				    marker.setMap(map);
-				    var iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-				    iwRemoveable = true; // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
-				    var infowindow = new daum.maps.InfoWindow({
-				        content : iwContent,
-				        removable : iwRemoveable
-				    });
+				
+			    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
+			    marker[i] = new daum.maps.Marker({ position : points[i], clickable: true });
+			    marker[i].setMap(map);
+			    
+			    iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			    iwRemoveable = true, // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
+			    iwPosition = new daum.maps.LatLng(ar[i].latitude, ar[i].longitude);
+			    infowindow[i] = new daum.maps.InfoWindow({
+			        content : iwContent,
+			        removable : iwRemoveable
+			    });
 
-				    // 마커에 클릭이벤트를 등록합니다
-				    daum.maps.event.addListener(marker, 'click', function() {
-				          // 마커 위에 인포윈도우를 표시합니다
-				          infowindow.open(map, marker);  
-				    });
-				    // LatLngBounds 객체에 좌표를 추가합니다
-				    bounds.extend(points[i]);
-				}
+			    // 마커에 클릭이벤트를 등록합니다
+			    daum.maps.event.addListener(marker[i], 'click', function() {
+			          // 마커 위에 인포윈도우를 표시합니다
+			          infowindow[i].open(map, marker[i]);  
+			    });
+			    // LatLngBounds 객체에 좌표를 추가합니다
+			    bounds.extend(points[i]);
+				
 				
 				 map.setBounds(bounds);
+	 		}
 		});  
 		
 	}
@@ -339,7 +343,7 @@
 		var geocoder = new daum.maps.services.Geocoder();
 
 		// 주소로 좌표를 검색합니다
-		geocoder.addressSearch('인천광역시 남구 숭의4동', function(result, status) {
+		geocoder.addressSearch("서울특별시 관악구 시흥대로 552 석천빌딩 7층",function(result, status) {
 
 			// 정상적으로 검색이 완료됐으면 
 			if (status === daum.maps.services.Status.OK) {
