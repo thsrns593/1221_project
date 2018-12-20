@@ -97,5 +97,14 @@
 	<update id="updateHit" parameterType="mybatis.vo.NormalVO">
 		UPDATE normal_board set nb_hit = nb_hit + 1 WHERE nb_num = #{nb_num}
 	</update>
+	
+	<select id="takenotice" resultType="mybatis.vo.NormalVO">
+		SELECT * FROM
+		(SELECT rownum r_num, a.*from
+			(SELECT * FROM normal_board
+			WHERE nb_category = '공지'
+			ORDER BY nb_cdate desc)a)
+		WHERE r_num BETWEEN 1 AND 3	
+	</select>
 </mapper>
 

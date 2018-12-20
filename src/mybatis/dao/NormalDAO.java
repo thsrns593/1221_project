@@ -64,4 +64,15 @@ public class NormalDAO {
 		else
 			return false;
 	}
+	
+	public NormalVO[] takenotice() {
+		NormalVO[] ar = null;
+		List<NormalVO> list = ss.selectList("normal.takenotice");
+		
+		if(list != null) {
+			ar = new NormalVO[list.size()];
+			list.toArray(ar);
+		}
+		return ar;
+	}
 }

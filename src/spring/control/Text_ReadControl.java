@@ -125,7 +125,7 @@ public class Text_ReadControl {
 	//댓글 추가
 	@RequestMapping("nreply.inc")
 	@ResponseBody
-	public Map<String, String> addNreply(NreplyVO vo, HttpServletRequest request){
+	public Map<String, Object> addNreply(NreplyVO vo, HttpServletRequest request){
 		
 
 		vo.setNreply_ip(request.getRemoteAddr());
@@ -158,36 +158,15 @@ public class Text_ReadControl {
 		vo.setBegin(pvo.getBegin());
 		vo.setEnd(pvo.getEnd());
 
-		nreplyar = nreply_dao.getNreplyList(vo);
-		
-			
-		StringBuffer sb = new StringBuffer();
-
-		for(NreplyVO nrvo : nreplyar) {
-			sb.append("#");
-			sb.append(nrvo.getM_id());
-			sb.append("@");
-			sb.append(nrvo.getNreply_to());
-			sb.append("@");
-			sb.append(nrvo.getNreply_cdate());
-			sb.append("@");
-			sb.append(nrvo.getNreply_content());
-			sb.append("@");
-			sb.append(nrvo.getNreply_group());
-			sb.append("@");
-			sb.append(nrvo.getNreply_num());
-			sb.append("@");
-			sb.append(nrvo.getNreply_status());
-			sb.append("#");
-		}
+		nreplyar = nreply_dao.getNreplyList(vo);		
 
 		pageCode = pvo.getSb().toString();
 				
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
-		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
-		map.put("pageCode", "!"+pageCode+"!");
-		map.put("replylist", sb.toString());
+		map.put("ar",nreplyar);
+		map.put("replycount",nvo.getNb_reply_count());
+		map.put("pageCode", pageCode);
 		
 		return map;
 		
@@ -196,7 +175,7 @@ public class Text_ReadControl {
 	//댓글추가 2
 	@RequestMapping("nreply2.inc")
 	@ResponseBody
-	public Map<String, String> addNreply1(NreplyVO vo, HttpServletRequest request){
+	public Map<String, Object> addNreply1(NreplyVO vo, HttpServletRequest request){
 		
 		vo.setNreply_ip(request.getRemoteAddr());
 
@@ -231,33 +210,13 @@ public class Text_ReadControl {
 		nreplyar = nreply_dao.getNreplyList(vo);
 		
 		
-		StringBuffer sb = new StringBuffer();
-		
-		for(NreplyVO nrvo : nreplyar) {
-			sb.append("#");
-			sb.append(nrvo.getM_id());
-			sb.append("@");
-			sb.append(nrvo.getNreply_to());
-			sb.append("@");
-			sb.append(nrvo.getNreply_cdate());
-			sb.append("@");
-			sb.append(nrvo.getNreply_content());
-			sb.append("@");
-			sb.append(nrvo.getNreply_group());
-			sb.append("@");
-			sb.append(nrvo.getNreply_num());
-			sb.append("@");
-			sb.append(nrvo.getNreply_status());
-			sb.append("#");
-		}
-		
 		pageCode = pvo.getSb().toString();
 		
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
-		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
-		map.put("pageCode", "!"+pageCode+"!");
-		map.put("replylist", sb.toString());
+		map.put("ar",nreplyar);
+		map.put("replycount",nvo.getNb_reply_count());
+		map.put("pageCode", pageCode);
 		
 		return map;
 		
@@ -266,7 +225,7 @@ public class Text_ReadControl {
 	//댓글삭제
 	@RequestMapping("nreply3.inc")
 	@ResponseBody
-	public Map<String, String> addNreply2(NreplyVO vo, HttpServletRequest request){
+	public Map<String, Object> addNreply2(NreplyVO vo, HttpServletRequest request){
 		
 		nreply_dao.delNreply(vo);
 		
@@ -298,35 +257,13 @@ public class Text_ReadControl {
 		vo.setEnd(pvo.getEnd());
 		
 		nreplyar = nreply_dao.getNreplyList(vo);
-		
-		
-		StringBuffer sb = new StringBuffer();
-		
-		for(NreplyVO nrvo : nreplyar) {
-			sb.append("#");
-			sb.append(nrvo.getM_id());
-			sb.append("@");
-			sb.append(nrvo.getNreply_to());
-			sb.append("@");
-			sb.append(nrvo.getNreply_cdate());
-			sb.append("@");
-			sb.append(nrvo.getNreply_content());
-			sb.append("@");
-			sb.append(nrvo.getNreply_group());
-			sb.append("@");
-			sb.append(nrvo.getNreply_num());
-			sb.append("@");
-			sb.append(nrvo.getNreply_status());
-			sb.append("#");
-		}
-		
 		pageCode = pvo.getSb().toString();
 		
-		Map<String, String> map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		
-		map.put("replycount","^"+nvo.getNb_reply_count()+"^");
-		map.put("pageCode", "!"+pageCode+"!");
-		map.put("replylist", sb.toString());
+		map.put("ar",nreplyar);
+		map.put("replycount",nvo.getNb_reply_count());
+		map.put("pageCode", pageCode);
 		
 		return map;
 		

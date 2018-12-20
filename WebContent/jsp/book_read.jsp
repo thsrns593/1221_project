@@ -209,6 +209,7 @@
 									<div id="reinput">
 										<div class="footfoot">
                       						<form action="" id="reply">
+                      							<input type="text" style="display: none;"/>
 												<table id="reinput">
 													<colgroup>
 														<col width="1000px">
