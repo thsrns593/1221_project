@@ -146,12 +146,12 @@
 	                        				<option value="교환">&nbsp;교환&nbsp;</option>
 	                        				<option value="대여">&nbsp;대여&nbsp;</option>
 	                        			</select>
-	                        			<input name="bb_title" type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }"/>
+	                        			<input name="bb_title" id="bb_title" type="text" size="120px" style="margin-bottom: 10px;" value="${vo.bb_title }"/>
 	                        		</div>
 									<div id="textdiv">
-										<div><label>도서명:</label>&nbsp;<input name="bb_bname" type="text" value="${vo.bb_bname }"/></div>
-										<div><label>저자명:</label>&nbsp;<input name="bb_author" type="text" value="${vo.bb_author }"></div>
-										<div><label>출판사:</label>&nbsp;<input name="bb_press" type="text" value="${vo.bb_press }"></div>
+										<div><label>도서명:</label>&nbsp;<input name="bb_bname"  id="bb_bname" type="text" value="${vo.bb_bname }"/></div>
+										<div><label>저자명:</label>&nbsp;<input name="bb_author" id="bb_author" type="text" value="${vo.bb_author }"></div>
+										<div><label>출판사:</label>&nbsp;<input name="bb_press"  id="bb_press" type="text" value="${vo.bb_press }"></div>
 									</div>
   									<table>
   										<tfoot>
@@ -161,7 +161,7 @@
   											</tr>
   											<tr>
   												<td colspan="5">
-  													<textarea name="bb_content" rows="10px" cols="132px" id="nb_content">${vo.bb_content }</textarea>
+  													<textarea name="bb_content" rows="10px" cols="132px" id="bb_content">${vo.bb_content }</textarea>
   												</td>
   											</tr>
   										</tfoot>
@@ -196,10 +196,59 @@
 			location.href="board_share.inc";
 		}
 		function sendData(frm) {
+			
+			var bb_title= $("#bb_title").val();
+    		var bb_bname= $("#bb_bname").val();
+			var bb_author= $("#bb_author").val();
+    		var bb_press= $("#bb_press").val();
+			var bb_content= $("#bb_content").val();
+
+    		if(bb_title.trim().length <1 ){
+    			alert("제목을 입력해주세요");
+    			return; 
+    		}
+    		if(bb_title.trim().length >20 ){
+    			alert("제목을 20자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		if(bb_bname.trim().length <1 ){
+    			alert("도서명을 입력해주세요");
+    			return; 
+    		}
+    		if(bb_bname.trim().length >50 ){
+    			alert("도서명을 50자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		if(bb_author.trim().length <1 ){
+    			alert("저자를 입력해주세요");
+    			return; 
+    		}
+    		if(bb_author.trim().length >20 ){
+    			alert("저자를 50자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		if(bb_press.trim().length <1 ){
+    			alert("출판사를 입력해주세요");
+    			return; 
+    		}
+    		if(bb_press.trim().length >20 ){
+    			alert("출판사를 50자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		if(bb_content.trim().length <1 ){
+    			alert("내용을 입력해주세요");
+    			return; 
+    		}
+    		if(bb_content.trim().length > 100000 ){
+    			alert("내용을 50자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		
+    		
 			frm.submit();
 		}
 		$(function() {
-    		$("#nb_content").summernote({
+    		$("#bb_content").summernote({
                 //placeholder: 'Hello stand alone ui',
 			    toolbar: [
 			        ['style', ['style']],

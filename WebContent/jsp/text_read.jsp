@@ -332,6 +332,20 @@
 		}
 
 		function goPage(pg) {
+			
+			var nreply_content =$("#nreply_content").val();
+			
+			if(nreply_content.trim().length <1){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			if(nreply_content.trim().length >150){
+				alert("150자 미만으로 입력해주세요");
+				return;
+			}
+				
+			
+			
 			var postvalue = $("form[name=addnreply]").serialize();
 			var nb_num = $("#nrnb_num").val();
 			$.ajax({
@@ -435,6 +449,23 @@
 
 		}
 		function goPage2(pg) {
+			
+			var nreply_content =$("#nreply_content2").val();
+			var m_id1 = "${m_id}";
+
+			if(m_id1.trim().length <1){
+				alert("로그인 해주세요");
+				return;
+			}
+			
+			if(nreply_content.trim().length <1){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			if(nreply_content.trim().length >150){
+				alert("150자 미만으로 입력해주세요");
+				return;
+			}
 
 			var postvalue = $("form[name=addnreply2]").serialize();
 			var nreply_content = $("#nreply_content2").val();

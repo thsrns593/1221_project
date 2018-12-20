@@ -217,7 +217,7 @@
 													<tbody>
 														<tr>
 															<td>
-																<input type="text" style="width: 100%;" name="breply_content"/>
+																<input type="text" style="width: 100%;" name="breply_content" id="breply_content"/>
 															</td>
 															<td><button type="button" style="width: 100%;" onclick="reply(this.form)">댓글달기</button> </td>
 														</tr>
@@ -409,6 +409,17 @@
 				return;
 			}
 			
+			var breply_content = $("#breply_content").val();
+			
+			if(breply_content.trim().length <1){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			if(breply_content.trim().length >150){
+				alert("150자 미만으로 입력해주세요");
+				return;
+			}
+			
 			var breply_content = frm.breply_content.value;
 			myData = "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+breply_content;
 			$.ajax({
@@ -419,6 +430,7 @@
 			}).done(function(data){
 				var str =toTable(data.ar);
 				$("#reply_list").html(str);
+				$("#breply_content").val("");
 			}).fail(function(err){
 				console.log("댓글실패");
 			});
@@ -485,6 +497,7 @@
 		var breply_to="";
 		
 		var breply_group="";
+		
 		function rereply(t) {
 			if(!login_id) {
 				alert("로그인을 해주세요");
@@ -500,7 +513,7 @@
 				breply_to = $(replyForm).children("input[name=m_id]");
 				breply_group = $(replyForm).find("input[name=breply_group]");
 				replyOpen=true;
-				$(replyTr).after("<tr id='reply_input'><td colspan=2><form><input type='text' name='breply_content'><input onclick='sendRr(this.form)' type='button' value='보내기'></form></td></tr>");
+				$(replyTr).after("<tr id='reply_input'><td colspan=2><form><input type='text' name='breply_content' id='breply_content2'><input onclick='sendRr(this.form)' type='button' value='보내기'></form></td></tr>");
 			}else {
 				replyOpen = false;
 				$("#reply_input").remove();
@@ -510,6 +523,17 @@
 		}
 		
 		function sendRr(frm) {
+			var breply_content2 = $("#breply_content2").val();
+			
+			if(breply_content2.trim().length <1){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			if(breply_content2.trim().length >150){
+				alert("150자 미만으로 입력해주세요");
+				return;
+			}
+
 			var bt =breply_to.val();
 			var bg = breply_group.val();
 			var bc =$(frm).find("input[name=breply_content]").val();

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -155,11 +156,13 @@
 	                        	<form action="text_write.inc" method=post id="writeform" enctype="multipart/form-data">
 	                        		<div>
 	                        			<select name="nb_category">
-	                        				<option value="공지">&nbsp;공지&nbsp;</option>
+	                        				<c:if test="${sessionScope.m_id eq admin }">
+	                        					<option value="공지">&nbsp;공지&nbsp;</option>
+	                        				</c:if>
 	                        				<option value="잡담">&nbsp;잡담&nbsp;</option>
 	                        				<option value="질문">&nbsp;질문&nbsp;</option>
 	                        			</select>
-	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="" placeholder="제목" name="nb_title"/>
+	                        			<input type="text" size="120px" style="margin-bottom: 10px;" value="" placeholder="제목" name="nb_title" id="nb_title"/>
 	                        		</div>
   									<table>
   										<tfoot>
@@ -202,6 +205,26 @@
    	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
     <script type="text/javascript">
     	function textwrite() {
+    		var nb_content= $("#nb_content").val();
+    		var nb_title= $("#nb_title").val();
+    		
+    		if(nb_title.trim().length <1 ){
+    			alert("제목을 입력해주세요");
+    			return; 
+    		}
+    		if(nb_title.trim().length >20){
+    			alert("제목을 20글자 미만으로 입력해주세요");
+    			return; 
+    		}
+    		if(nb_content.trim().length <1){
+    			alert("내용을 입력해주세요");
+    			return; 
+    		}
+    		if(nb_content.trim().length > 100000){
+    			alert("내용을 10만자 이하로 입력해주세요");
+    			return; 
+    		}
+
     		$("#writeform").submit();
 		}
     	$(function() {

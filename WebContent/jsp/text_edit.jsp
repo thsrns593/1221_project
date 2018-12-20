@@ -158,7 +158,7 @@
 								</select>
 								
 								<input type="text" size="120px" style="margin-bottom: 10px;"
-									value="${vo.getNb_title() }"  name="nb_title"/>
+									value="${vo.getNb_title() }"  name="nb_title" id="nb_title"/>
 							</div>
 							<table>
 								<tfoot>
@@ -189,7 +189,7 @@
 		</div>
 	</c:if>
 	<c:if test="${vo eq null }">
-		<h1>올바른 접근이 아닙니다!!</h1>
+		<h1>올바른 접근이 아닙니다!!</h1>  
 	</c:if>
 
 
@@ -205,10 +205,32 @@
    	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
 		function editText(){
+
+	    		var nb_content= $("#nb_content").val();
+	    		var nb_title= $("#nb_title").val();
+	    		
+	    		if(nb_title.trim().length <1 ){
+	    			alert("제목을 입력해주세요");
+	    			return; 
+	    		}
+	    		if(nb_title.trim().length >20){
+	    			alert("20글자 미만으로 입력해주세요");
+	    			return; 
+	    		}
+	    		
+	    		if(nb_content.trim().length < 1){
+	    			alert("내용을 입력해주세요");
+	    			return; 
+	    		}
+	    		if(nb_content.trim().length > 100000){
+	    			alert("10만자 이하로 입력해주세요");
+	    			return; 
+	    		}
+
+	    	$("#writeform").submit();
 			$("#editform").attr("action", "text_edit.inc");
 			$("#editform").submit();
-			
-		};
+		}
 		$(function() {
     		$("#nb_content").summernote({
                 //placeholder: 'Hello stand alone ui',
