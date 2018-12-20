@@ -22,7 +22,7 @@
 				</when>
 				<!-- 2 글제목+글내용 -->
 				<when test="searchType == 2">
-					AND nb_title LIKE '%'||#{searchValue}||'%' OR nb_content LIKE '%'||#{searchValue}||'%'
+					AND (nb_title LIKE '%'||#{searchValue}||'%' OR nb_content LIKE '%'||#{searchValue}||'%')
 				</when>
 				<!-- 3 글쓴이 -->
 				<when test="searchType == 3">
@@ -37,7 +37,7 @@
 		parameterType="mybatis.vo.NormalVO">
 		SELECT * FROM
 			(SELECT rownum as r_num, a.* FROM
-				(SELECT * FROM normal_board WHERE nb_status = 0
+				(SELECT * FROM normal_board WHERE nb_status = 0 
 				<if test="cate != null and cate!= '전체' and cate !='null'">
 					AND nb_category= #{cate}
 				</if>
@@ -53,7 +53,7 @@
 						</when>
 						<!-- 2 글제목+글내용 -->
 						<when test="searchType == 2">
-							AND nb_title LIKE '%'||#{searchValue}||'%' OR nb_content LIKE '%'||#{searchValue}||'%'
+							
 						</when>
 						<!-- 3 글쓴이 -->
 						<when test="searchType == 3">
