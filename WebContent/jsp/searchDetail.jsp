@@ -329,7 +329,12 @@
 			    //var marker = new daum.maps.Marker({ position : points[i], clickable: true });
 			    marker.setMap(map);
 			    markers.push(marker);
-			    var iwContent = "<div style='padding:5px; font-size :11px;'><div>"+ar[i].libName+
+			    var fontSize;
+			    if(ar[i].libName.length >11)
+			    	fontSize = "10";
+			    else
+			    	fontSize = "12";
+			    var iwContent = "<div style='padding:5px; font-size :"+fontSize+"px;'><div>"+ar[i].libName+
 			    	"</div><div><a target='_blank' href='"+ar[i].homepage+"'>"+ar[i].homepage+"</a></div></div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 			    iwRemoveable = true, // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 			    iwPosition = new daum.maps.LatLng(ar[i].latitude, ar[i].longitude);
