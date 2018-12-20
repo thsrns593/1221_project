@@ -26,7 +26,7 @@
 					<h3 class="panel-title">로그인</h3>
 				</div>
 				<div class="panel-body b_color">
-					<form method="post" id="frm" action="login.inc">
+					<form method="post" id="frm" name="frm" action="login.inc">
 						<fieldset>
 							<div class="input-group">
 			              	<span class="input-group-btn">
@@ -46,8 +46,7 @@
 			              	  </label>              	  
 			                </span>
 			                <span class="input-group-btn">
-			                  <input id="password" name="password" type="password" class="form-control" 
-			                  placeholder="User password">
+			                  <input id="password" name="password" type="password" class="form-control"  onkeydown="javascript: enter()" placeholder="User password">
 			                </span>              
 			              </div>
 			          
@@ -96,9 +95,13 @@
 	<jsp:include page="footer.jsp"></jsp:include>
 	
 	<script type="text/javascript">
-	
+	function enter(){
+
+		var keyCode = window.event.keyCode;
+		if(keyCode==13) frm.submit();
+		}
+
 		$(function() {
-			
 			var m_id = localStorage.getItem("m_id");
 			if (m_id != null && m_id.trim().length > 0){
 				$("#email").val(m_id);
@@ -119,7 +122,9 @@
 			} else {
 				$("#frm").submit();
 			}
+			
 		}
+
 		function join() {
 			location.href = "join.inc";
 		}
