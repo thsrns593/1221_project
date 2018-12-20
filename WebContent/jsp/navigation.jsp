@@ -88,9 +88,16 @@
 	                        메인화면
 	                    </a>
 	                </li>
-	                <li>
-	                    <a href="modify.inc">마이페이지</a>
-	                </li>
+	                <c:if test="${sessionScope.m_id == null }">
+		                <li>
+		                    <a href="login.inc">마이페이지</a>
+		                </li>
+	                </c:if>
+	                <c:if test="${sessionScope.m_id != null }">
+		                <li>
+		                    <a href="modify.inc">마이페이지</a>
+		                </li>
+	                </c:if>
 	                <li>
 	                    <a href="board_free.inc">일반게시판</a>
 	                </li>

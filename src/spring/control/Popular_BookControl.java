@@ -104,16 +104,16 @@ public class Popular_BookControl {
 		String url_str ="";
 		
 		if(value == null) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage;	
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage;	
 		}
 		else if(value != null && value2.equals("3")){	
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&region="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&region="+value;
 		}
 		else if(value !=null && value2.equals("4")){
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value;
 		}
 		else if(value !=null && (value2.equals("0") || value2.equals("1"))) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
 		}
 		
 		
