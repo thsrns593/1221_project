@@ -54,7 +54,8 @@
             </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
-            		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important;
+            		<!-- <a class="nav-link" href="login.inc"   style="color: white !important; font-size: x-large !important; -->
+            		<a class="nav-link" href="login.inc" onclick="location.href='login.inc?returnUrl=' + encodeURIComponent(location)" style="color: white !important; font-size: x-large !important;
             		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i></a>
             	</li>
             	</c:if>

@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Case;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.input.SAXBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -33,6 +34,9 @@ import mybatis.vo.BoardVO;*/
 public class Popular_BookControl {
 	
 	//페이징 기법을 위한 상수들
+	
+	@Autowired
+	private String appKey;
 	
 	public static final int BLOCK_LIST = 12;
 	public static final int BLOCK_PAGE = 5; //한 블럭당 페이지 수 
@@ -99,21 +103,21 @@ public class Popular_BookControl {
 		else if(Integer.parseInt(nowPage) >17) {
 			nowPage = String.valueOf(17);
 		}
-		System.out.println(value+nowPage+value2);
+		//System.out.println(value+nowPage+value2);
 		
 		String url_str ="";
 		
 		if(value == null) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage;	
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage;	
 		}
 		else if(value != null && value2.equals("3")){	
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&region="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&region="+value;
 		}
 		else if(value !=null && value2.equals("4")){
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value;
 		}
 		else if(value !=null && (value2.equals("0") || value2.equals("1"))) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
 		}
 		
 		
@@ -155,7 +159,7 @@ public class Popular_BookControl {
 				pg = new Paging_popular(Integer.parseInt(nowPage), 200, 12, 5, value, value2); //페이징 객체 생성
 			}
 		
-		System.out.println("b_list의 사이즈:"+b_list.size());
+		//System.out.println("b_list의 사이즈:"+b_list.size());
 		DataVO[] ar = new DataVO[b_list.size()]; // b_list사이즈만큼의 DataVO를 생성만 해놓음!!
 		
 		//e_list의 길이만큼 반복문을 수행 하면서 DataVO를 하나씩 생성하여 item의 값을 저장한 후 배열인 ar에 DataVO를 저장한다.

@@ -29,7 +29,7 @@ public class Board_FreeControl {
 	@RequestMapping("board_free.inc")
 	public ModelAndView board_free(NormalVO vo) {
 		
-		System.out.println("받은 페이지"+String.valueOf(vo.getNowPage()));
+		//System.out.println("받은 페이지"+String.valueOf(vo.getNowPage()));
 		String c_page = String.valueOf(vo.getNowPage());
 		
 		if(c_page.equals("0"))

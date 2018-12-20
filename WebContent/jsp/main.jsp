@@ -260,10 +260,17 @@
 	<!-- ui는 위의 core가 있어야 움직이므로 두개의 js파일의 순서가 바뀌면 안됨! -->
 
 	<script type="text/javascript">
+		$(function() {
+			window.onhashchange = locationHashChanged;	
+		});
+	
+		function locationHashChanged() {
+	        alert("새로운페이지");
+		}
+	
 		var myIsbn = "9788937473135";
 		$(function() {
 			//jQuery시작부분!!!
-
 			exe(myIsbn, 1); //전국 1위의 책으로 추천도서를 호출. //9788937473135는 전국 1위의 ISBN
 
 		});

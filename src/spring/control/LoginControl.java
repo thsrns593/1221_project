@@ -1,6 +1,9 @@
 package spring.control;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -48,13 +51,13 @@ public class LoginControl {
 	//로그인 첫 화면 요청 메소드
     @RequestMapping(value = "/login.inc", method = { RequestMethod.GET, RequestMethod.POST })
     public String login(Model model, HttpSession session) {
-        System.out.println("success");
+        //System.out.println("success");
         /* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
         String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
         
         //https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
         //redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-        System.out.println("네이버:" + naverAuthUrl);
+       // System.out.println("네이버:" + naverAuthUrl);
         
         //네이버 
         model.addAttribute("url", naverAuthUrl);
@@ -67,20 +70,20 @@ public class LoginControl {
     @RequestMapping(value = "/callback.inc", method = { RequestMethod.GET, RequestMethod.POST })
     public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
             throws IOException {
-        System.out.println("여기는 callback");
+       // System.out.println("여기는 callback");
         OAuth2AccessToken oauthToken;
         oauthToken = naverLoginBO.getAccessToken(session, code, state);
         //로그인 사용자 정보를 읽어온다.
         apiResult = naverLoginBO.getUserProfile(oauthToken);
-        System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
+       // System.out.println(naverLoginBO.getUserProfile(oauthToken).toString());
         model.addAttribute("result", apiResult);
         System.out.println("result"+apiResult);
         /* 네이버 로그인 성공 페이지 View 호출 */
       JSONObject jsonobj = jsonparse.stringToJson(apiResult, "response");
       String email = jsonparse.JsonToString(jsonobj, "email");
       String name = jsonparse.JsonToString(jsonobj, "name");
-      System.out.println(email);
-      System.out.println(name);
+     // System.out.println(email);
+      //System.out.println(name);
       MemberVO vo = new MemberVO();
       vo.setM_id(email);
       vo.setM_pwd(name);
@@ -89,7 +92,7 @@ public class LoginControl {
       boolean chk = m_dao.join(vo);
       }
       vo = l_dao.login(vo.getM_email(), vo.getM_pwd());
-      System.out.println(email);
+     // System.out.println(email);
       session.setAttribute("m_id", email);
 //      System.out.println(name);
 //      try {
@@ -107,19 +110,30 @@ public class LoginControl {
     }
     
 	@RequestMapping("/login.inc")
-	public String login() {
+	public String login(String returnUrl) {
 		return "login";
 	}
 	
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
-	public ModelAndView login(String email, String password) {
+	public ModelAndView login(String email, String password, String returnUrl) throws Exception {
+		
+		System.out.println("돌아갈곳2 :"+returnUrl);
+		
+		
 		ModelAndView mv = new ModelAndView();
 		MemberVO vo = null;
 		vo = l_dao.login(email, password);
 		if(vo != null && vo.getM_odate() == null) {
 			session.setAttribute("m_id", email);
-			System.out.println((String)session.getAttribute("m_id"));
-			mv.setViewName("main");
+			
+			if(returnUrl != null) {
+				System.out.println(URLDecoder.decode(returnUrl, "UTF-8"));
+				int idx = URLDecoder.decode(returnUrl, "UTF-8").lastIndexOf("/");
+				String 
+				
+				mv.setViewName("redirect:");
+			}else
+				mv.setViewName("main");
 		}else {
 			
 			mv.setViewName("redirect:/login.inc?check=fail");

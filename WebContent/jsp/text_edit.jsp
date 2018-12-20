@@ -206,7 +206,7 @@
 	<script type="text/javascript">
 		function editText(){
 
-	    		var nb_content= $("#nb_content").val();
+	    		var nb_content= $("#nb_content").text();
 	    		var nb_title= $("#nb_title").val();
 	    		
 	    		if(nb_title.trim().length <1 ){

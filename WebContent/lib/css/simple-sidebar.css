@@ -71,6 +71,7 @@ body {
   display: block;
   text-decoration: none;
   color: #999999;
+  font-size: 22px;
 }
 
 .sidebar-nav li a:hover {

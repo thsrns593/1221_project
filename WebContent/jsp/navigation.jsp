@@ -49,9 +49,11 @@
             </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
-            		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important;
-            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i>로그인</a>
-            	</li>
+<!--             		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important; padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i>로그인</a>
+ -->            	
+ 					<a class="nav-link"onclick="location.href='login.inc?returnUrl=' + encodeURIComponent(location)" style="color: white !important; font-size: x-large !important;
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i></a>
+ 				</li>
             	</c:if>
 			<c:if test="${sessionScope.m_id != null }">
             	<li class="nav_logout">

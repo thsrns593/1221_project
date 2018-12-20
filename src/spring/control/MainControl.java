@@ -32,12 +32,15 @@ public class MainControl {
 	int block_page =3;
 	
 	@Autowired
+	private String appKey;
+	
+	@Autowired
 	private NormalDAO n_dao;
 	@Autowired
 	HttpSession session;
 	@RequestMapping("main.inc")
 	public ModelAndView main() {
-		System.out.println("메인시작!");
+		//System.out.println("메인시작!");
 		NormalVO[] ar = n_dao.takenotice();
 		
 		ModelAndView mv = new ModelAndView();
@@ -55,12 +58,12 @@ public class MainControl {
 	public Map<String,Object> bookList(String value, String nowPage) throws Exception {
 		if(nowPage ==null)
 			nowPage ="1";
-		System.out.println(value+"  "+nowPage);
+		//System.out.println(value+"  "+nowPage);
 		List<Element> b_list = null;
 		Object obj = session.getAttribute("b_list");
 		if(obj == null) {
 			//URL 생성!
-			URL url = new URL("http://data4library.kr/api/recommandList?authKey=6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c&isbn13="+value+"&pageNo="+nowPage+"&pageSize=6");	
+			URL url = new URL("http://data4library.kr/api/recommandList?authKey="+appKey+"&isbn13="+value+"&pageNo="+nowPage+"&pageSize=6");	
 		
 			//URL url = new URL("http://data4library.kr/api/loanItemSrch?authKey=b04eff4b086e9b0502ac17bf55bdf725e21d3bffabc915362b7ddbf05f2bb67e&startDt=2018-12-10&endDt=2018-12-16&pageSize=6&pageNo="+nowPage+"&region="+value);
 			
@@ -102,7 +105,7 @@ public class MainControl {
 		
 		//Paging_main pg = new Paging_main(Integer.parseInt(nowPage), 30, 6, 3,value); //페이징 객체 생성;
 				
-		System.out.println("b_list의 사이즈:"+b_list.size());
+		//System.out.println("b_list의 사이즈:"+b_list.size());
 		
 		DataVO[] ar = new DataVO[block_list]; // 사이즈만큼의 DataVO를 생성만 해놓음!!
 		
@@ -119,7 +122,7 @@ public class MainControl {
 			String publication_year = item.getChildText("publication_year");
 			String isbn13 = item.getChildText("isbn13");
 			String bookImageURL = item.getChildText("bookImageURL");
-			System.out.println("no: "+no+" bookname : "+bookname);
+			//System.out.println("no: "+no+" bookname : "+bookname);
 			DataVO vo= new DataVO(no, bookname, authors, publisher, publication_year, isbn13, bookImageURL);
 			ar[i] = vo;
 		}

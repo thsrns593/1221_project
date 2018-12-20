@@ -403,6 +403,15 @@
 					map : map,
 					position : coords
 				});
+				var iwContent = '<div style="padding:5px;">인크레파스<img src="${pageContext.request.contextPath}/images/heart.png"/><div>대표님감사합니다</div></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			    iwPosition = new daum.maps.LatLng(result[0].y, result[0].x); //인포윈도우 표시 위치입니다
+
+				// 인포윈도우를 생성합니다
+				var infowindow = new daum.maps.InfoWindow({
+				    position : iwPosition, 
+				    content : iwContent 
+				});
+				infowindow.open(map, marker);
 				// 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
 				map.setCenter(coords);
 			}
