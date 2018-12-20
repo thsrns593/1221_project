@@ -21,7 +21,7 @@
 			</when>
 			<!-- 2 글제목+글내용 -->
 			<when test="searchType == 2">
-			  AND bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%'
+			  AND (bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%')
 			</when>
 			<!-- 3 글쓴이 -->
 			<when test="searchType == 3">
