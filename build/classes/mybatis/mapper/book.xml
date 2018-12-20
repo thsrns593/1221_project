@@ -13,18 +13,26 @@
 		<choose>
 	 	  <!-- 0 글제목 -->
 			<when test="searchType == 0">
+			  AND bb_bname LIKE '%'||#{searchValue}||'%'
+			</when>
+			<!-- 1 저자 -->
+			<when test="searchType == 1">
+			  AND bb_author LIKE '%'||#{searchValue}||'%'
+			</when>
+			<!-- 2 글제목 -->
+			<when test="searchType == 2">
 			  AND bb_title LIKE '%'||#{searchValue}||'%'
 			</when>
-			<!-- 1 글내용 -->
-			<when test="searchType == 1">
+			<!-- 3 글내용-->
+			<when test="searchType == 3">
 			  AND bb_content LIKE '%'||#{searchValue}||'%'
 			</when>
-			<!-- 2 글제목+글내용 -->
-			<when test="searchType == 2">
+			<!-- 3 글내용-->
+			<when test="searchType == 4">
 			  AND (bb_title LIKE '%'||#{searchValue}||'%' OR bb_content LIKE '%'||#{searchValue}||'%')
 			</when>
 			<!-- 3 글쓴이 -->
-			<when test="searchType == 3">
+			<when test="searchType == 5">
 		 	  AND m_id LIKE '%'||#{searchValue}||'%'
 			</when>
 		</choose>

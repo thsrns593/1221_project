@@ -64,8 +64,8 @@ public class Board_ShareControl {
 		map.put("cate", cate);
 		map.put("searchType", searchType);
 		map.put("searchValue", searchValue);
-		System.out.println(searchType);
-		System.out.println(searchValue);
+		System.out.println("type"+searchType);
+		System.out.println("value:"+searchValue);
 		//getTotalCount 에서는 카테고리, 검색타입, 검색어만 필요로한다.
 		int tc =b_dao.getTotalCount(map);
 		//페이지를 관리할 객체 생성

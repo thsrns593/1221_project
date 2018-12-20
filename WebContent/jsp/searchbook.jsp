@@ -171,6 +171,23 @@ table td, table tr{
 
 
 	<script>
+		$("#bookname").keydown(function(key) {
+		
+			var bookname =$("#bookname").val();
+		
+			if (key.keyCode == 13) {
+				
+				if(bookname.trim().length <1){
+					alert("검색할 도서명을 입력해주세요");
+					return;
+				}
+				
+				searchbook(document.getElementById("searchbookform"));
+	
+			}
+
+		});
+
 		function searchbook(frm) {
 			var bookname = frm.bookname.value;
 			
