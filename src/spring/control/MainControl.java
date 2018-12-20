@@ -16,8 +16,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import mybatis.dao.NormalDAO;
 import mybatis.vo.DataVO;
+import mybatis.vo.NormalVO;
 import spring.util.PageUtil;
 import spring.util.Paging_main;
 import spring.util.Paging_popular;
@@ -29,11 +32,19 @@ public class MainControl {
 	int block_page =3;
 	
 	@Autowired
+	private NormalDAO n_dao;
+	@Autowired
 	HttpSession session;
 	@RequestMapping("main.inc")
-	public String main() {
+	public ModelAndView main() {
 		System.out.println("메인시작!");
-		return "main";
+		NormalVO[] ar = n_dao.takenotice();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("ar", ar);
+		mv.setViewName("main");
+		
+		return mv;
 	}
 	
 	

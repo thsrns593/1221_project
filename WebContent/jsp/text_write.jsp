@@ -156,7 +156,7 @@
 	                        	<form action="text_write.inc" method=post id="writeform" enctype="multipart/form-data">
 	                        		<div>
 	                        			<select name="nb_category">
-	                        				<c:if test="${sessionScope.m_id eq admin }">
+	                        				<c:if test="${sessionScope.m_id eq 'admin'}">
 	                        					<option value="공지">&nbsp;공지&nbsp;</option>
 	                        				</c:if>
 	                        				<option value="잡담">&nbsp;잡담&nbsp;</option>
