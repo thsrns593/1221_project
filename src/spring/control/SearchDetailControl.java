@@ -38,7 +38,7 @@ public class SearchDetailControl {
 	private String kakaoKey = "de6b4d081663a01db2e3bc26e9c95fd2";
 	
 	//도서관정보나루 api요청에 사용될 key
-	private String appKey ="6783ba480877e44faf4ed668090208a2728f1f4b48a0cdfc8db471571acc3e2c";
+	private String appKey ="7496dac2e3c3d7181939ba1abf59fed38c30c64ff83ec93871de30bdeeeef6c4";
 	@Autowired
 	private LibDAO lib_dao;
 	

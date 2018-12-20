@@ -14,6 +14,25 @@
 <title>도서정보</title>
 
 <style type="text/css">
+#load {
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	display: none;
+	opacity: 0.8;
+	background: white;
+	z-index: 99;
+	text-align: center;
+}
+
+#load > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 100;
+}
 .row {
 	margin-top: 5%;
 }
@@ -246,6 +265,7 @@
 
 
 							<div id="map"></div>
+							<div id="ing"></div>
 							<!-- /.table-responsive -->
 						</div>
 						<!-- /.panel-body -->
@@ -263,7 +283,9 @@
 
 	<jsp:include page="footer.jsp"></jsp:include>
 
-
+	<div id="load">
+		<img src="/images/loading.gif" alt="loading">
+	</div>
 	<script
 		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=10238676475819144801ce4c309505cf&libraries=services"></script>
 	<!-- Bootstrap core JavaScript -->
@@ -271,12 +293,14 @@
 
 
 	<script type="text/javascript">
+	
 	function searchlib(frm) {
 		var h_area1 = frm.h_area1;
 		var h_area2 = frm.h_area2;
 		
 		var address = h_area1.options[h_area1.selectedIndex].text+" "+h_area2.options[h_area2.selectedIndex].text;
 		var isbn13 = $("#isbn").val();
+		$("#load").show();
 		$.ajax({
 			url : "searchLib.inc?address="+address+"&isbn13="+isbn13,
 			type : "get",
@@ -288,43 +312,62 @@
 				alert("책을 소장하고 있는 도서관이 없습니다.");
 			}
 			
-			var infowindow = new Array();
-			var marker =new Array();
+			
+			
 			var points = new Array;
-			var bounds;
-			var iwContent;
+			var markers = [];
+			var bounds = new daum.maps.LatLngBounds();
 	 		for(var i = 0; i < ar.length; i++){
 	 			points.push(new daum.maps.LatLng(ar[i].latitude, ar[i].longitude));
 			 
-				// 지도를 재설정할 범위정보를 가지고 있을 LatLngBounds 객체를 생성합니다
-				bounds = new daum.maps.LatLngBounds();    
-
-				
 			    // 배열의 좌표들이 잘 보이게 마커를 지도에 추가합니다
-			    marker[i] = new daum.maps.Marker({ position : points[i], clickable: true });
-			    marker[i].setMap(map);
-			    
-			    iwContent = '<div style="padding:5px;">Hello World!</div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+			    var marker = new daum.maps.Marker({
+			        position : points[i], // 마커를 표시할 위치
+			        title : ar[i].libName, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다 
+			        clickable: true
+			    });
+			    //var marker = new daum.maps.Marker({ position : points[i], clickable: true });
+			    marker.setMap(map);
+			    markers.push(marker);
+			    var iwContent = "<div style='padding:5px;'><div>"+ar[i].libName+
+			    	"</div><div><a target='_blank' href='"+ar[i].homepage+"'>"+ar[i].homepage+"</a></div></div>", // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
 			    iwRemoveable = true, // removeable 속성을 ture 로 설정하면 인포윈도우를 닫을 수 있는 x버튼이 표시됩니다
 			    iwPosition = new daum.maps.LatLng(ar[i].latitude, ar[i].longitude);
-			    infowindow[i] = new daum.maps.InfoWindow({
+			    var infowindow = new daum.maps.InfoWindow({
 			        content : iwContent,
 			        removable : iwRemoveable
 			    });
-
-			    // 마커에 클릭이벤트를 등록합니다
-			    daum.maps.event.addListener(marker[i], 'click', function() {
-			          // 마커 위에 인포윈도우를 표시합니다
-			          infowindow[i].open(map, marker[i]);  
-			    });
-			    // LatLngBounds 객체에 좌표를 추가합니다
+			 // LatLngBounds 객체에 좌표를 추가합니다
 			    bounds.extend(points[i]);
-				
-				
-				 map.setBounds(bounds);
+			 // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+			    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+			    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+			    daum.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
+			    //daum.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+			   
 	 		}
+	 		setBounds(bounds);
+	 		$("#load").hide();
 		});  
 		
+	}
+	function setBounds(bounds) {
+		    // LatLngBounds 객체에 추가된 좌표들을 기준으로 지도의 범위를 재설정합니다
+		    // 이때 지도의 중심좌표와 레벨이 변경될 수 있습니다
+		    map.setBounds(bounds);
+		}
+	// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+	function makeOverListener(map, marker, infowindow) {
+	    return function() {
+	        infowindow.open(map, marker);
+	    };
+	}
+
+	// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+	function makeOutListener(infowindow) {
+	    return function() {
+	        infowindow.close();
+	    };
 	}
 
 		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
