@@ -108,16 +108,16 @@ public class Popular_BookControl {
 		String url_str ="";
 		
 		if(value == null) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage;	
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-13&endDt=2018-12-20&pageSize=12&pageNo="+nowPage;	
 		}
 		else if(value != null && value2.equals("3")){	
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&region="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-13&endDt=2018-12-20&pageSize=12&pageNo="+nowPage+"&region="+value;
 		}
 		else if(value !=null && value2.equals("4")){
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-13&endDt=2018-12-20&pageSize=12&pageNo="+nowPage+"&age="+value;
 		}
 		else if(value !=null && (value2.equals("0") || value2.equals("1"))) {
-			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-10&endDt=2018-12-16&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
+			url_str = "http://data4library.kr/api/loanItemSrch?authKey="+appKey+"&startDt=2018-12-13&endDt=2018-12-20&pageSize=12&pageNo="+nowPage+"&age="+value+"&gender="+value2;
 		}
 		
 		

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -219,8 +220,15 @@
 						</tr>               
 					</tfoot>
 				</table>
-				<span><label>글쓴이:</label><input class="writerinfo"
-					type="text" value="${vo.getM_id() }" readonly="readonly" /></span> <span><label>작성일</label><input
+				<span><label>글쓴이:</label>
+						<c:if test="${fn:contains(vo.m_id,'@naver')}">
+							<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(vo.m_id,0,fn:indexOf(vo.m_id,'@')) }
+						</c:if> 
+						<c:if test="${!fn:contains(vo.m_id,'@naver') }">
+							${vo.m_id }
+						</c:if> 
+					
+					</span> <span><label>작성일</label><input
 					class="writerinfo" type="text" value="${vo.getNb_cdate() }"
 					readonly="readonly" /></span> <span><label>조회수:</label><input
 					class="writerinfo" type="text" value="${vo.getNb_hit() }"
@@ -264,7 +272,12 @@
 											<button type="button" class="button"
 												onclick="newreplybox(this)"
 												value="${item.m_id},${item.nreply_group}" id="${item.m_id}">
-												${item.m_id }
+												<c:if test="${fn:contains(item.m_id,'@naver')}">
+													<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(item.m_id,0,fn:indexOf(item.m_id,'@')) }
+												</c:if> 
+												<c:if test="${!fn:contains(item.m_id,'@naver') }">
+													${item.m_id}
+												</c:if> 
 											</button>
 										</c:if>
 										<c:if test="${item.nreply_to ne null }">
@@ -322,6 +335,35 @@
 	</form>  
 
 	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
+	
+	$("#nreply_content").keydown(function(key) {
+		
+		var nreply_content =$("#nreply_content").val();
+	
+		if (key.keyCode == 13) {
+			
+			if(nreply_content.trim().length <1){
+				alert("내용을 입력해주세요");
+				return;
+			}
+			
+			goPage(1);
+
+		}
+
+	});	
+	
+	
 	
 		function nreply_status(a) {
 			
@@ -433,7 +475,7 @@
 		}
 		function goPage2(pg) {
 			
-			var nreply_content =$("#nreply_content2").val();
+			var nreply_content = encodeURIComponent($("#nreply_content2").val());
 			var m_id1 = "${m_id}";
 
 			if(m_id1.trim().length <1){
@@ -451,7 +493,7 @@
 			}
 
 			var postvalue = $("form[name=addnreply2]").serialize();
-			var nreply_content = $("#nreply_content2").val();
+			var nreply_content = encodeURIComponent($("#nreply_content2").val());
 
 			$.ajax(
 							{
@@ -503,7 +545,7 @@
 		function goPage3(pg) {
 
 			var postvalue = $("form[name=addnreply2]").serialize();
-			var nreply_content = $("#nreply_content2").val();
+			var nreply_content = encodeURIComponent($("#nreply_content2").val());
 
 			$.ajax(
 							{

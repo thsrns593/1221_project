@@ -24,7 +24,6 @@
     		text-decoration: none;
     	}
     	#page_num_area {
-    		width : 160px;
     		float: right;
     		text-align: center;
     	}
@@ -204,6 +203,16 @@
 	</div>
 	<jsp:include page="footer.jsp"></jsp:include>
     <script>
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
     	function sel() {
     		var cate =document.forms[0].cate.value;
     		location.href= "board_free.inc?cate="+cate;

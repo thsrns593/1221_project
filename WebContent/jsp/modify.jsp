@@ -260,6 +260,16 @@
 					showMonthAfterYear: true
 			});
 		}); */
+		if (document.addEventListener) {
+		    window.addEventListener('pageshow', function (event) {
+		        if (event.persisted || window.performance && 
+		            window.performance.navigation.type == 2) 
+		        {
+		            location.reload();
+		        }
+		    },
+		   false);
+		}
 		var str_space = /\s/;
 	    var regType1 = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9])$/;
 	    var regType2 = /^[A-Za-z0-9+]*$/;

@@ -86,7 +86,7 @@
 							<div id="naver_id_login" style="text-align:center"><a href="${url}">
 <img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/></a></div>
 						</fieldset>
-					<input type="hidden" name="returnUrl" value="${param.returnUrl}"/>
+					
 					</form>
 				</div>
 			</div>
@@ -100,13 +100,26 @@
 	
 	<script type="text/javascript">
 	
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
+	
 	function enter(){
 
 		var keyCode = window.event.keyCode;
 		if(keyCode==13) frm.submit();
 		}
 
+		
 		$(function() {
+			
 			var m_id = localStorage.getItem("m_id");
 			if (m_id != null && m_id.trim().length > 0){
 				$("#email").val(m_id);
@@ -115,6 +128,7 @@
 			var check = $("#check").val();
 			if (check.trim().length > 1) {
 				alert("로그인 실패");
+				history.go(-1);
 			}
 		});
 		
@@ -136,7 +150,6 @@
 		function chk() {
 			var m_id = $("#email").val();
 			var remember = $("[name=remember]").prop("checked");
-			alert(remember);
 			if (remember) {
 				if (m_id.trim().length < 1) {
 					$("[name=remember]").prop("checked", false);

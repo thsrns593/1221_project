@@ -1,6 +1,7 @@
 package spring.control;
 
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -175,10 +176,11 @@ public class Text_ReadControl {
 	//댓글추가 2
 	@RequestMapping("nreply2.inc")
 	@ResponseBody
-	public Map<String, Object> addNreply1(NreplyVO vo, HttpServletRequest request){
+	public Map<String, Object> addNreply1(NreplyVO vo, HttpServletRequest request) throws Exception{
 		
 		vo.setNreply_ip(request.getRemoteAddr());
 
+		vo.setNreply_content(URLDecoder.decode(vo.getNreply_content(),"utf-8"));
 		nreply_dao.addNreply2(vo);
 		
 		NormalVO nvo = new NormalVO();

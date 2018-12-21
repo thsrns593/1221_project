@@ -107,6 +107,7 @@ public class SearchDetailControl {
 			address = "서울특별시 관악구";
 		Map<String, Object> map = new HashMap<>();
 		LibraryVO[] ar = lib_dao.selectLib(address);
+		System.out.println("도서관 뽑기:"+ar.length);
 		JsonParser parser = new JsonParser();
 		String libCode = null;
 		RestTemplate template = new RestTemplate();
@@ -117,6 +118,7 @@ public class SearchDetailControl {
 		System.out.println("isbn13 :" + isbn13 + " addr : "+address);
 		for(LibraryVO vo : ar) {
 			libCode =vo.getLibCode();
+			System.out.println("도서관코드"+libCode);
 			if(libCode !=null && isbn13 !=null) {
 				url = makeUrl(appKey, libCode, isbn13);
 				System.out.println("url : "+url);

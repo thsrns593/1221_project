@@ -221,6 +221,16 @@
 	<!-- /contents -->
     <jsp:include page="footer.jsp"></jsp:include>
     <script>
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
     	function goView(bb_num) {
     		var frm = document.forms[0];
     		frm.num.value=bb_num;

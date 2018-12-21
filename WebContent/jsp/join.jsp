@@ -151,7 +151,22 @@
     
 	    <!-- Menu Toggle Script -->
     <script>
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
     
+	var sessionid = "${m_id}";
+	
+	if(sessionid != "")
+		location.href = "main.inc";
+	
     $(function(){	
 		$("#b_day").datepicker({
 				dateFormat: 'yy-mm-dd',

@@ -118,6 +118,16 @@ body{
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	
 	<script>
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
 	
 	var chkAtt = false;
 	var chkSend = false;

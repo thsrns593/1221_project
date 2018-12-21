@@ -32,7 +32,7 @@
 	top: 50%;
 	left: 50%;
 	z-index: 100;
-}
+}z
 .row {
 	margin-top: 5%;
 }
@@ -293,6 +293,16 @@
 
 
 	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
 	
 	function searchlib(frm) {
 		var h_area1 = frm.h_area1;

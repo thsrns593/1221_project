@@ -1,9 +1,6 @@
 package spring.control;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -110,30 +107,22 @@ public class LoginControl {
     }
     
 	@RequestMapping("/login.inc")
-	public String login(String returnUrl) {
+	public String login() {
+		
+		
 		return "login";
 	}
 	
 	@RequestMapping(value="/login.inc", method=RequestMethod.POST)
-	public ModelAndView login(String email, String password, String returnUrl) throws Exception {
-		
-		System.out.println("돌아갈곳2 :"+returnUrl);
-		
-		
+	public ModelAndView login(String email, String password) {
 		ModelAndView mv = new ModelAndView();
 		MemberVO vo = null;
 		vo = l_dao.login(email, password);
 		if(vo != null && vo.getM_odate() == null) {
 			session.setAttribute("m_id", email);
-			
-			if(returnUrl != null) {
-				System.out.println(URLDecoder.decode(returnUrl, "UTF-8"));
-				int idx = URLDecoder.decode(returnUrl, "UTF-8").lastIndexOf("/");
-				String 
-				
-				mv.setViewName("redirect:");
-			}else
-				mv.setViewName("main");
+			//System.out.println((String)session.getAttribute("m_id"));
+			mv.setViewName("back");
+			mv.addObject("su", 2);
 		}else {
 			
 			mv.setViewName("redirect:/login.inc?check=fail");
@@ -145,7 +134,8 @@ public class LoginControl {
 	public ModelAndView logout(HttpSession session) {
 		session.removeAttribute("m_id");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("main");
+		mv.setViewName("back");
+		mv.addObject("su", "1");
 		return mv;
 	}
 	

@@ -188,6 +188,16 @@
    	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-lite.js"></script>
    	<script src="lib/js/summernote/lang/summernote-ko-KR.js"></script>
 	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
 		var test = "${vo.bb_category}";
 		if(test != "")
 			$("#bb_category").val("${vo.bb_category}").prop("selected", true);
@@ -253,7 +263,6 @@
 			    toolbar: [
 			        ['style', ['style']],
 			        ['style', ['bold', 'italic', 'underline', 'strikethrough', 'clear']],
-			        ['fontface', ['fontname']],
 			        ['textsize', ['fontsize']],
 			        ['color', ['color']],
 			        ['alignment', ['ul', 'ol', 'paragraph', 'lineheight']],

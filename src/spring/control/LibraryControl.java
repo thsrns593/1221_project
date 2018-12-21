@@ -36,7 +36,7 @@ public class LibraryControl {
 
 		RestTemplate template = new RestTemplate();
 
-		String apiURL = "http://data4library.kr/api/libSrch?authKey=28976a95aa52c5becbaa99d9c166f26e15331ad5d1c5546b7b97c4ddca00609d&pageNo="
+		String apiURL = "http://data4library.kr/api/libSrch?authKey=b04eff4b086e9b0502ac17bf55bdf725e21d3bffabc915362b7ddbf05f2bb67e&pageNo="
 				+ page+ "&pageSize=200&format=json";
 
 		try {
@@ -105,7 +105,7 @@ public class LibraryControl {
 				lib_dao.insertLib(lvo);
 
 			}
-			System.out.println("페이지 :" +page+"끝");
+			//System.out.println("페이지 :" +page+"끝");
 		} catch (Exception e) {
 
 			e.printStackTrace();

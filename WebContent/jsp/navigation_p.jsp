@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!-- 메인 css -->
  	<link href="${pageContext.request.contextPath}/lib/css/common.css" rel="stylesheet">
 <!-- Bootstrap core CSS -->
@@ -40,13 +41,13 @@
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
               <a class="nav-link" href="main.inc" style="color: white !important; font-size: x-large !important;
-               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-home"></i>
+               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-home"></i>HOME
               </a>
             </li>
             <c:if test="${sessionScope.m_id == null }">
             <li class="nav-item">
               <a class="nav-link" href="join.inc" style="color: white !important; font-size: x-large !important;
-               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user"></i></a> <!-- 로그인 시, 마이페이지 -->
+               padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user"></i>회원가입</a> <!-- 로그인 시, 마이페이지 -->
             </li>
             </c:if>
             <c:if test="${sessionScope.m_id != null }">
@@ -54,20 +55,27 @@
             </c:if>
             <c:if test="${sessionScope.m_id == null }">
             	<li class="nav-item">
-            		<!-- <a class="nav-link" href="login.inc"   style="color: white !important; font-size: x-large !important; -->
-            		<a class="nav-link" href="login.inc" onclick="location.href='login.inc?returnUrl=' + encodeURIComponent(location)" style="color: white !important; font-size: x-large !important;
-            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i></a>
+            	
+            		<a class="nav-link" href="login.inc" style="color: white !important; font-size: x-large !important;
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-sign-in"></i>로그인</a>
             	</li>
             	</c:if>
             
 			<c:if test="${sessionScope.m_id != null }">
             	<li class="nav_logout">
             		<a href="modify.inc" style="color: white !important; font-size: x-large !important; 
-            		padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user-md"></i></a>
+            		padding-right: 15px !important; padding-left: 15px !important;"><i class="fa fa-user-md"></i>
+	            		<c:if test="${fn:contains(m_id,'@naver')}">
+							<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(m_id,0,fn:indexOf(m_id,'@')) }
+						</c:if> 
+						<c:if test="${!fn:contains(m_id,'@naver') }">
+							${m_id }
+						</c:if> 
+            		</a>
             	</li>
             	<li class="nav-item">
             		<a class="nav-link" href="logout.inc" style="color: white !important; font-size: x-large !important;
-            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa  fa-sign-out"></i></a>
+            		 padding-right: 15px !important; padding-left: 15px !important;"><i class="fa  fa-sign-out"></i>로그아웃</a>
             	</li>
             </c:if>
             <!-- <li class="nav-item">

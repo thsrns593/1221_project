@@ -260,6 +260,17 @@
 	<!-- ui는 위의 core가 있어야 움직이므로 두개의 js파일의 순서가 바뀌면 안됨! -->
 
 	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
+	
 		$(function() {
 			window.onhashchange = locationHashChanged;	
 		});

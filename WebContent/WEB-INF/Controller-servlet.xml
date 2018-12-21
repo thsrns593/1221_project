@@ -10,7 +10,7 @@
 	<context:annotation-config />
 	
 	<bean id="appKey" class="java.lang.String">
-    	<constructor-arg type="String" value="7496dac2e3c3d7181939ba1abf59fed38c30c64ff83ec93871de30bdeeeef6c4"/>
+    	<constructor-arg type="String" value="9affd8788e7706c4b53fec5bbda0ccb67fa880fb5fc0cc527238fd70919199a5"/>
     </bean>
 	
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">

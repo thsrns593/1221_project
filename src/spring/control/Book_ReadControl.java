@@ -28,7 +28,7 @@ public class Book_ReadControl {
 	@RequestMapping("book_read.inc")
 	public ModelAndView book_read(BoardUtil bu) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println("게시물 idx :"+bu.getNum());
+		//System.out.println("게시물 idx :"+bu.getNum());
 		BookVO vo = b_dao.getBbs(bu.getNum());
 		String bb_num =vo.getBb_num();
 		List<String> read_list = (List<String>)session.getAttribute("read_list");
@@ -50,7 +50,7 @@ public class Book_ReadControl {
 		mv.addObject("vo",vo);
 		BreplyVO[] r_list = br_dao.getList(bu.getNum(), "1");
 		mv.addObject("r_list", r_list);
-		System.out.println("댓글 갯수: "+r_list.length);
+		//System.out.println("댓글 갯수: "+r_list.length);
 		mv.setViewName("book_read");
 		return mv;
 	}

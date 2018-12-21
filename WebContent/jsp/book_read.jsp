@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -179,7 +180,12 @@
                		</div>
                		&nbsp;
                		&nbsp;
-               		<span><label>글쓴이:</label><input class="writerinfo"  type="text" value="${vo.m_id }" readonly="readonly" name="m_id" /></span>
+               		<span><label>글쓴이:</label><c:if test="${fn:contains(vo.m_id,'@naver')}">
+												<img src="${pageContext.request.contextPath}/images/naver_icon.png"></img>${fn:substring(vo.m_id,0,fn:indexOf(vo.m_id,'@')) }
+											</c:if> 
+											<c:if test="${!fn:contains(vo.m_id,'@naver') }">
+												${vo.m_id }
+											</c:if> </span>
                		<span><label>작성일:</label><input class="writerinfo" type="text" value="${vo.bb_cdate }" readonly="readonly" /></span>
                		<span><label>조회수:</label><input class="writerinfo" type="text" value="${vo.bb_hit }" readonly="readonly" /></span>
                		
@@ -317,6 +323,16 @@
     <jsp:include page="footer.jsp"></jsp:include>
     <script type="text/javascript" src=""></script>
 	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
 	var bb_num = "${vo.bb_num}";
 	var reply_list = document.getElementById("reply_list");
 	var bb_num = "${vo.bb_num}";
@@ -408,8 +424,7 @@
 			if(!login_id) {
 				alert("로그인을 해주세요");
 				return;
-			}
-			
+			}			
 			var breply_content = $("#breply_content").val();
 			
 			if(breply_content.trim().length <1){
@@ -422,10 +437,12 @@
 			}
 			
 			var breply_content = frm.breply_content.value;
+			
 			myData = "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+breply_content;
+			
 			$.ajax({
 				url:"breply_write.inc",
-				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+breply_content,
+				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+encodeURIComponent(breply_content),
 				dataType : "json",
 				type:"post"
 			}).done(function(data){
@@ -461,7 +478,7 @@
 							sb+= "<input type='button' onclick='delReply(this.form)' value='삭제'>";
 						}
 						sb+="</div>";
-						sb+= "<div><span class='reply_content'>"+ar[i].breply_content+"</span></div>";
+						sb+= "<div><span class='reply_content'>"+"'"+ar[i].breply_content+"'"+"</span></div>";
 						sb+= "</form></div></td></tr>";
 					}
 				}else {
@@ -544,7 +561,7 @@
 			
 			$.ajax({
 				url:"breply_write.inc",
-				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+bc+"&breply_group="+bg+"&breply_to="+bt,
+				data : "bb_num="+bb_num+"&m_id="+login_id+"&breply_content="+encodeURIComponent(bc)+"&breply_group="+bg+"&breply_to="+bt,
 				dataType : "json",
 				type:"post"
 			}).done(function(data){

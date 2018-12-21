@@ -171,6 +171,16 @@ table td, table tr{
 
 
 	<script>
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
 		$("#bookname").keydown(function(key) {
 		
 			var bookname =$("#bookname").val();

@@ -96,5 +96,17 @@
 	</div>	
 
 	<jsp:include page="footer.jsp"></jsp:include>
+	<script type="text/javascript">
+	if (document.addEventListener) {
+	    window.addEventListener('pageshow', function (event) {
+	        if (event.persisted || window.performance && 
+	            window.performance.navigation.type == 2) 
+	        {
+	            location.reload();
+	        }
+	    },
+	   false);
+	}
+	</script>
 </body>
 </html>
